@@ -1,0 +1,193 @@
+.landing-container {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "content content"
+    "footer footer";
+  grid-template-rows: 60px 950px 60px;
+  grid-template-columns: 1fr;
+}
+
+.header-container {
+  grid-area: header;
+  background-color: #f2f4fb;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  //border-bottom: solid #ca4043;
+}
+
+.header-container > div {
+  padding: 10px;
+}
+
+.btn-group {
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.home-container {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.login-button {
+  margin-left: auto;
+}
+
+.content-container {
+  grid-area: content;
+  background-image: url("../resources/images/stairs-blurred.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: minmax(500px, 700px) 500px 500px;
+  grid-template-rows: 500px 200px;
+}
+
+.description {
+  background-image: linear-gradient(to bottom right, #be3144, #f95959);
+  border-radius: 30px;
+  padding: 70px;
+  margin-left: -25px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  height: 50%;
+}
+
+.desc-text {
+  font-weight: bold;
+  margin-top: -30px;
+  p:nth-child(1) {
+    font-size: 40px;
+  }
+  p:nth-child(2) {
+    font-weight: 500;
+    font-size: 20px;
+  }
+}
+
+.footer-container {
+  grid-area: footer;
+  background-color: #be3144;
+  color: #ffffff;
+  .info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.footer-container > h3 {
+  color: #fafafa;
+}
+
+.btn {
+  outline: none;
+  border: none;
+  display: table;
+  margin: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 7px 45px;
+  line-height: 21px;
+  border-radius: 7px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  background-color: #285efe;
+  color: #fafafa;
+}
+
+.btn--1 {
+  background-color: #f2f4fb;
+  color: #be3144;
+  border: 2px solid #be3144;
+}
+
+.btn--2 {
+  background-color: #be3144;
+  color: #ffffff;
+  border: 2px solid #be3144;
+}
+
+.info-container {
+  padding: 75px;
+  color: #ffffff;
+  margin-top: 20px;
+  margin-left: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  font-weight: bold;
+  grid-column: 2/-1;
+  //   grid-row-start: 2;
+
+  p {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    width: 380px;
+    height: 75;
+    border: none;
+    padding: 39px;
+    padding-left: 95px;
+    color: #1e1e1e;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    border-radius: 5px;
+    background: -webkit-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0) 79px,
+        rgb(171, 206, 212) 79px,
+        rgb(171, 206, 212) 81px,
+        rgba(0, 0, 0, 0) 81px
+      ),
+      -webkit-linear-gradient(90deg, rgb(238, 238, 238) 0.1em, rgba(0, 0, 0, 0)
+            0.1em),
+      rgb(255, 255, 255);
+    background: -moz-linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0) 79px,
+        rgb(171, 206, 212) 79px,
+        rgb(171, 206, 212) 81px,
+        rgba(0, 0, 0, 0) 81px
+      ),
+      -moz-linear-gradient(0deg, rgb(238, 238, 238) 0.1em, rgba(0, 0, 0, 0)
+            0.1em),
+      rgb(255, 255, 255);
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0) 79px,
+        rgb(171, 206, 212) 79px,
+        rgb(171, 206, 212) 81px,
+        rgba(0, 0, 0, 0) 81px
+      ),
+      linear-gradient(0deg, rgb(238, 238, 238) 0.1em, rgba(0, 0, 0, 0) 0.1em),
+      rgb(255, 255, 255);
+    background-position: auto auto;
+    -webkit-background-origin: padding-box;
+    background-origin: padding-box;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-background-size: 100% 1.2em;
+    background-size: 100% 1.2em;
+  }
+  //p:nth-child(2n) {
+  //background-image: linear-gradient(135deg, #ff9d6c 10%, #bb4e75 100%);
+  //color: white;
+  //text-align: left;
+  //}
+}
+
+.trending-container {
+  grid-row-start: 2;
+  grid-column: 2/4;
+}

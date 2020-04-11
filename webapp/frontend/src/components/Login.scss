@@ -1,0 +1,116 @@
+.login-container {
+    display: grid;
+    padding-left: 45px;
+    padding-bottom: 35px;
+    grid-template-rows: 80px 50px 50px;
+}
+
+.input-container {
+    --text: #646b8c;
+    --text-placeholder: #bbc1e1;
+    --icon: #a6accd;
+    --icon-focus: #646b8c;
+    --icon-invalid: #f04949;
+    --icon-valid: #16bf78;
+    --background: #fff;
+    --border: #d1d6ee;
+    --border-hover: #a6accd;
+    --border-focus: #89dcff;
+    --shadow-focus: #{rgba(#275efe, 0.32)};
+    position: relative;
+    width: fit-content;
+    input {
+        -webkit-appearance: none;
+        outline: none;
+        display: block;
+        font-size: 14px;
+        font-family: inherit;
+        margin: 0;
+        padding: 8px 16px 8px 41px;
+        line-height: 26px;
+        border-radius: 6px;
+        color: var(--text);
+        border: 1px solid var(--bc, var(--border));
+        background: var(--background);
+        transition: border-color 0.3s, box-shadow 0.3s;
+        &::placeholder {
+            color: var(--text-placeholder);
+        }
+    }
+    svg {
+        width: 16px;
+        height: 16px;
+        top: 14px;
+        left: 14px;
+        display: block;
+        position: absolute;
+        fill: none;
+        stroke: var(--i, var(--icon));
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.6;
+        transition: stroke 0.3s;
+        path {
+            stroke-dasharray: 80;
+            stroke-dashoffset: var(--path, 170);
+            transition: stroke-dashoffset 0.5s ease var(--path-delay, 0.3s);
+        }
+        polyline {
+            stroke-dasharray: 12;
+            stroke-dashoffset: var(--tick, 12);
+            transition: stroke-dashoffset 0.45s ease var(--tick-delay, 0s);
+        }
+    }
+    &:hover {
+        --bc: var(--border-hover);
+    }
+    &:focus-within {
+        --bc: var(--border-focus);
+        --i: var(--icon-focus);
+        input {
+            box-shadow: 0 1px 6px -1px var(--shadow-focus);
+        }
+    }
+}
+
+.submit-btn-group {
+    display: grid;
+    justify-items: start;
+    .btn {
+        width: fit-content;
+    }
+    .btn-forgot {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    .btn-login {
+        margin-left: 0px;
+        background-color: white;
+        color: #be3144;
+        border: 2px solid #be3144;
+    }
+}
+
+.error-container {
+    color: #33494a;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.gradientText {
+    position: relative;
+    color: transparent;
+    transition-duration: 0.3s;
+    background: linear-gradient(
+            to right,
+            #13f3b9 0%,
+            #5878f3 50%,
+            transparent 50%
+        )
+        100% 0 / 200% 200% #474e51;
+    background-clip: text;
+}
+
+.gradientText:hover {
+    background-position: 0 0;
+}
