@@ -1,25 +1,16 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Modali, { useModali } from "modali";
 import "./Landing.scss";
 import Login from "./Login.js";
 import Register from "./Register.js";
 import Trending from "./Trending.js";
 
-const Landing = () => {
+const Landing = (props) => {
   const [loginModal, toggleLoginModal] = useModali({
     animated: true,
   });
   const [registerModal, toggleRegisterModal] = useModali({
     animated: true,
-  });
-
-  const [message, setMessage] = useState("");
-  useEffect(() => {
-    fetch("/api/hello")
-      .then((response) => response.text())
-      .then((message) => {
-        setMessage(message);
-      });
   });
 
   return (
@@ -52,7 +43,6 @@ const Landing = () => {
             <p>
               Upload and stream music for other students and alumni to discover.
             </p>
-            <p>{message}</p>
           </div>
         </div>
         <div className="trending-container">

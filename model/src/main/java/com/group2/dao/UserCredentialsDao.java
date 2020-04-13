@@ -17,14 +17,15 @@ public class UserCredentialsDao extends AbstractBaseDao {
         ps.setString(1, login_name);
         ResultSet rs = ps.executeQuery();
         rs.next();
-        return new UserCredentials(rs.getString("login_name"), rs.getString("password"));
+        return new UserCredentials(rs.getString("login_name"), rs.getString("password"), rs.getString("email"));
     }
 
     public void addUserCredentials(UserCredentials uc) throws SQLException {
-        String SQL = "INSERT INTO user_credentials(login_name, password) VALUES (?, ?)";
+        String SQL = "INSERT INTO user_credentials(login_name, password, email) VALUES (?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setString(1, uc.getLogin_name());
         ps.setString(2, uc.getPassword());
+        ps.setString(3, uc.getEmail());
         ps.executeUpdate();
     }
 

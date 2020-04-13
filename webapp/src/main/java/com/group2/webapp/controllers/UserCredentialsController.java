@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.sql.SQLException;
 
 @Controller
@@ -17,19 +16,20 @@ public class UserCredentialsController {
     public UserCredentialsController() throws SQLException {}
 
 
-    @PostMapping("/user-credentials")
+    @PostMapping("/user-credentials-register")
     @ResponseBody
-    public boolean register(@RequestBody UserCredentials uc)  {
+    public ResponseEntity<Boolean> register(@RequestBody UserCredentials uc) {
         try {
             dao.addUserCredentials(uc);
-            return true;
-        } catch(SQLException e) {
+            // return true;
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        } catch (SQLException e) {
             e.getMessage();
-            return false;
+            return new ResponseEntity<Boolean>(false, HttpStatus.CONFLICT);
         }
     }
-
-    @GetMapping("/user-credentials")
+    
+    @PostMapping("/user-credentials-login")
     @ResponseBody
     public ResponseEntity<Boolean> login(@RequestBody UserCredentials uc) {
         UserCredentials uc2 = null;
@@ -43,7 +43,17 @@ public class UserCredentialsController {
         } else {
             return new ResponseEntity<Boolean>(false, HttpStatus.UNAUTHORIZED);
         }
-
-
     }
+
+    // @PostMapping("/user-credentials-login")
+    // @ResponseBody
+    // public boolean login(@RequestBody UserCredentials uc) {
+    //     UserCredentials uc2 = null;
+    //     try {
+    //         uc2 = dao.getUserCredentialsByLoginName(uc.getLogin_name());
+    //     } catch (SQLException e) {
+    //         return false;
+    //     }
+    //     return uc.equals(uc2);
+    // }
 }
