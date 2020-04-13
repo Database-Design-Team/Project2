@@ -5,26 +5,26 @@ package com.group2.model;
  */
 public class UserAccount {
     String username;
-    int student_id;
-    boolean admin;
+    int studentID;
+    boolean isAdmin;
 
     /**
      * empty constructor, setting defaults
      */
     public UserAccount() {
-        admin = false;
+        isAdmin = false;
     }
 
     /**
      * constructor with full parameters
      * @param username unique username
-     * @param student_id user's University of Houston ID
-     * @param admin indicates if the user is an admin
+     * @param studentID user's University of Houston ID
+     * @param isAdmin indicates if the user is an admin
      */
-    public UserAccount(String username, int student_id, boolean admin) {
+    public UserAccount(String username, int studentID, boolean isAdmin, String email) {
         this.username = username;
-        this.student_id = student_id;
-        this.admin = admin;
+        this.studentID = studentID;
+        this.isAdmin = isAdmin;
     }
 
     public String getUsername() {
@@ -35,19 +35,19 @@ public class UserAccount {
         this.username = username;
     }
 
-    public int getStudent_id() {
-        return student_id;
+    public int getStudentID() {
+        return studentID;
     }
 
-    public void setStudent_id(int student_id) {
-        this.student_id = student_id;
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
     }
 
     public boolean isAdmin() {
-        return admin;
+        return isAdmin;
     }
 
     public void setAdmin(boolean admin) {
-        this.admin = admin;
+        this.isAdmin = admin;
     }
 }

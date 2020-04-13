@@ -8,7 +8,7 @@ import java.sql.Date;
 public class PlaylistSongs {
     int song;
     int playlist;
-    Date date_added;
+    Date dateAdded;
 
     /**
      * constructor with no parameters
@@ -20,12 +20,12 @@ public class PlaylistSongs {
      * constructor with full parameters
      * @param song the ID of the song getting added
      * @param playlist the ID of the playlist getting added to
-     * @param date_added the date the song was added to the playlist
+     * @param dateAdded the date the song was added to the playlist
      */
-    public PlaylistSongs(int song, int playlist, Date date_added) {
+    public PlaylistSongs(int song, int playlist, Date dateAdded) {
         this.song = song;
         this.playlist = playlist;
-        this.date_added = date_added;
+        this.dateAdded = dateAdded;
     }
 
     /**
@@ -63,15 +63,15 @@ public class PlaylistSongs {
      * getter for date added
      * @return the date the song was added
      */
-    public Date getDate_added() {
-        return date_added;
+    public Date getDateAdded() {
+        return dateAdded;
     }
 
     /**
      * setter for date added
-     * @param date_added the date the song was added
+     * @param dateAdded the date the song was added
      */
-    public void setDate_added(Date date_added) {
-        this.date_added = date_added;
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
     }
 }

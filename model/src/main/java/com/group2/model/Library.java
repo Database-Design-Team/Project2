@@ -8,7 +8,7 @@ import java.sql.Date;
 class Library {
     int song;
     String owner;
-    Date date_added;
+    Date dateAdded;
 
     /**
      * constructor with no parameters
@@ -20,12 +20,12 @@ class Library {
      * constructor with all parameters
      * @param song the unique integer value of a song
      * @param owner the name of the library's owner
-     * @param date_added the date that this song was added to the library
+     * @param dateAdded the date that this song was added to the library
      */
-    public Library(int song, String owner, Date date_added) {
+    public Library(int song, String owner, Date dateAdded) {
         this.song = song;
         this.owner = owner;
-        this.date_added = date_added;
+        this.dateAdded = dateAdded;
     }
 
     /**
@@ -64,15 +64,15 @@ class Library {
      * getter for date added
      * @return the date a song was added to the library
      */
-    public Date getDate_added() {
-        return date_added;
+    public Date getDateAdded() {
+        return dateAdded;
     }
 
     /**
      * setter for date added
-     * @param date_added the date a song was added to the library
+     * @param dateAdded the date a song was added to the library
      */
-    public void setDate_added(Date date_added) {
-        this.date_added = date_added;
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
     }
 }
