@@ -2,12 +2,10 @@ package com.group2.webapp.controllers;
 
 import com.group2.dao.UserCredentialsDao;
 import com.group2.model.UserCredentials;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import java.sql.SQLException;
 
 @Controller
@@ -45,7 +43,6 @@ public class UserCredentialsController {
         } else {
             return new ResponseEntity<Boolean>(false, HttpStatus.UNAUTHORIZED);
         }
-
     }
 
     // @PostMapping("/user-credentials-login")
