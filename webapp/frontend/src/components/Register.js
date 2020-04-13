@@ -1,17 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 import "./Register.scss";
 
 const Register = props => {
   // const { handleSubmit, register, errors } = useForm();
   const { register, errors, getValues, handleSubmit } = useForm();
+  let history = useHistory();
   const onSubmit = values => {
+    delete values["passwordConfirmation"];
     console.log(values);
-    //if user found
 
-    // if (true) {
-    //   history.push(`/dashboard`);
-    // }
+    axios
+      .post("/user-credentials-register", {
+        login_name: values["username"],
+        email: values["email"],
+        password: values["password"]
+      })
+      .then(function(response) {
+        console.log(response);
+        if (response.data) {
+          history.push("/dashboard");
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
   return (

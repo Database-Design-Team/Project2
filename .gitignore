@@ -29,3 +29,9 @@ yarn-error.log*
 
 /webapp/frontend/build/
 /webapp/frontend/node_modules/
+
+/webapp/.classpath
+/webapp/.project
+
+/model/.classpath
+/model.project
