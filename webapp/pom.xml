@@ -126,18 +126,24 @@
                 </executions>
             </plugin>
             <plugin>
-                <!-- Build an executable JAR -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.group2.webapp.App</mainClass>
-                        </manifest>
+                    <manifest>
+                        <addClasspath>true</addClasspath>
+                        <classpathPrefix>lib/</classpathPrefix>
+                        <mainClass>com.group2.webapp.App</mainClass>
+                    </manifest>
                     </archive>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -169,7 +175,7 @@
                     </includes>
                     <appName>coog-music</appName>
                     <processTypes>
-                        <web>java -jar target/*.jar</web>
+                        <web>java -jar target/*.jar --port $PORT</web>
                     </processTypes>
                 </configuration>
             </plugin>
