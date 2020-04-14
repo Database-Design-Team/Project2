@@ -1,9 +1,10 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import "./Dashboard.scss";
 
-const Dashboard = () => {
+const Dashboard = props => {
   let history = useHistory();
+  const location = useLocation();
   const handleSignOut = () => {
     history.push(`/`);
   };
@@ -22,6 +23,9 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
+      </div>
+      <div className="dashboard-body-container">
+        <h1>Welcome {location.state.login_name}!</h1>
       </div>
     </div>
   );
