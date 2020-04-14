@@ -3,7 +3,7 @@ package com.group2.model;
 /**
  * @author Timothy
  */
-class Genre {
+public class Genre {
     int genreID;
     String genreTitle;
 
