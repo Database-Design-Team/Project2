@@ -7,6 +7,7 @@ import Home from "./Home";
 import Songs from "./Songs";
 import Playlists from "./Playlists";
 import MusicPlayer from "./MusicPlayer";
+import Upload from "./Upload";
 import "./Dashboard.scss";
 
 const Dashboard = props => {
@@ -20,7 +21,8 @@ const Dashboard = props => {
     Home: Home,
     Feed: Feed,
     Songs: Songs,
-    Playlists: Playlists
+    Playlists: Playlists,
+    Upload: Upload
   };
 
   const [page, changePage] = useState("Home");
@@ -57,6 +59,7 @@ const Dashboard = props => {
             <NavItem eventKey="Feed">Feed</NavItem>
             <NavItem eventKey="Songs">Songs</NavItem>
             <NavItem eventKey="Playlists">Playlists</NavItem>
+            <NavItem eventKey="Upload">Upload</NavItem>
           </SideNav.Nav>
         </SideNav>
       </div>

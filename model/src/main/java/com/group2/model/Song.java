@@ -1,5 +1,6 @@
 package com.group2.model;
 
+
 /**
  * @author Timothy
  */
@@ -8,7 +9,7 @@ public class Song {
     float aggregate_popularity;
     String song_name;
     int song_length;
-    String path_to_audio_file;
+    byte[] audio_file;
     int musician;
     boolean deleted;
 
@@ -24,16 +25,16 @@ public class Song {
      * @param aggregate_popularity the popularity of the song
      * @param song_name name of the song
      * @param song_length length of the song in seconds
-     * @param path_to_audio_file specifies where the audio file can be found
+     * @param audio_file specifies where the audio file can be found
      * @param musician the unique ID of the artist
      * @param deleted indicates if the song is flagged as deleted
      */
-    public Song(int song_id, float aggregate_popularity, String song_name, int song_length, String path_to_audio_file, int musician, boolean deleted) {
+    public Song(int song_id, float aggregate_popularity, String song_name, int song_length, byte[] audio_file, int musician, boolean deleted) {
         this.song_id = song_id;
         this.aggregate_popularity = aggregate_popularity;
         this.song_name = song_name;
         this.song_length = song_length;
-        this.path_to_audio_file = path_to_audio_file;
+        this.audio_file = audio_file;
         this.musician = musician;
     }
 
@@ -69,12 +70,12 @@ public class Song {
         this.song_length = song_length;
     }
 
-    public String getPath_to_audio_file() {
-        return path_to_audio_file;
+    public byte[] getaudio_file() {
+        return audio_file;
     }
 
-    public void setPath_to_audio_file(String path_to_audio_file) {
-        this.path_to_audio_file = path_to_audio_file;
+    public void setaudio_file(byte[] audio_file) {
+        this.audio_file = audio_file;
     }
 
     public int getMusician() {
