@@ -1,7 +1,6 @@
 package com.group2.dao;
 
 import com.group2.model.Genre;
-import org.jetbrains.annotations.NotNull;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -50,7 +49,7 @@ public class GenreDao extends AbstractBaseDao {
      * @param genre the Genre object representing the genre getting added to the database
      * @throws SQLException on errors interacting with the database
      */
-    public void addGenre(@NotNull Genre genre) throws SQLException {
+    public void addGenre(Genre genre) throws SQLException {
         String SQL = "INSERT INTO genre(genre_id, genre_title) VALUES (?, ?)";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setInt(1, genre.getGenreID());
@@ -63,7 +62,7 @@ public class GenreDao extends AbstractBaseDao {
      * @param gList a List object of genres getting added
      * @throws SQLException on errors interacting with the database
      */
-    public void addGenre(@NotNull List<Genre> gList) throws SQLException {
+    public void addGenre(List<Genre> gList) throws SQLException {
         for(Genre g : gList) {
             addGenre(g);
         }
