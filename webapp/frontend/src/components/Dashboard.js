@@ -10,7 +10,7 @@ import MusicPlayer from "./MusicPlayer";
 import Upload from "./Upload";
 import "./Dashboard.scss";
 
-const Dashboard = props => {
+const Dashboard = (props) => {
   let history = useHistory();
   const location = useLocation();
   const handleSignOut = () => {
@@ -22,7 +22,7 @@ const Dashboard = props => {
     Feed: Feed,
     Songs: Songs,
     Playlists: Playlists,
-    Upload: Upload
+    Upload: Upload,
   };
 
   const [page, changePage] = useState("Home");
@@ -50,7 +50,7 @@ const Dashboard = props => {
       </div>
       <div className="sidebar-container">
         <SideNav
-          onSelect={selected => {
+          onSelect={(selected) => {
             changePage(selected);
           }}
         >

@@ -4,16 +4,16 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./Login.scss";
 
-const Login = props => {
+const Login = (props) => {
   const { handleSubmit, register, errors } = useForm();
   let history = useHistory();
 
-  const onSubmit = values => {
+  const onSubmit = (values) => {
     console.log(values);
 
     axios.interceptors.response.use(
-      response => response,
-      error => {
+      (response) => response,
+      (error) => {
         const { status } = error.response;
         if (status === 401) {
           alert("The username and/or password are incorrect.");
@@ -26,7 +26,7 @@ const Login = props => {
     axios
       .post("/user-credentials-login", {
         login_name: values["username"],
-        password: values["password"]
+        password: values["password"],
       })
       .then(function(response) {
         if (response.data) {
@@ -34,8 +34,8 @@ const Login = props => {
             pathname: "/dashboard",
             state: {
               login_name: values["username"],
-              password: values["password"]
-            }
+              password: values["password"],
+            },
           });
         }
       })
@@ -56,7 +56,7 @@ const Login = props => {
             name="username"
             ref={register({
               required: "A username is required",
-              max: 16
+              max: 16,
             })}
             placeholder="username"
           />
@@ -68,7 +68,7 @@ const Login = props => {
             ref={register({
               required: "A password is required",
               min: 8,
-              max: 32
+              max: 32,
             })}
             placeholder="••••••••"
           />

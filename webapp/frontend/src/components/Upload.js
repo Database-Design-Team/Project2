@@ -3,30 +3,15 @@ import axios from "axios";
 import { useDropzone } from "react-dropzone";
 import "./Upload.scss";
 
-const Upload = props => {
-  //   const handleUpload = file => {
-  //     const fileAsBlob = new Blob([file]);
-  //     var reader = new FileReader();
-  //     reader.readAsDataURL(fileAsBlob);
-  //     reader.onloadend = function() {
-  //       var base64data = reader.result.split(",");
-  //       console.log(base64data[1]);
-  //     };
-
-  //     // const blobAsFile = new File([fileAsBlob], file.name, {
-  //     //   type: file.type,
-  //     //   lastModified: file.lastModifiedDate
-  //     // });
-  //   };
-
-  const onDrop = useCallback(acceptedFiles => {
+const Upload = (props) => {
+  const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
     const formData = new FormData();
     formData.append("file", file);
     const config = {
       headers: {
-        "content-type": "multipart/form-data"
-      }
+        "content-type": "multipart/form-data",
+      },
     };
     axios.post("/upload-files", formData, config);
   }, []);
