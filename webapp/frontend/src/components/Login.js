@@ -11,6 +11,18 @@ const Login = props => {
   const onSubmit = values => {
     console.log(values);
 
+    axios.interceptors.response.use(
+      response => response,
+      error => {
+        const { status } = error.response;
+        if (status === 401) {
+          alert("The username and/or password are incorrect.");
+        }
+        window.location.reload(false);
+        return Promise.reject(error);
+      }
+    );
+
     axios
       .post("/user-credentials-login", {
         login_name: values["username"],
@@ -18,7 +30,13 @@ const Login = props => {
       })
       .then(function(response) {
         if (response.data) {
-          history.push("/dashboard");
+          history.push({
+            pathname: "/dashboard",
+            state: {
+              login_name: values["username"],
+              password: values["password"]
+            }
+          });
         }
       })
       .catch(function(error) {

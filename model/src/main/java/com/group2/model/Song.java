@@ -1,14 +1,15 @@
 package com.group2.model;
 
+
 /**
  * @author Timothy
  */
 public class Song {
-    int songID;
-    float aggregatePopularity;
-    String songName;
-    int songLength;
-    String audioFile;
+    int song_id;
+    float aggregate_popularity;
+    String song_name;
+    int song_length;
+    byte[] audio_file;
     int musician;
     boolean isDeleted;
 
@@ -25,16 +26,16 @@ public class Song {
      * @param aggregate_popularity the popularity of the song
      * @param songName name of the song
      * @param song_length length of the song in seconds
-     * @param path_to_audio_file specifies where the audio file can be found
+     * @param audio_file specifies where the audio file can be found
      * @param musician the unique ID of the artist
      * @param isDeleted indicates if the song is flagged as deleted
      */
-    public Song(int songID, float aggregate_popularity, String songName, int song_length, String path_to_audio_file, int musician, boolean isDeleted) {
-        this.songID = songID;
-        this.aggregatePopularity = aggregate_popularity;
-        this.songName = songName;
-        this.songLength = song_length;
-        this.audioFile = path_to_audio_file;
+    public Song(int song_id, float aggregate_popularity, String song_name, int song_length, byte[] audio_file, int musician, boolean deleted) {
+        this.song_id = song_id;
+        this.aggregate_popularity = aggregate_popularity;
+        this.song_name = song_name;
+        this.song_length = song_length;
+        this.audio_file = audio_file;
         this.musician = musician;
         this.isDeleted = isDeleted;
     }
@@ -71,12 +72,13 @@ public class Song {
         this.songLength = songLength;
     }
 
-    public String getAudioFile() {
-        return audioFile;
+    public byte[] getaudio_file() {
+        return audio_file;
     }
 
-    public void setAudioFile(String audioFile) {
-        this.audioFile = audioFile;
+    public void setaudio_file(byte[] audio_file) {
+        this.audio_file = audio_file;
+
     }
 
     public int getMusician() {
