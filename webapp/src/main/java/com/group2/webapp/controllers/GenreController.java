@@ -1,15 +1,11 @@
-package com.group2.webapp.controllers.config;
+package com.group2.webapp.controllers;
 
 import com.group2.dao.GenreDao;
 import com.group2.model.Genre;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.bind.annotation.*;
 import java.sql.SQLException;
 
 /**
@@ -46,12 +42,11 @@ public class GenreController {
      */
     @GetMapping("/genres")
     @ResponseBody
-    public ResponseEntity<Boolean> getGenreByID(int id) {
+    public ResponseEntity<Genre> getGenreByID(@RequestParam Integer id) {
         try {
-            dao.getGenreByID(id);
-            return new ResponseEntity<>(true, HttpStatus.OK);
+            return new ResponseEntity<>(dao.getGenreByID(id), HttpStatus.OK);
         } catch(SQLException e) {
-            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+            return new ResponseEntity(false, HttpStatus.NOT_FOUND);
         }
     }
 
@@ -60,14 +55,13 @@ public class GenreController {
      * @param title the title of the genre being searched for
      * @return response from the http request
      */
-    @GetMapping("/genres")
+/*    @GetMapping("/genres")
     @ResponseBody
-    public ResponseEntity<Boolean> getGenreByTitle(String title) {
+    public ResponseEntity<Genre> getGenreByTitle(@RequestBody String title) {
         try {
-            dao.getGenreByTitle(title);
-            return new ResponseEntity<>(true, HttpStatus.OK);
+            return new ResponseEntity<>(dao.getGenreByTitle(title), HttpStatus.OK);
         } catch(SQLException e) {
-            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+            return new ResponseEntity(false, HttpStatus.NOT_FOUND);
         }
-    }
+    }*/
 }

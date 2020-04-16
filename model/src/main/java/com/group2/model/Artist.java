@@ -5,7 +5,7 @@ import java.sql.Date;
 /**
  * @author Timothy
  */
-class Artist {
+public class Artist {
     int artistID;
     String artistName;
     Date dateFormed;
