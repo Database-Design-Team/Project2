@@ -7,35 +7,35 @@ import java.sql.Date;
  */
 public class Playlist {
     int playlist_id;
-    Date date_created;
-    boolean is_private;
-    int number_of_songs;
-    String playlist_name;
+    Date dateCreated;
+    boolean isPrivate;
+    int numberOfSongs;
+    String playlistName;
     String owner;
 
     /**
      * constructor with no parameters, initializing to defaults
      */
     public Playlist() {
-        is_private = false;
-        number_of_songs = 0;
+        isPrivate = false;
+        numberOfSongs = 0;
     }
 
     /**
      * constructor with full parameters
-     * @param playlist_id the unique ID number of the playlist
-     * @param date_created the date this playlist was created on
-     * @param is_private boolean indicating if the playlist is private
-     * @param number_of_songs the number of songs
-     * @param playlist_name the name of the playlist
+     * @param playlistID the unique ID number of the playlist
+     * @param dateCreated the date this playlist was created on
+     * @param isPrivate boolean indicating if the playlist is private
+     * @param numberOfSongs the number of songs
+     * @param playlistName the name of the playlist
      * @param owner the owner of the playlist
      */
-    public Playlist(int playlist_id, Date date_created, boolean is_private, int number_of_songs, String playlist_name, String owner) {
-        this.playlist_id = playlist_id;
-        this.date_created = date_created;
-        this.is_private = is_private;
-        this.number_of_songs = number_of_songs;
-        this.playlist_name = playlist_name;
+    public Playlist(int playlistID, Date dateCreated, boolean isPrivate, int numberOfSongs, String playlistName, String owner) {
+        this.playlist_id = playlistID;
+        this.dateCreated = dateCreated;
+        this.isPrivate = isPrivate;
+        this.numberOfSongs = numberOfSongs;
+        this.playlistName = playlistName;
         this.owner = owner;
     }
 
@@ -59,64 +59,64 @@ public class Playlist {
      * getter for date created
      * @return the date this playlist was created
      */
-    public Date getDate_created() {
-        return date_created;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
     /**
      * setter for date created
-     * @param date_created the date this playlist was made
+     * @param dateCreated the date this playlist was made
      */
-    public void setDate_created(Date date_created) {
-        this.date_created = date_created;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     /**
      * getter for is private
      * @return boolean indicating if the playlist is private
      */
-    public boolean isIs_private() {
-        return is_private;
+    public boolean isPrivate() {
+        return isPrivate;
     }
 
     /**
      * setter for is private
-     * @param is_private a boolean indicating if the playlist is private
+     * @param isPrivate a boolean indicating if the playlist is private
      */
-    public void setIs_private(boolean is_private) {
-        this.is_private = is_private;
+    public void setPrivate(boolean isPrivate) {
+        this.isPrivate = isPrivate;
     }
 
     /**
      * getter for number of songs
      * @return the amount of songs in the playlist
      */
-    public int getNumber_of_songs() {
-        return number_of_songs;
+    public int getNumberOfSongs() {
+        return numberOfSongs;
     }
 
     /**
      * setter for number of songs
-     * @param number_of_songs the number of songs in the playlist
+     * @param numberOfSongs the number of songs in the playlist
      */
-    public void setNumber_of_songs(int number_of_songs) {
-        this.number_of_songs = number_of_songs;
+    public void setNumberOfSongs(int numberOfSongs) {
+        this.numberOfSongs = numberOfSongs;
     }
 
     /**
      * getter for playlist name
      * @return the name of the playlist
      */
-    public String getPlaylist_name() {
-        return playlist_name;
+    public String getPlaylistName() {
+        return playlistName;
     }
 
     /**
      * setter for playlist name
-     * @param playlist_name the name of the playlist
+     * @param playlistName the name of the playlist
      */
-    public void setPlaylist_name(String playlist_name) {
-        this.playlist_name = playlist_name;
+    public void setPlaylistName(String playlistName) {
+        this.playlistName = playlistName;
     }
 
     /**

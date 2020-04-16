@@ -3,11 +3,11 @@ package com.group2.model;
 import java.sql.Date;
 
 public class Release {
-    int release_id;
+    int releaseID;
     String title;
-    int release_type;
-    Date date_created;
-    int number_of_tracks;
+    int releaseType;
+    Date dateCreated;
+    int numberOfTracks;
 
     /**
      * constructor with no parameters
@@ -17,34 +17,34 @@ public class Release {
 
     /**
      * constructor with full parameters
-     * @param release_id unique ID number for release
+     * @param releaseID unique ID number for release
      * @param title name of the release
-     * @param release_type type of the release
-     * @param date_created the date of release
-     * @param number_of_tracks the number of tracks
+     * @param releaseType type of the release
+     * @param dateCreated the date of release
+     * @param numberOfTracks the number of tracks
      */
-    public Release(int release_id, String title, int release_type, Date date_created, int number_of_tracks) {
-        this.release_id = release_id;
+    public Release(int releaseID, String title, int releaseType, Date dateCreated, int numberOfTracks) {
+        this.releaseID = releaseID;
         this.title = title;
-        this.release_type = release_type;
-        this.date_created = date_created;
-        this.number_of_tracks = number_of_tracks;
+        this.releaseType = releaseType;
+        this.dateCreated = dateCreated;
+        this.numberOfTracks = numberOfTracks;
     }
 
     /**
      * getter for release id
      * @return unique ID number for release
      */
-    public int getRelease_id() {
-        return release_id;
+    public int getReleaseID() {
+        return releaseID;
     }
 
     /**
      * setter for release id
-     * @param release_id unique ID number for release
+     * @param releaseID unique ID number for release
      */
-    public void setRelease_id(int release_id) {
-        this.release_id = release_id;
+    public void setReleaseID(int releaseID) {
+        this.releaseID = releaseID;
     }
 
     /**
@@ -67,47 +67,47 @@ public class Release {
      * getter for release type
      * @return type of the release
      */
-    public int getRelease_type() {
-        return release_type;
+    public int getReleaseType() {
+        return releaseType;
     }
 
     /**
      * setter for release type
-     * @param release_type type of the release
+     * @param releaseType type of the release
      */
-    public void setRelease_type(int release_type) {
-        this.release_type = release_type;
+    public void setReleaseType(int releaseType) {
+        this.releaseType = releaseType;
     }
 
     /**
      * getter for date created
      * @return the date of release
      */
-    public Date getDate_created() {
-        return date_created;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
     /**
      * setter for date created
-     * @param date_created the date of release
+     * @param dateCreated the date of release
      */
-    public void setDate_created(Date date_created) {
-        this.date_created = date_created;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     /**
      * getter for number of tracks
      * @return the number of tracks
      */
-    public int getNumber_of_tracks() {
-        return number_of_tracks;
+    public int getNumberOfTracks() {
+        return numberOfTracks;
     }
 
     /**
      * setter for number of tracks
-     * @param number_of_tracks the number of tracks
+     * @param numberOfTracks the number of tracks
      */
-    public void setNumber_of_tracks(int number_of_tracks) {
-        this.number_of_tracks = number_of_tracks;
+    public void setNumberOfTracks(int numberOfTracks) {
+        this.numberOfTracks = numberOfTracks;
     }
 }

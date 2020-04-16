@@ -11,23 +11,24 @@ public class Song {
     int song_length;
     byte[] audio_file;
     int musician;
-    boolean deleted;
+    boolean isDeleted;
 
     /**
-     * empty constructor
+     * empty constructor, respecting default values
      */
     public Song() {
+        isDeleted = false;
     }
 
     /**
      * constructor with full parameters
-     * @param song_id the unique ID of the song
+     * @param songID the unique ID of the song
      * @param aggregate_popularity the popularity of the song
-     * @param song_name name of the song
+     * @param songName name of the song
      * @param song_length length of the song in seconds
      * @param audio_file specifies where the audio file can be found
      * @param musician the unique ID of the artist
-     * @param deleted indicates if the song is flagged as deleted
+     * @param isDeleted indicates if the song is flagged as deleted
      */
     public Song(int song_id, float aggregate_popularity, String song_name, int song_length, byte[] audio_file, int musician, boolean deleted) {
         this.song_id = song_id;
@@ -36,38 +37,39 @@ public class Song {
         this.song_length = song_length;
         this.audio_file = audio_file;
         this.musician = musician;
+        this.isDeleted = isDeleted;
     }
 
-    public int getSong_id() {
-        return song_id;
+    public int getSongID() {
+        return songID;
     }
 
-    public void setSong_id(int song_id) {
-        this.song_id = song_id;
+    public void setSongID(int songID) {
+        this.songID = songID;
     }
 
-    public float getAggregate_popularity() {
-        return aggregate_popularity;
+    public float getAggregatePopularity() {
+        return aggregatePopularity;
     }
 
-    public void setAggregate_popularity(float aggregate_popularity) {
-        this.aggregate_popularity = aggregate_popularity;
+    public void setAggregatePopularity(float aggregatePopularity) {
+        this.aggregatePopularity = aggregatePopularity;
     }
 
-    public String getSong_name() {
-        return song_name;
+    public String getSongName() {
+        return songName;
     }
 
-    public void setSong_name(String song_name) {
-        this.song_name = song_name;
+    public void setSongName(String songName) {
+        this.songName = songName;
     }
 
-    public int getSong_length() {
-        return song_length;
+    public int getSongLength() {
+        return songLength;
     }
 
-    public void setSong_length(int song_length) {
-        this.song_length = song_length;
+    public void setSongLength(int songLength) {
+        this.songLength = songLength;
     }
 
     public byte[] getaudio_file() {
@@ -76,6 +78,7 @@ public class Song {
 
     public void setaudio_file(byte[] audio_file) {
         this.audio_file = audio_file;
+
     }
 
     public int getMusician() {
@@ -87,10 +90,10 @@ public class Song {
     }
 
     public boolean isDeleted() {
-        return deleted;
+        return isDeleted;
     }
 
     public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+        this.isDeleted = deleted;
     }
 }
