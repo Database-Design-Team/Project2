@@ -8,7 +8,13 @@ const MusicPlayer = (props) => {
 
   return (
     <div>
-      <ReactPlayer url={currentSong.url} controls width="100%" height="50px" />
+      <ReactPlayer
+        url={currentSong.url}
+        playing
+        controls
+        width="100%"
+        height="50px"
+      />
     </div>
   );
 };

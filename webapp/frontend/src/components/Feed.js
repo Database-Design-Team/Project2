@@ -31,14 +31,6 @@ const Feed = (props) => {
     <div>
       <h1>Download a song</h1>
       <button onClick={handleClick}>press me</button>
-      {/* <ReactPlayer
-        className="react-player"
-        url={currentSong.url}
-        playing
-        controls
-        width="100%"
-        height="100%"
-      /> */}
     </div>
   );
 };

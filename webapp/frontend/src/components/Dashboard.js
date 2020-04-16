@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import SideNav, { NavItem } from "@trendmicro/react-sidenav";
 
 import Feed from "./Feed";
@@ -12,7 +12,6 @@ import "./Dashboard.scss";
 
 const Dashboard = (props) => {
   let history = useHistory();
-  const location = useLocation();
   const handleSignOut = () => {
     history.push(`/`);
   };
@@ -64,8 +63,6 @@ const Dashboard = (props) => {
         </SideNav>
       </div>
       <div className="dashboard-body-container">
-        {/* <h1>Welcome {location.state.login_name}!</h1> */}
-
         <div className="home-content-container">
           <h1>{page}</h1>
           <div className="content-body-container">

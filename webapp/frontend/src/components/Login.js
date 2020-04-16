@@ -3,9 +3,12 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./Login.scss";
+import { useStateValue } from "../state";
 
 const Login = (props) => {
   const { handleSubmit, register, errors } = useForm();
+  const [{ credentials }, dispatch] = useStateValue();
+
   let history = useHistory();
 
   const onSubmit = (values) => {
@@ -29,13 +32,16 @@ const Login = (props) => {
         password: values["password"],
       })
       .then(function(response) {
+        dispatch({
+          type: "changeCredentials",
+          postCredentials: {
+            login_name: values["username"],
+            password: values["password"],
+          },
+        });
         if (response.data) {
           history.push({
             pathname: "/dashboard",
-            state: {
-              login_name: values["username"],
-              password: values["password"],
-            },
           });
         }
       })

@@ -9,6 +9,7 @@ import { StateProvider } from "./state";
 function App() {
   const initialState = {
     currentSong: { url: "" },
+    credentials: { login_name: "", password: "" },
   };
 
   const reducer = (state, action) => {
@@ -18,7 +19,11 @@ function App() {
           ...state,
           currentSong: action.newSong,
         };
-
+      case "changeCredentials":
+        return {
+          ...state,
+          credentials: action.postCredentials,
+        };
       default:
         return state;
     }
