@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import SideNav, { NavItem } from "@trendmicro/react-sidenav";
 
 import Feed from "./Feed";
@@ -10,9 +10,8 @@ import MusicPlayer from "./MusicPlayer";
 import Upload from "./Upload";
 import "./Dashboard.scss";
 
-const Dashboard = props => {
+const Dashboard = (props) => {
   let history = useHistory();
-  const location = useLocation();
   const handleSignOut = () => {
     history.push(`/`);
   };
@@ -22,7 +21,7 @@ const Dashboard = props => {
     Feed: Feed,
     Songs: Songs,
     Playlists: Playlists,
-    Upload: Upload
+    Upload: Upload,
   };
 
   const [page, changePage] = useState("Home");
@@ -50,7 +49,7 @@ const Dashboard = props => {
       </div>
       <div className="sidebar-container">
         <SideNav
-          onSelect={selected => {
+          onSelect={(selected) => {
             changePage(selected);
           }}
         >
@@ -64,8 +63,6 @@ const Dashboard = props => {
         </SideNav>
       </div>
       <div className="dashboard-body-container">
-        {/* <h1>Welcome {location.state.login_name}!</h1> */}
-
         <div className="home-content-container">
           <h1>{page}</h1>
           <div className="content-body-container">

@@ -4,15 +4,38 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./index.scss";
 import Landing from "./components/Landing";
 import Dashboard from "./components/Dashboard";
+import { StateProvider } from "./state";
 
 function App() {
+  const initialState = {
+    currentSong: { url: "" },
+    credentials: { login_name: "", password: "" },
+  };
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "changeSong":
+        return {
+          ...state,
+          currentSong: action.newSong,
+        };
+      case "changeCredentials":
+        return {
+          ...state,
+          credentials: action.postCredentials,
+        };
+      default:
+        return state;
+    }
+  };
+
   return (
-    <div>
+    <StateProvider initialState={initialState} reducer={reducer}>
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route path="/dashboard" component={Dashboard} />
       </Switch>
-    </div>
+    </StateProvider>
   );
 }
 
