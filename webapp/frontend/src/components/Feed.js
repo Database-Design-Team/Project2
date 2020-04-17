@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Feed.scss";
 import axios from "axios";
-import ReactPlayer from "react-player";
 import { useStateValue } from "../state";
 
 const Feed = (props) => {
   const [{ currentSong }, dispatch] = useStateValue();
+  const [list, setList] = useState({});
+  useEffect(() => {
+    axios({
+      url: "/getAllSongs",
+      method: "GET",
+      responseType: "json", // important
+    }).then((response) => {
+      setList(response.data);
+    });
+  });
 
-  const handleClick = () => {
+  const handleClick = (item) => {
+    const song_id = item.item;
     axios({
       url: "/download-files",
       method: "GET",
-      responseType: "blob", // important
+      responseType: "blob",
+      params: { song_id },
     }).then((response) => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
-      // const link = document.createElement("a");
-      // link.href = url;
-      // link.setAttribute("download", "newsong.mp3");
-      // document.body.appendChild(link);
-      // link.click();
-      // setAudioUrl(url);
       dispatch({
         type: "changeSong",
         newSong: { url: url },
@@ -28,9 +33,13 @@ const Feed = (props) => {
   };
 
   return (
-    <div>
-      <h1>Download a song</h1>
-      <button onClick={handleClick}>press me</button>
+    <div className="feed-container">
+      {Object.keys(list).map((item, i) => (
+        <div className="feed-element-container" key={i}>
+          <h2>{list[item].split(".")[0]}</h2>
+          <button onClick={() => handleClick({ item })}>Play</button>
+        </div>
+      ))}
     </div>
   );
 };
