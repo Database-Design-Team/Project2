@@ -12,8 +12,6 @@ const Login = (props) => {
   let history = useHistory();
 
   const onSubmit = (values) => {
-    // console.log(values);
-
     axios.interceptors.response.use(
       (response) => response,
       (error) => {

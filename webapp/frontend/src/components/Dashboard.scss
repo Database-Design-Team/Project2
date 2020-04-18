@@ -113,11 +113,12 @@ html {
 
 .sidebar-container {
   grid-area: sidebar;
-  background-color: #f2f4fb;
+  background-color: #2b2d30;
   position: fixed;
   margin-top: 65px;
   height: 100%;
   width: 200px;
+  color: white;
 }
 
 .sidenav-container {
@@ -125,18 +126,18 @@ html {
   grid-template-rows: repeat(5, 100px);
   font-size: 25px;
   font-weight: 700;
-  justify-items: center;
+  justify-items: start;
   align-items: center;
-  .nav-item-container {
-    cursor: pointer;
-    background: #edf1fa;
-    border: 2px solid #d1d6ee;
-    border-radius: 10px;
-    width: 150px;
-    height: 50px;
-    text-align: center;
-    line-height: 50px;
-  }
+  margin-left: 40px;
+}
+
+.navi {
+  margin-left: -10px;
+  margin-right: 10px;
+}
+
+.nav-item-container {
+  cursor: pointer;
 }
 
 .content-body-container {
@@ -145,8 +146,6 @@ html {
   grid-template-rows: 900px;
   grid-template-columns: 1000px;
   border-radius: 20px;
-  // margin: 20px;
-  // margin-top: 0px;
   justify-content: center;
 }
 

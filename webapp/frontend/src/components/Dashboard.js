@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import SideNav, { NavItem } from "@trendmicro/react-sidenav";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faListUl,
+  faMusic,
+  faUpload,
+  faIndent,
+} from "@fortawesome/fontawesome-free-solid";
 
 import Feed from "./Feed";
 import Home from "./Home";
@@ -54,19 +62,24 @@ const Dashboard = (props) => {
         >
           <SideNav.Nav className="sidenav-container" defaultSelected="home">
             <NavItem className="nav-item-container" eventKey="Home">
-              Home
+              <FontAwesomeIcon className="navi" icon={faHome} />
+              {"Home"}
             </NavItem>
             <NavItem className="nav-item-container" eventKey="Feed">
-              Feed
+              <FontAwesomeIcon className="navi" icon={faListUl} />
+              {" Feed"}
             </NavItem>
             <NavItem className="nav-item-container" eventKey="Songs">
-              Songs
+              <FontAwesomeIcon className="navi" icon={faMusic} />
+              {" Songs"}
             </NavItem>
             <NavItem className="nav-item-container" eventKey="Playlists">
-              Playlists
+              <FontAwesomeIcon className="navi" icon={faIndent} />
+              {" Playlists"}
             </NavItem>
             <NavItem className="nav-item-container" eventKey="Upload">
-              Upload
+              <FontAwesomeIcon className="navi" icon={faUpload} />
+              {" Upload"}
             </NavItem>
           </SideNav.Nav>
         </SideNav>

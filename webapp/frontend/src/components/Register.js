@@ -4,17 +4,17 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./Register.scss";
 
-const Register = props => {
+const Register = (props) => {
   // const { handleSubmit, register, errors } = useForm();
   const { register, errors, getValues, handleSubmit } = useForm();
   let history = useHistory();
-  const onSubmit = values => {
+  const onSubmit = (values) => {
     delete values["passwordConfirmation"];
     console.log(values);
 
     axios.interceptors.response.use(
-      response => response,
-      error => {
+      (response) => response,
+      (error) => {
         const { status } = error.response;
         if (status === 409) {
           alert("The username already exists.");
@@ -25,10 +25,11 @@ const Register = props => {
     );
 
     axios
-      .post("/user-credentials-register", {
-        login_name: values["username"],
+      .post("/user-account-register", {
+        username: values["username"],
         email: values["email"],
-        password: values["password"]
+        student_id: values["student_id"],
+        password: values["password"],
       })
       .then(function(response) {
         console.log(response);
@@ -36,9 +37,9 @@ const Register = props => {
           history.push({
             pathname: "/dashboard",
             state: {
-              login_name: values["username"],
-              password: values["password"]
-            }
+              username: values["username"],
+              password: values["password"],
+            },
           });
         }
       })
@@ -61,8 +62,8 @@ const Register = props => {
               required: "Required",
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: "Please enter a valid email address."
-              }
+                message: "Please enter a valid email address.",
+              },
             })}
             placeholder="student@uh.edu"
           />
@@ -72,9 +73,20 @@ const Register = props => {
             name="username"
             ref={register({
               required: "Required",
-              max: 20
+              max: 20,
             })}
             placeholder="username"
+          />
+        </div>
+
+        <div className="input-container">
+          <input
+            name="student_id"
+            ref={register({
+              required: "Required",
+              max: 20,
+            })}
+            placeholder="student_id"
           />
         </div>
 
@@ -86,7 +98,7 @@ const Register = props => {
             ref={register({
               required: "A password is required.",
               min: 8,
-              max: 20
+              max: 20,
             })}
           ></input>
         </div>
@@ -99,11 +111,11 @@ const Register = props => {
             ref={register({
               required: "Please confirm password.",
               validate: {
-                matchesPreviousPassword: value => {
+                matchesPreviousPassword: (value) => {
                   const { password } = getValues();
                   return password === value || "Passwords should match.";
-                }
-              }
+                },
+              },
             })}
           />
         </div>

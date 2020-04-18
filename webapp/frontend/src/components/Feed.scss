@@ -1,11 +1,9 @@
 .feed-container {
-  background: #e0eafc; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #cfdef3,
-    #e0eafc
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #cfdef3, #e0eafc);
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(255, 249, 255, 1) 11.1%,
+    rgba(255, 241, 255, 1) 90%
+  );
   border-radius: 10px;
   max-width: 1000px;
   display: grid;
@@ -24,6 +22,10 @@
   justify-items: center;
   align-items: center;
   justify-content: space-between;
+  margin-left: 15px;
+  margin-right: 20px;
+  color: #3d4061;
+  font-weight: 700;
 }
 
 .feed-grid-container {
@@ -43,8 +45,12 @@
   justify-items: center;
   align-items: center;
   justify-content: space-between;
-  background: #edf1fa;
-  border: 2px solid #d1d6ee;
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(255, 249, 255, 1) 11.1%,
+    rgba(255, 241, 255, 1) 90%
+  );
+  border: 2px solid #d9d9da;
   border-radius: 10px;
   height: 70px;
   .fa-icon {

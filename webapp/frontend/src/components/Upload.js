@@ -14,7 +14,7 @@ const Upload = (props) => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("song_name", values.song_name);
-    formData.append("musician", 1);
+    formData.append("musician", 1); //change this to the artist_id
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -30,7 +30,6 @@ const Upload = (props) => {
       .catch(function(error) {
         console.log(error);
       });
-    // TODO: get http response to inform user if file uploaded sucessfully
   };
 
   return (
@@ -38,7 +37,7 @@ const Upload = (props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="login-container">
           <div className="title-container">
-            <h1>Enter song information.</h1>
+            <p>Enter song information.</p>
           </div>
 
           <div className="song-input-container">
@@ -56,7 +55,7 @@ const Upload = (props) => {
             <div className="dropzone-container">
               <div {...getRootProps({ className: "dropzone" })}>
                 <input {...getInputProps()} />
-                <p>Drag 'n' drop some files here, or click to select files</p>
+                <p>Drag and drop your song here, or click to select files</p>
               </div>
             </div>
 

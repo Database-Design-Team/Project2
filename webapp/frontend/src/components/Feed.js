@@ -40,10 +40,10 @@ const Feed = (props) => {
         <p>Stream the latest songs from all of our users.</p>
       </div>
       <div className="playlist-headers-container">
-        <p></p>
+        <p>Play</p>
         <p>Title</p>
         <p>Artist</p>
-        <p></p>
+        <p>Add to Playlist</p>
       </div>
       <ul className="feed-grid-container">
         {Object.keys(list)
