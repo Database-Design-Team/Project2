@@ -28,13 +28,4 @@ public class UserCredentialsDao extends AbstractBaseDao {
         ps.setString(3, uc.getEmail());
         ps.executeUpdate();
     }
-
-    public void addUserCredentials(List<UserCredentials> ucList) throws SQLException {
-        for(UserCredentials u : ucList) {
-            addUserCredentials(u);
-        }
-    }
-
-
-
 }
