@@ -20,12 +20,12 @@ public class ArtistController {
 
     /**
      * adds an entry to the artist table
-     * @param artist the Artist object representing the artist getting added to the database
+     * @param artist the name of the artist getting added to the database
      * @return the http response from the interaction with the database
      */
     @PostMapping("/artists")
     @ResponseBody
-    public ResponseEntity<Boolean> addArtist(@RequestBody Artist artist) {
+    public ResponseEntity<Boolean> addArtist(@RequestParam("artist_name") String artist) {
         try {
             dao.addArtist(artist);
             // return true;

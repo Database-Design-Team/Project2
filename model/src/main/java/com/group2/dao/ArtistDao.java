@@ -16,6 +16,18 @@ public class ArtistDao extends AbstractBaseDao {
     }
 
     /**
+     * adds an artist to the Artist table
+     * @param artist the Artist object representing the entity to be entered
+     * @throws SQLException on errors interacting with the database
+     */
+    public void addArtist(@NotNull String artist) throws SQLException {
+        String SQL = "INSERT INTO artist(artist_name) VALUES (?)";
+        PreparedStatement ps = conn.prepareStatement(SQL);
+        ps.setString(1, artist);
+        ps.executeUpdate();
+    }
+
+    /**
      * searches for an artist using the unique ID number
      * @param id the unique ID number getting searched for
      * @return an Artist object representing the entry in the database
@@ -28,17 +40,5 @@ public class ArtistDao extends AbstractBaseDao {
         ResultSet rs = ps.executeQuery();
         rs.next();
         return new Artist(rs.getInt("artist_id"), rs.getString("artist_name"), rs.getDate("date_formed"));
-    }
-
-    /**
-     * adds an artist to the Artist table
-     * @param artist the Artist object representing the entity to be entered
-     * @throws SQLException on errors interacting with the database
-     */
-    public void addArtist(@NotNull Artist artist) throws SQLException {
-        String SQL = "INSERT INTO artist(artist_name) VALUES (?)";
-        PreparedStatement ps = conn.prepareStatement(SQL);
-        ps.setString(1, artist.getArtistName());
-        ps.executeUpdate();
     }
 }
