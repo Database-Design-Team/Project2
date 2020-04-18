@@ -10,9 +10,9 @@ html {
   grid-template-areas:
     "header header header"
     "sidebar content content"
-    "footer footer footer";
-  grid-template-rows: 60px 950px 60px;
-  grid-template-columns: 1fr;
+    "player player player";
+  grid-template-rows: 60px 1000px 60px;
+  grid-template-columns: 200px 10fr;
 }
 
 .header-container {
@@ -31,27 +31,112 @@ html {
   border: 2px solid #be3144;
 }
 
-.search-container {
-  padding: 20px;
-  input {
-    outline: none;
-    border: none;
-    margin: 10px;
-    padding: 7px 45px;
-    border-radius: 7px;
-    -webkit-appearance: none;
-    -webkit-tap-highlight-color: transparent;
-    padding: 14px;
-    color: rgb(0, 0, 0);
-    width: 400px;
-    height: 11px;
-    font-size: 14px;
-    font-weight: 500;
-    background-image: linear-gradient(to right, #f2f4fb 30%, #be3144 100%);
-  }
-}
-
 .fa-search {
   position: relative;
   left: -25px;
+}
+
+.search-container {
+  --text: #646b8c;
+  --text-placeholder: #bbc1e1;
+  --icon: #a6accd;
+  --icon-focus: #646b8c;
+  --background: #fff;
+  --border: #d1d6ee;
+  --border-hover: #a6accd;
+  --border-focus: #89dcff;
+  --shadow-focus: #{rgba(#275efe, 0.32)};
+  input {
+    -webkit-appearance: none;
+    width: 400px;
+    outline: none;
+    display: block;
+    font-size: 14px;
+    font-family: inherit;
+    margin: 0;
+    padding: 8px 16px 8px 41px;
+    line-height: 26px;
+    border-radius: 6px;
+    color: var(--text);
+    border: 1px solid var(--bc, var(--border));
+    background: var(--background);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    &::placeholder {
+      color: var(--text-placeholder);
+    }
+  }
+  svg {
+    width: 16px;
+    height: 16px;
+    top: 14px;
+    left: 14px;
+    display: block;
+    position: absolute;
+    fill: none;
+    stroke: var(--i, var(--icon));
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.6;
+    transition: stroke 0.3s;
+    path {
+      stroke-dasharray: 80;
+      stroke-dashoffset: var(--path, 170);
+      transition: stroke-dashoffset 0.5s ease var(--path-delay, 0.3s);
+    }
+    polyline {
+      stroke-dasharray: 12;
+      stroke-dashoffset: var(--tick, 12);
+      transition: stroke-dashoffset 0.45s ease var(--tick-delay, 0s);
+    }
+  }
+  &:hover {
+    --bc: var(--border-hover);
+  }
+  &:focus-within {
+    --bc: var(--border-focus);
+    --i: var(--icon-focus);
+    input {
+      box-shadow: 0 1px 6px -1px var(--shadow-focus);
+    }
+  }
+}
+
+.dashboard-body-container {
+  grid-area: content;
+  display: grid;
+  background-color: #be3144;
+}
+
+.sidebar-container {
+  grid-area: sidebar;
+  background-color: #f2f4fb;
+}
+
+.sidenav-container {
+  display: flex;
+  flex-direction: column;
+  font-size: 25px;
+  font-weight: 700;
+  margin: 20px;
+}
+
+.content-body-container {
+  background-image: linear-gradient(45deg, #fff4f4 0%, #e7f0fd 100%);
+  display: grid;
+  grid-template-rows: 900px;
+  border-radius: 20px;
+  margin: 20px;
+  margin-top: 0px;
+}
+
+.home-content-container {
+  h1 {
+    color: white;
+    padding-left: 20px;
+  }
+}
+
+.player-container {
+  grid-area: player;
+  padding: 10px;
 }

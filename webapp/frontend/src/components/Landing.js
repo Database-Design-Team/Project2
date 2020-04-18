@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Modali, { useModali } from "modali";
 import "./Landing.scss";
 import Login from "./Login.js";
 import Register from "./Register.js";
 import Trending from "./Trending.js";
 
-const Landing = (props) => {
+const Landing = props => {
   const [loginModal, toggleLoginModal] = useModali({
-    animated: true,
+    animated: true
   });
   const [registerModal, toggleRegisterModal] = useModali({
-    animated: true,
+    animated: true
   });
 
   return (

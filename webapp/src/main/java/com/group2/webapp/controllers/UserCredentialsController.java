@@ -2,7 +2,6 @@ package com.group2.webapp.controllers;
 
 import com.group2.dao.UserCredentialsDao;
 import com.group2.model.UserCredentials;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -32,7 +31,7 @@ public class UserCredentialsController {
     
     @PostMapping("/user-credentials-login")
     @ResponseBody
-    public ResponseEntity<Boolean> login(@NotNull @RequestBody UserCredentials uc) {
+    public ResponseEntity<Boolean> login(@RequestBody UserCredentials uc) {
         UserCredentials uc2;
         try {
             uc2 = dao.getUserCredentialsByLoginName(uc.getLogin_name());
@@ -46,15 +45,4 @@ public class UserCredentialsController {
         }
     }
 
-    // @PostMapping("/user-credentials-login")
-    // @ResponseBody
-    // public boolean login(@RequestBody UserCredentials uc) {
-    //     UserCredentials uc2 = null;
-    //     try {
-    //         uc2 = dao.getUserCredentialsByLoginName(uc.getLogin_name());
-    //     } catch (SQLException e) {
-    //         return false;
-    //     }
-    //     return uc.equals(uc2);
-    // }
 }

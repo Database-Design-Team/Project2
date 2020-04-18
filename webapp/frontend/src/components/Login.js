@@ -3,22 +3,46 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./Login.scss";
+import { useStateValue } from "../state";
 
-const Login = props => {
+const Login = (props) => {
   const { handleSubmit, register, errors } = useForm();
+  const [{ credentials }, dispatch] = useStateValue();
+
   let history = useHistory();
 
-  const onSubmit = values => {
+  const onSubmit = (values) => {
     console.log(values);
+
+    axios.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        const { status } = error.response;
+        if (status === 401) {
+          alert("The username and/or password are incorrect.");
+        }
+        window.location.reload(false);
+        return Promise.reject(error);
+      }
+    );
 
     axios
       .post("/user-credentials-login", {
         login_name: values["username"],
-        password: values["password"]
+        password: values["password"],
       })
       .then(function(response) {
+        dispatch({
+          type: "changeCredentials",
+          postCredentials: {
+            login_name: values["username"],
+            password: values["password"],
+          },
+        });
         if (response.data) {
-          history.push("/dashboard");
+          history.push({
+            pathname: "/dashboard",
+          });
         }
       })
       .catch(function(error) {
@@ -38,7 +62,7 @@ const Login = props => {
             name="username"
             ref={register({
               required: "A username is required",
-              max: 16
+              max: 16,
             })}
             placeholder="username"
           />
@@ -50,7 +74,7 @@ const Login = props => {
             ref={register({
               required: "A password is required",
               min: 8,
-              max: 32
+              max: 32,
             })}
             placeholder="••••••••"
           />
