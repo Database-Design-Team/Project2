@@ -11,31 +11,16 @@ public class Song {
     int song_length;
     byte[] audio_file;
     int musician;
-    boolean deleted;
+    boolean isDeleted;
 
-    /**
-     * empty constructor
-     */
-    public Song() {
-    }
-
-    /**
-     * constructor with full parameters
-     * @param song_id the unique ID of the song
-     * @param aggregate_popularity the popularity of the song
-     * @param song_name name of the song
-     * @param song_length length of the song in seconds
-     * @param audio_file specifies where the audio file can be found
-     * @param musician the unique ID of the artist
-     * @param deleted indicates if the song is flagged as deleted
-     */
-    public Song(int song_id, float aggregate_popularity, String song_name, int song_length, byte[] audio_file, int musician, boolean deleted) {
+    public Song(int song_id, float aggregate_popularity, String song_name, int song_length, byte[] audio_file, int musician, boolean isDeleted) {
         this.song_id = song_id;
         this.aggregate_popularity = aggregate_popularity;
         this.song_name = song_name;
         this.song_length = song_length;
         this.audio_file = audio_file;
         this.musician = musician;
+        this.isDeleted = isDeleted;
     }
 
     public int getSong_id() {
@@ -70,11 +55,11 @@ public class Song {
         this.song_length = song_length;
     }
 
-    public byte[] getaudio_file() {
+    public byte[] getAudio_file() {
         return audio_file;
     }
 
-    public void setaudio_file(byte[] audio_file) {
+    public void setAudio_file(byte[] audio_file) {
         this.audio_file = audio_file;
     }
 
@@ -87,10 +72,10 @@ public class Song {
     }
 
     public boolean isDeleted() {
-        return deleted;
+        return isDeleted;
     }
 
     public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+        isDeleted = deleted;
     }
 }

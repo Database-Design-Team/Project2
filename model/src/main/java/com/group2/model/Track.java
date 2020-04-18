@@ -6,7 +6,7 @@ package com.group2.model;
 public class Track {
     int release;
     int song;
-    int track_number;
+    int trackNumber;
 
     /**
      * empty constructor
@@ -18,12 +18,12 @@ public class Track {
      * constructor with full parameter
      * @param release ID of the release the song belongs to
      * @param song ID of the song in the release
-     * @param track_number the track number in the release
+     * @param trackNumber the track number in the release
      */
-    public Track(int release, int song, int track_number) {
+    public Track(int release, int song, int trackNumber) {
         this.release = release;
         this.song = song;
-        this.track_number = track_number;
+        this.trackNumber = trackNumber;
     }
 
     public int getRelease() {
@@ -42,11 +42,11 @@ public class Track {
         this.song = song;
     }
 
-    public int getTrack_number() {
-        return track_number;
+    public int getTrackNumber() {
+        return trackNumber;
     }
 
-    public void setTrack_number(int track_number) {
-        this.track_number = track_number;
+    public void setTrackNumber(int trackNumber) {
+        this.trackNumber = trackNumber;
     }
 }

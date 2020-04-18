@@ -7,8 +7,8 @@ import java.util.Objects;
  */
 public class UserAccount {
     String username;
-    int student_id;
-    boolean admin;
+    int studentID;
+    boolean isAdmin;
     String password;
     String email;
 
@@ -16,7 +16,7 @@ public class UserAccount {
      * empty constructor, setting defaults
      */
     public UserAccount() {
-        admin = false;
+        isAdmin = false;
     }
 
     /**
@@ -29,8 +29,8 @@ public class UserAccount {
      */
     public UserAccount(String username, int student_id, boolean admin, String password, String email) {
         this.username = username;
-        this.student_id = student_id;
-        this.admin = admin;
+        this.studentID = student_id;
+        this.isAdmin = admin;
         this.password = password;
         this.email = email;
     }
@@ -43,20 +43,20 @@ public class UserAccount {
         this.username = username;
     }
 
-    public int getStudent_id() {
-        return student_id;
+    public int getStudentID() {
+        return studentID;
     }
 
-    public void setStudent_id(int student_id) {
-        this.student_id = student_id;
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
     }
 
     public boolean isAdmin() {
-        return admin;
+        return isAdmin;
     }
 
     public void setAdmin(boolean admin) {
-        this.admin = admin;
+        this.isAdmin = admin;
     }
 
     public String getPassword() {
