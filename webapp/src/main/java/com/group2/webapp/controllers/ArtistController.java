@@ -4,15 +4,15 @@ import com.group2.dao.ArtistDao;
 import com.group2.model.Artist;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
 import java.sql.SQLException;
 
 /**
  * @author Timothy
  */
+@Controller
 public class ArtistController {
     private ArtistDao dao = new ArtistDao();
 
@@ -27,7 +27,7 @@ public class ArtistController {
     @ResponseBody
     public ResponseEntity<Boolean> addArtist(@RequestBody Artist artist) {
         try {
-            dao.addGenre(artist);
+            dao.addArtist(artist);
             // return true;
             return new ResponseEntity<>(true, HttpStatus.OK);
         } catch (SQLException e) {
@@ -43,24 +43,9 @@ public class ArtistController {
      */
     @GetMapping("/artists")
     @ResponseBody
-    public ResponseEntity<Artist> getArtistByID(int id) {
+    public ResponseEntity<Artist> getArtistByID(@RequestParam Integer id) {
         try {
             return new ResponseEntity<>(dao.getArtistByID(id), HttpStatus.OK);
-        } catch(SQLException e) {
-            return new ResponseEntity(false, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    /**
-     * searches for an artist by using the artist's unique name
-     * @param name the name of the artist getting searched for
-     * @return the http response from the interaction with the database
-     */
-    @GetMapping("/artists")
-    @ResponseBody
-    public ResponseEntity<Artist> getArtistByTitle(String name) {
-        try {
-            return new ResponseEntity<>(dao.getArtistByTitle(name), HttpStatus.OK);
         } catch(SQLException e) {
             return new ResponseEntity(false, HttpStatus.NOT_FOUND);
         }

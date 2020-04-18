@@ -2,10 +2,10 @@ package com.group2.dao;
 
 import com.group2.model.Artist;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.web.bind.annotation.RequestBody;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  * @author Timothy
@@ -16,43 +16,29 @@ public class ArtistDao extends AbstractBaseDao {
     }
 
     /**
-     * searches for an artist using the
-     * @param id
-     * @return
-     * @throws SQLException
+     * searches for an artist using the unique ID number
+     * @param id the unique ID number getting searched for
+     * @return an Artist object representing the entry in the database
+     * @throws SQLException on errors interacting with the database
      */
-    public Artist getArtistByID(int id) throws SQLException {
+    public Artist getArtistByID(@RequestBody int id) throws SQLException {
         String SQL = "SELECT * FROM artist WHERE artist_id = ?";
         PreparedStatement ps = conn.prepareStatement(SQL);
-        ps.setString(1, String.valueOf(id));
+        ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         rs.next();
         return new Artist(rs.getInt("artist_id"), rs.getString("artist_name"), rs.getDate("date_formed"));
     }
 
-
-    public Artist getArtistByTitle(String title) throws SQLException {
-        String SQL = "SELECT * FROM artist WHERE artist_title = ?";
+    /**
+     * adds an artist to the Artist table
+     * @param artist the Artist object representing the entity to be entered
+     * @throws SQLException on errors interacting with the database
+     */
+    public void addArtist(@NotNull Artist artist) throws SQLException {
+        String SQL = "INSERT INTO artist(artist_name) VALUES (?)";
         PreparedStatement ps = conn.prepareStatement(SQL);
-        ps.setString(1, title);
-        ResultSet rs = ps.executeQuery();
-        rs.next();
-        return new Artist(rs.getInt("artist_id"), rs.getString("artist_name"), rs.getDate("date_formed"));
-    }
-
-
-    public void addGenre(@NotNull Artist artist) throws SQLException {
-        String SQL = "INSERT INTO artist(artist_id, artist_name, date_formed) VALUES (?, ?, ?)";
-        PreparedStatement ps = conn.prepareStatement(SQL);
-        ps.setInt(1, artist.getArtistID());
-        ps.setString(2, artist.getArtistName());
+        ps.setString(1, artist.getArtistName());
         ps.executeUpdate();
-    }
-
-
-    public void addGenre(@NotNull List<Artist> gList) throws SQLException {
-        for(Artist a : gList) {
-            addGenre(a);
-        }
     }
 }

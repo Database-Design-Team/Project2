@@ -20,11 +20,11 @@ public class GenreController {
     /**
      * adds a genre to the genres table
      * @param genre Genre object representing what should be added to the table
-     * @return response from the http request
+     * @return http response object
      */
     @PostMapping("/genres")
     @ResponseBody
-    public ResponseEntity<Boolean> addGenre(@RequestBody Genre genre) {
+    public ResponseEntity<Boolean> addGenre(@RequestParam("genre_id") String genre) {
         try {
             dao.addGenre(genre);
             // return true;
@@ -38,30 +38,15 @@ public class GenreController {
     /**
      * gets a genre by it's unique ID number
      * @param id the unique ID number getting searched for
-     * @return response from the http request
+     * @return http response object
      */
     @GetMapping("/genres")
     @ResponseBody
-    public ResponseEntity<Genre> getGenreByID(@RequestParam Integer id) {
+    public ResponseEntity getGenreByID(@RequestParam Integer id) {
         try {
             return new ResponseEntity<>(dao.getGenreByID(id), HttpStatus.OK);
         } catch(SQLException e) {
             return new ResponseEntity(false, HttpStatus.NOT_FOUND);
         }
     }
-
-    /**
-     * gets a genre by it's name
-     * @param title the title of the genre being searched for
-     * @return response from the http request
-     */
-/*    @GetMapping("/genres")
-    @ResponseBody
-    public ResponseEntity<Genre> getGenreByTitle(@RequestBody String title) {
-        try {
-            return new ResponseEntity<>(dao.getGenreByTitle(title), HttpStatus.OK);
-        } catch(SQLException e) {
-            return new ResponseEntity(false, HttpStatus.NOT_FOUND);
-        }
-    }*/
 }
