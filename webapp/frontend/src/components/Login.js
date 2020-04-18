@@ -25,15 +25,15 @@ const Login = (props) => {
     );
 
     axios
-      .post("/user-credentials-login", {
-        login_name: values["username"],
+      .post("/user-account-login", {
+        username: values["username"],
         password: values["password"],
       })
       .then(function(response) {
         dispatch({
           type: "changeCredentials",
           postCredentials: {
-            login_name: values["username"],
+            username: values["username"],
             password: values["password"],
           },
         });

@@ -3,6 +3,7 @@ package com.group2.dao;
 import com.group2.model.Song;
 
 import org.springframework.web.multipart.MultipartFile;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.sql.*;
@@ -47,9 +48,23 @@ public class SongDao extends AbstractBaseDao {
         }
         rs.close();
         ps.close();
-        
+
         return songList;
-        
+
     }
 
+    // public JSONObject getAllSongs() throws SQLException {
+    //     PreparedStatement ps = conn.prepareStatement("SELECT song_name, audio_id FROM public.audio");
+    //     ResultSet rs = ps.executeQuery();
+    //     JSONObject songList = new JSONObject();
+    //     while (rs.next()) {
+    //         songList.put("song_name", rs.getString(1));
+    //         songList.put("audio_id", rs.getInt(2));
+    //     }
+    //     rs.close();
+    //     ps.close();
+    //     System.out.println(songList.toString());
+    //     return songList;
+        
+    // }
 }
