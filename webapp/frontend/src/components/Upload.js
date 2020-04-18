@@ -20,7 +20,16 @@ const Upload = (props) => {
         "content-type": "multipart/form-data",
       },
     };
-    axios.post("/upload-files", formData, config);
+    axios
+      .post("/upload-files", formData, config)
+      .then(function(response) {
+        if (response.data) {
+          alert("Successfully uploaded files.");
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
     // TODO: get http response to inform user if file uploaded sucessfully
   };
 

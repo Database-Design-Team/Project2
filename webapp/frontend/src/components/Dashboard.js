@@ -37,7 +37,6 @@ const Dashboard = (props) => {
         <div className="home-container">Coog Music</div>
         <div className="search-container">
           <input type="text" placeholder="Search" />
-          <i className="fa fa-search"></i>
         </div>
         <div className="btn-group">
           <div>
@@ -54,11 +53,21 @@ const Dashboard = (props) => {
           }}
         >
           <SideNav.Nav className="sidenav-container" defaultSelected="home">
-            <NavItem eventKey="Home">Home</NavItem>
-            <NavItem eventKey="Feed">Feed</NavItem>
-            <NavItem eventKey="Songs">Songs</NavItem>
-            <NavItem eventKey="Playlists">Playlists</NavItem>
-            <NavItem eventKey="Upload">Upload</NavItem>
+            <NavItem className="nav-item-container" eventKey="Home">
+              Home
+            </NavItem>
+            <NavItem className="nav-item-container" eventKey="Feed">
+              Feed
+            </NavItem>
+            <NavItem className="nav-item-container" eventKey="Songs">
+              Songs
+            </NavItem>
+            <NavItem className="nav-item-container" eventKey="Playlists">
+              Playlists
+            </NavItem>
+            <NavItem className="nav-item-container" eventKey="Upload">
+              Upload
+            </NavItem>
           </SideNav.Nav>
         </SideNav>
       </div>

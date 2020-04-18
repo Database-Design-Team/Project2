@@ -47,16 +47,4 @@ public class UserCredentialsController {
         }
 
     }
-
-    // @PostMapping("/user-credentials-login")
-    // @ResponseBody
-    // public boolean login(@RequestBody UserCredentials uc) {
-    //     UserCredentials uc2 = null;
-    //     try {
-    //         uc2 = dao.getUserCredentialsByLoginName(uc.getLogin_name());
-    //     } catch (SQLException e) {
-    //         return false;
-    //     }
-    //     return uc.equals(uc2);
-    // }
 }

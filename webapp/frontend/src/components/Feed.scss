@@ -1,9 +1,66 @@
 .feed-container {
+  background: #e0eafc; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #cfdef3,
+    #e0eafc
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #cfdef3, #e0eafc);
+  border-radius: 10px;
+  max-width: 1000px;
   display: grid;
-  grid-auto-rows: max-content;
+  grid-template-rows: 200px 30px 650px;
+}
+
+.feed-title-container {
+  text-align: center;
+  font-weight: 600;
+  font-size: 40px;
+}
+
+.playlist-headers-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 215px);
+  justify-items: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.feed-grid-container {
+  overflow: auto;
+  display: grid;
+  gap: 10px;
+}
+.feed-grid-container::-webkit-scrollbar {
+  display: none;
 }
 
 .feed-element-container {
-  display: flex;
-  flex-direction: row;
+  margin-left: -22px;
+  margin-right: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 215px);
+  justify-items: center;
+  align-items: center;
+  justify-content: space-between;
+  background: #edf1fa;
+  border: 2px solid #d1d6ee;
+  border-radius: 10px;
+  height: 70px;
+  .fa-icon {
+    color: #3d4061;
+    &:hover {
+      transition-duration: 200ms;
+      color: #a6accd;
+      cursor: pointer;
+    }
+  }
+  p {
+    color: #3d4061;
+    font-weight: 600;
+  }
+  &:hover {
+    transition-duration: 400ms;
+    border: 2px solid #a6accd;
+  }
 }

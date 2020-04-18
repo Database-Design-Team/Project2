@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Feed.scss";
 import axios from "axios";
 import { useStateValue } from "../state";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay, faPlusCircle } from "@fortawesome/fontawesome-free-solid";
 
 const Feed = (props) => {
   const [{ currentSong }, dispatch] = useStateValue();
@@ -34,12 +36,31 @@ const Feed = (props) => {
 
   return (
     <div className="feed-container">
-      {Object.keys(list).map((item, i) => (
-        <div className="feed-element-container" key={i}>
-          <h2>{list[item].split(".")[0]}</h2>
-          <button onClick={() => handleClick({ item })}>Play</button>
-        </div>
-      ))}
+      <div className="feed-title-container">
+        <p>Stream the latest songs from all of our users.</p>
+      </div>
+      <div className="playlist-headers-container">
+        <p></p>
+        <p>Title</p>
+        <p>Artist</p>
+        <p></p>
+      </div>
+      <ul className="feed-grid-container">
+        {Object.keys(list)
+          .reverse()
+          .map((item, i) => (
+            <li className="feed-element-container" key={i}>
+              <FontAwesomeIcon
+                className="fa-icon play"
+                icon={faPlay}
+                onClick={() => handleClick({ item })}
+              />
+              <p>{list[item]}</p>
+              <p>{"Artist"}</p>
+              <FontAwesomeIcon className="fa-icon add" icon={faPlusCircle} />
+            </li>
+          ))}
+      </ul>
     </div>
   );
 };
