@@ -1,25 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Feed.scss";
 import axios from "axios";
-import ReactPlayer from "react-player";
 import { useStateValue } from "../state";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay, faPlusCircle } from "@fortawesome/fontawesome-free-solid";
 
 const Feed = (props) => {
   const [{ currentSong }, dispatch] = useStateValue();
+  const [list, setList] = useState({});
+  useEffect(() => {
+    axios({
+      url: "/getAllSongs",
+      method: "GET",
+      responseType: "json", // important
+    }).then((response) => {
+      setList(response.data);
+    });
+  });
 
-  const handleClick = () => {
+  const handleClick = (item) => {
+    const song_id = item.item;
     axios({
       url: "/download-files",
       method: "GET",
-      responseType: "blob", // important
+      responseType: "blob",
+      params: { song_id },
     }).then((response) => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
-      // const link = document.createElement("a");
-      // link.href = url;
-      // link.setAttribute("download", "newsong.mp3");
-      // document.body.appendChild(link);
-      // link.click();
-      // setAudioUrl(url);
       dispatch({
         type: "changeSong",
         newSong: { url: url },
@@ -28,9 +35,32 @@ const Feed = (props) => {
   };
 
   return (
-    <div>
-      <h1>Download a song</h1>
-      <button onClick={handleClick}>press me</button>
+    <div className="feed-container">
+      <div className="feed-title-container">
+        <p>Stream the latest songs from all of our users.</p>
+      </div>
+      <div className="playlist-headers-container">
+        <p>Play</p>
+        <p>Title</p>
+        <p>Artist</p>
+        <p>Add to Playlist</p>
+      </div>
+      <ul className="feed-grid-container">
+        {Object.keys(list)
+          .reverse()
+          .map((item, i) => (
+            <li className="feed-element-container" key={i}>
+              <FontAwesomeIcon
+                className="fa-icon play"
+                icon={faPlay}
+                onClick={() => handleClick({ item })}
+              />
+              <p>{list[item]}</p>
+              <p>{"Artist"}</p>
+              <FontAwesomeIcon className="fa-icon add" icon={faPlusCircle} />
+            </li>
+          ))}
+      </ul>
     </div>
   );
 };

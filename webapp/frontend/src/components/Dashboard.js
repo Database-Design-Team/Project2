@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import SideNav, { NavItem } from "@trendmicro/react-sidenav";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faListUl,
+  faMusic,
+  faUpload,
+  faIndent,
+} from "@fortawesome/fontawesome-free-solid";
 
 import Feed from "./Feed";
 import Home from "./Home";
@@ -37,7 +45,6 @@ const Dashboard = (props) => {
         <div className="home-container">Coog Music</div>
         <div className="search-container">
           <input type="text" placeholder="Search" />
-          <i className="fa fa-search"></i>
         </div>
         <div className="btn-group">
           <div>
@@ -54,11 +61,26 @@ const Dashboard = (props) => {
           }}
         >
           <SideNav.Nav className="sidenav-container" defaultSelected="home">
-            <NavItem eventKey="Home">Home</NavItem>
-            <NavItem eventKey="Feed">Feed</NavItem>
-            <NavItem eventKey="Songs">Songs</NavItem>
-            <NavItem eventKey="Playlists">Playlists</NavItem>
-            <NavItem eventKey="Upload">Upload</NavItem>
+            <NavItem className="nav-item-container" eventKey="Home">
+              <FontAwesomeIcon className="navi" icon={faHome} />
+              {"Home"}
+            </NavItem>
+            <NavItem className="nav-item-container" eventKey="Feed">
+              <FontAwesomeIcon className="navi" icon={faListUl} />
+              {" Feed"}
+            </NavItem>
+            <NavItem className="nav-item-container" eventKey="Songs">
+              <FontAwesomeIcon className="navi" icon={faMusic} />
+              {" Songs"}
+            </NavItem>
+            <NavItem className="nav-item-container" eventKey="Playlists">
+              <FontAwesomeIcon className="navi" icon={faIndent} />
+              {" Playlists"}
+            </NavItem>
+            <NavItem className="nav-item-container" eventKey="Upload">
+              <FontAwesomeIcon className="navi" icon={faUpload} />
+              {" Upload"}
+            </NavItem>
           </SideNav.Nav>
         </SideNav>
       </div>

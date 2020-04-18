@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.HashMap;
 
 public class SongDao extends AbstractBaseDao {
 
@@ -13,29 +14,20 @@ public class SongDao extends AbstractBaseDao {
         super();
     }
 
-    // public void addSongFile(Song songFile) throws SQLException {
-    //     String SQL = "INSERT INTO song(song_id, song_name, song_length, audio_file, musician) VALUES (?,?,?,?,?,?,?)";
-    //     PreparedStatement ps = conn.prepareStatement(SQL);
-    //     ps.setInt(1, songFile.getSong_id());
-    //     ps.setString(2, songFile.getSong_name());
-    //     ps.setInt(3, songFile.getSong_length());
-    //     ps.setBytes(4, songFile.getaudio_file());
-    //     ps.setInt(5, songFile.getMusician());
-    //     ps.executeUpdate();
-    // }
-
-    public void AddSongFile(MultipartFile file) throws SQLException, IOException {
-        String SQL = "INSERT INTO audio (audio_file, audio_name) VALUES (?, ?)";
+    public void AddSongFile(MultipartFile file, Song song) throws SQLException, IOException {
+        String SQL = "INSERT INTO audio (audio_file, song_name, musician, deleted) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setBytes(1, file.getBytes());
-        ps.setString(2, "song2.mp3");
+        ps.setString(2, song.getSong_name());
+        ps.setInt(3, song.getMusician());
+        ps.setBoolean(4, false);
         ps.executeUpdate();
         ps.close();
     }
 
-    public byte[] GetSongFile() throws SQLException {
-        PreparedStatement ps = conn.prepareStatement("SELECT audio_file FROM audio WHERE audio_name = ?");
-        ps.setString(1, "song2.mp3");
+    public byte[] GetSongFile(int song_id) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("SELECT audio_file FROM audio WHERE audio_id = ?");
+        ps.setInt(1, song_id);
         ResultSet rs = ps.executeQuery();
         byte[] songBytes = null;
         if (rs.next()) {
@@ -44,6 +36,20 @@ public class SongDao extends AbstractBaseDao {
         }
         ps.close();
         return songBytes;
+    }
+
+    public HashMap<Integer, String> getAllSongs() throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("SELECT song_name, audio_id FROM public.audio");
+        ResultSet rs = ps.executeQuery();
+        HashMap<Integer, String> songList = new HashMap<Integer, String>();
+        while (rs.next()) {
+            songList.put(rs.getInt(2), rs.getString(1));
+        }
+        rs.close();
+        ps.close();
+        
+        return songList;
+        
     }
 
 }

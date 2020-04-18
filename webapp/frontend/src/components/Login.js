@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import axios from "axios";
 import "./Login.scss";
 import { useStateValue } from "../state";
@@ -12,8 +12,6 @@ const Login = (props) => {
   let history = useHistory();
 
   const onSubmit = (values) => {
-    console.log(values);
-
     axios.interceptors.response.use(
       (response) => response,
       (error) => {
