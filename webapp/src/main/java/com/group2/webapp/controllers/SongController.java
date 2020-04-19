@@ -27,9 +27,7 @@ public class SongController {
     @ResponseBody
     public ResponseEntity<Boolean> upload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("song_name") String song_name, @RequestParam("musician") int musician) throws IOException, SQLException {
         try {
-            Song song = new Song();
-            song.setSong_name(song_name);
-            song.setMusician(musician);
+            Song song = new Song(song_name, musician, false);
             dao.AddSongFile(multipartFile, song);
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } catch (SQLException e) {

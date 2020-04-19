@@ -13,12 +13,9 @@ public class Song {
     int musician;
     boolean isDeleted;
 
-    public Song(int song_id, float aggregate_popularity, String song_name, int song_length, byte[] audio_file, int musician, boolean isDeleted) {
-        this.song_id = song_id;
-        this.aggregate_popularity = aggregate_popularity;
+    public Song(String song_name, int musician, boolean isDeleted) {
+
         this.song_name = song_name;
-        this.song_length = song_length;
-        this.audio_file = audio_file;
         this.musician = musician;
         this.isDeleted = isDeleted;
     }

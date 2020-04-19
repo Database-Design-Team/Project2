@@ -24,7 +24,7 @@ public class UserAccountDao extends AbstractBaseDao {
         String SQL = "INSERT INTO user_account(username, student_id, admin, password, email) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setString(1, uc.getUsername());
-        ps.setInt(2, uc.getStudent_id());
+        ps.setInt(2, uc.getStudentID());
         ps.setBoolean(3, uc.isAdmin());
         ps.setString(4, uc.getPassword());
         ps.setString(5, uc.getEmail());
