@@ -13,7 +13,7 @@ import java.sql.SQLException;
 @Controller
 public class UserAccountController {
 
-    private UserAccountDao dao = new UserAccountDao();
+    private final UserAccountDao dao = new UserAccountDao();
 
     public UserAccountController() throws SQLException {}
 

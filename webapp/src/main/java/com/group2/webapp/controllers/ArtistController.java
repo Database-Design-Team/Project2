@@ -12,9 +12,10 @@ import java.sql.SQLException;
 /**
  * @author Timothy
  */
+@SuppressWarnings("unchecked")
 @Controller
 public class ArtistController {
-    private ArtistDao dao = new ArtistDao();
+    private final ArtistDao dao = new ArtistDao();
 
     public ArtistController() throws SQLException {}
 
