@@ -47,7 +47,8 @@ public class ArtistController {
     public ResponseEntity<Artist> getArtistByID(@RequestParam Integer id) {
         try {
             return new ResponseEntity<>(dao.getArtistByID(id), HttpStatus.OK);
-        } catch(SQLException e) {
+        } catch (SQLException e) {
+            e.getMessage();
             return new ResponseEntity(false, HttpStatus.NOT_FOUND);
         }
     }
