@@ -2,6 +2,8 @@ package com.group2.dao;
 
 import com.group2.model.Song;
 
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.springframework.web.multipart.MultipartFile;
 import org.json.JSONObject;
 
@@ -15,7 +17,14 @@ public class SongDao extends AbstractBaseDao {
         super();
     }
 
-    public void AddSongFile(MultipartFile file, Song song) throws SQLException, IOException {
+    /**
+     * adds a song to the {@code audio} table
+     * @param file the audio file of the song getting uploaded
+     * @param song the {@code song} object holding the other attributes of a song
+     * @throws SQLException
+     * @throws IOException
+     */
+    public void AddSongFile(@NotNull MultipartFile file, @NotNull Song song) throws SQLException, IOException {
         String SQL = "INSERT INTO audio (audio_file, song_name, musician, deleted) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setBytes(1, file.getBytes());
@@ -26,6 +35,12 @@ public class SongDao extends AbstractBaseDao {
         ps.close();
     }
 
+    /**
+     * gets an audio file from the database
+     * @param song_id the ID of the song getting returned
+     * @return the requested audio file from the database
+     * @throws SQLException on errors interacting with the database
+     */
     public byte[] GetSongFile(int song_id) throws SQLException {
         PreparedStatement ps = conn.prepareStatement("SELECT audio_file FROM audio WHERE audio_id = ?");
         ps.setInt(1, song_id);
@@ -39,32 +54,14 @@ public class SongDao extends AbstractBaseDao {
         return songBytes;
     }
 
-    public HashMap<Integer, String> getAllSongs() throws SQLException {
+    /**
+     * gets a list of all the songs stored
+     * @return an array of JSONs, holding the name and ID of the songs in the audio table
+     * @throws SQLException on errors interacting with the database
+     */
+    public JSONArray getAllSongs() throws SQLException {
         PreparedStatement ps = conn.prepareStatement("SELECT song_name, audio_id FROM public.audio");
         ResultSet rs = ps.executeQuery();
-        HashMap<Integer, String> songList = new HashMap<Integer, String>();
-        while (rs.next()) {
-            songList.put(rs.getInt(2), rs.getString(1));
-        }
-        rs.close();
-        ps.close();
-
-        return songList;
-
+        return getJsonArray(rs);
     }
-
-    // public JSONObject getAllSongs() throws SQLException {
-    //     PreparedStatement ps = conn.prepareStatement("SELECT song_name, audio_id FROM public.audio");
-    //     ResultSet rs = ps.executeQuery();
-    //     JSONObject songList = new JSONObject();
-    //     while (rs.next()) {
-    //         songList.put("song_name", rs.getString(1));
-    //         songList.put("audio_id", rs.getInt(2));
-    //     }
-    //     rs.close();
-    //     ps.close();
-    //     System.out.println(songList.toString());
-    //     return songList;
-        
-    // }
 }

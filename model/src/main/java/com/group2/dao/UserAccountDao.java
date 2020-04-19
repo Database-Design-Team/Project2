@@ -1,6 +1,9 @@
 package com.group2.dao;
 
 import com.group2.model.UserAccount;
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.sql.*;
 import java.util.List;
@@ -11,16 +14,26 @@ public class UserAccountDao extends AbstractBaseDao {
         super();
     }
 
-    public UserAccount getUserAccountByLoginName(String username) throws SQLException {
+    /**
+     * gets an account record from the database
+     * @param username the login name of the account being searched for
+     * @return the user account with the requested username
+     * @throws SQLException on errors interacting with the database
+     */
+    public JSONArray getUserAccountByLoginName(String username) throws SQLException {
         String SQL = "SELECT * FROM user_account WHERE username = ?";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setString(1, username);
         ResultSet rs = ps.executeQuery();
-        rs.next();
-        return new UserAccount(rs.getString("username"), rs.getInt("student_id"), rs.getBoolean("admin"), rs.getString("password"), rs.getString("email"));
+        return getJsonArray(rs);
     }
 
-    public void addUserAccount(UserAccount uc) throws SQLException {
+    /**
+     * adds an account to the database
+     * @param uc the {@code user_account} object representing the attributes of the account
+     * @throws SQLException on errors interacting with the database
+     */
+    public void addUserAccount(@NotNull UserAccount uc) throws SQLException {
         String SQL = "INSERT INTO user_account(username, student_id, admin, password, email) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setString(1, uc.getUsername());
@@ -31,12 +44,14 @@ public class UserAccountDao extends AbstractBaseDao {
         ps.executeUpdate();
     }
 
-    public void addUserAccount(List<UserAccount> ucList) throws SQLException {
+    /**
+     * this function adds a list of accounts
+     * @param ucList a {@code List} of user accounts to be added
+     * @throws SQLException on errors interacting with the database
+     */
+    public void addUserAccount(@NotNull List<UserAccount> ucList) throws SQLException {
         for(UserAccount u : ucList) {
             addUserAccount(u);
         }
     }
-
-
-
 }

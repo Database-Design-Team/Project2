@@ -2,6 +2,8 @@ package com.group2.dao;
 
 import com.group2.model.Genre;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,12 +36,11 @@ public class GenreDao extends AbstractBaseDao {
      * @return a Genre object representing the entry in the database
      * @throws SQLException on errors interacting with the database
      */
-    public Genre getGenreByID(@RequestBody int id) throws SQLException {
+    public JSONArray getGenreByID(@RequestBody int id) throws SQLException {
         String SQL = "SELECT * FROM genre WHERE genre_id = ?";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
-        rs.next();
-        return new Genre(rs.getInt("genre_id"), rs.getString("genre_title"));
+        return getJsonArray(rs);
     }
 }

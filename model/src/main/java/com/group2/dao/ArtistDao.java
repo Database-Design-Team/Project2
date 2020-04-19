@@ -2,6 +2,8 @@ package com.group2.dao;
 
 import com.group2.model.Artist;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,12 +35,11 @@ public class ArtistDao extends AbstractBaseDao {
      * @return an Artist object representing the entry in the database
      * @throws SQLException on errors interacting with the database
      */
-    public Artist getArtistByID(@RequestBody int id) throws SQLException {
+    public JSONArray getArtistByID(@RequestBody int id) throws SQLException {
         String SQL = "SELECT * FROM artist WHERE artist_id = ?";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
-        rs.next();
-        return new Artist(rs.getInt("artist_id"), rs.getString("artist_name"), rs.getDate("date_formed"));
+        return getJsonArray(rs);
     }
 }

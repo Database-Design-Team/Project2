@@ -1,8 +1,10 @@
 package com.group2.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.web.bind.annotation.RequestBody;
+import java.sql.*;
 
 public class AbstractBaseDao {
 
@@ -14,5 +16,26 @@ public class AbstractBaseDao {
 
     public AbstractBaseDao() throws SQLException {
         conn = DriverManager.getConnection(url, user, password);
+    }
+
+    /**
+     * This method turns the result of a database query as a JSON array
+     * @param rs the {@code ResultSet} result of the database query
+     * @return a {@code JSONArray} of the rows returned by the query
+     * @throws SQLException on errors interacting with the database
+     */
+    @NotNull
+    static JSONArray getJsonArray(@NotNull ResultSet rs) throws SQLException {
+        JSONArray array = new JSONArray();
+        while (rs.next()){
+            int total_rows = rs.getMetaData().getColumnCount();
+            for (int i = 0; i < total_rows; i++) {
+                JSONObject object = new JSONObject();
+                object.put(rs.getMetaData().getColumnLabel(i + 1)
+                        .toLowerCase(), rs.getObject(i + 1));
+                array.put(object);
+            }
+        }
+        return array;
     }
 }

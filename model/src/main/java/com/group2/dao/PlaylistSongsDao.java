@@ -1,6 +1,7 @@
 package com.group2.dao;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.sql.PreparedStatement;
@@ -58,17 +59,11 @@ public class PlaylistSongsDao extends AbstractBaseDao {
      * @return a {@code JSONObject} representing the songs saved in a given playlist
      * @throws SQLException on errors interacting with the database
      */
-    public JSONObject getPlaylistSongByPlaylist(@RequestBody int playlist) throws SQLException {
+    public JSONArray getPlaylistSongByPlaylist(@RequestBody int playlist) throws SQLException {
         String SQL = "SELECT * FROM playlist_songs WHERE playlist = ?";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setInt(1, playlist);
         ResultSet rs = ps.executeQuery();
-        JSONObject songs = new JSONObject();
-        while (rs.next()){
-            songs.put("song", rs.getInt(1));
-            songs.put("playlist", rs.getInt(2));
-            songs.put("date_added", rs.getDate(3));
-        }
-        return songs;
+        return getJsonArray(rs);
     }
 }
