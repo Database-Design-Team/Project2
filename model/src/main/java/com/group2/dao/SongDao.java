@@ -1,10 +1,10 @@
 package com.group2.dao;
 
 import com.group2.model.Song;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.sql.*;
+import java.util.HashSet;
 import java.util.Set;
 
 public class SongDao extends AbstractBaseDao {
@@ -13,8 +13,8 @@ public class SongDao extends AbstractBaseDao {
         super();
     }
 
-    public void AddSongFile(@NotNull MultipartFile file, @NotNull Song song) throws SQLException, IOException {
-        String SQL = "INSERT INTO audio (audio_file, song_name, musician, deleted) VALUES (?, ?, ?, ?)";
+    public void AddSongFile(MultipartFile file, Song song) throws SQLException, IOException {
+        String SQL = "INSERT INTO audio (audio_file, song_name, artist, deleted) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setBytes(1, file.getBytes());
         ps.setString(2, song.getSong_name());
@@ -42,10 +42,10 @@ public class SongDao extends AbstractBaseDao {
      * @return a {@code Set} of {@code Song} objects, initialized with only the song's ID and name
      * @throws SQLException on errors interacting with the database
      */
-    public Set getAllSongs() throws SQLException {
+    public Set<Song> getAllSongs() throws SQLException {
         PreparedStatement ps = conn.prepareStatement("SELECT audio_id, song_name FROM public.audio WHERE deleted = false");
         ResultSet rs = ps.executeQuery();
-        Set<Song> songList = null;
+        Set<Song> songList = new HashSet<Song>();
         while (rs.next()) {
             Song song = new Song(rs.getInt(1), rs.getString(2));
             songList.add(song);

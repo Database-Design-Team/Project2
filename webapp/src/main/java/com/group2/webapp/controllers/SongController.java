@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Set;
 
 @Controller
 public class SongController {
@@ -45,7 +46,11 @@ public class SongController {
 
     @GetMapping(value="/getAllSongs")
     public ResponseEntity<String> getAllSongs() throws SQLException {
-        JSONObject json = new JSONObject(dao.getAllSongs());
+        Set<Song> songList = dao.getAllSongs();
+        JSONObject json = new JSONObject();
+        for(Song song : songList) {
+            json.put(String.valueOf(song.getSong_id()), song.getSong_name());
+        }
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);
         return new ResponseEntity<>(json.toString(), headers, HttpStatus.OK);
