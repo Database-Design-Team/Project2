@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Set;
 
 /**
  * @author Timothy
@@ -41,4 +42,14 @@ public class ArtistDao extends AbstractBaseDao {
         rs.next();
         return new Artist(rs.getInt("artist_id"), rs.getString("artist_name"), rs.getDate("date_formed"));
     }
+
+    // public Set<Artist> getAllArtists() throws SQLException {
+    //     PreparedStatement ps = conn.prepareStatement("SELECT artist_name, artist_id FROM artist");
+    //     ResultSet rs = ps.executeQuery();
+    //     Set<Artist> artist = null;
+    //     while (rs.next()) {
+    //         Artist artist = new Artist( rs.getString(2), rs.getInt(1));
+    //     }
+
+    // }
 }

@@ -1,0 +1,21 @@
+.artists-container {
+  background-color: #f2f4fb;
+  max-width: 1000px;
+  display: grid;
+  grid-template-rows: 750px;
+  border-radius: 20px;
+}
+
+.artists-header-container {
+  color: white;
+  font-weight: 700;
+  font-size: 30px;
+  display: grid;
+  grid-template-columns: 500px 200px;
+  grid-template-rows: 90px;
+  align-items: center;
+}
+
+.current-artists-container {
+  border-radius: 20px;
+}

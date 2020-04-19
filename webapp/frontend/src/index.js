@@ -9,7 +9,7 @@ import { StateProvider } from "./state";
 function App() {
   const initialState = {
     currentSong: { url: "" },
-    credentials: { login_name: "", password: "" },
+    credentials: { username: "", password: "" },
   };
 
   const reducer = (state, action) => {

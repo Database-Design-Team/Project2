@@ -8,6 +8,7 @@ import {
   faMusic,
   faUpload,
   faIndent,
+  faUsers,
 } from "@fortawesome/fontawesome-free-solid";
 
 import Feed from "./Feed";
@@ -16,6 +17,7 @@ import Songs from "./Songs";
 import Playlists from "./Playlists";
 import MusicPlayer from "./MusicPlayer";
 import Upload from "./Upload";
+import Artists from "./Artists";
 import "./Dashboard.scss";
 
 const Dashboard = (props) => {
@@ -30,6 +32,7 @@ const Dashboard = (props) => {
     Songs: Songs,
     Playlists: Playlists,
     Upload: Upload,
+    Artists: Artists,
   };
 
   const [page, changePage] = useState("Home");
@@ -80,6 +83,10 @@ const Dashboard = (props) => {
             <NavItem className="nav-item-container" eventKey="Upload">
               <FontAwesomeIcon className="navi" icon={faUpload} />
               {" Upload"}
+            </NavItem>
+            <NavItem className="nav-item-container" eventKey="Artists">
+              <FontAwesomeIcon className="navi" icon={faUsers} />
+              {" Artists"}
             </NavItem>
           </SideNav.Nav>
         </SideNav>
