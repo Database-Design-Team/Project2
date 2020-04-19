@@ -17,6 +17,16 @@ public class PlaylistSongs {
     }
 
     /**
+     * constructor with non-defaulted parameters
+     * @param song the ID of a song in the audio table
+     * @param playlist the ID of a playlist in the playlist table
+     */
+    public PlaylistSongs(int song, int playlist) {
+        this.song = song;
+        this.playlist = playlist;
+    }
+
+    /**
      * constructor with full parameters
      * @param song the ID of the song getting added
      * @param playlist the ID of the playlist getting added to
