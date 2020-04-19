@@ -42,28 +42,13 @@ public class PlaylistSongsController {
     }
 
     /**
-     * get the playlists a given song is in
-     * @param song the ID of a song in the audio table
-     * @return http response object
-     */
-    @GetMapping("/playlist-songs")
-    @ResponseBody
-    public ResponseEntity getPlaylistSongBySongID(@RequestParam Integer song) {
-        try {
-            return new ResponseEntity<>(dao.getPlaylistSongBySongID(song), HttpStatus.OK);
-        } catch(SQLException e) {
-            return new ResponseEntity(false, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    /**
      * gets all the songs in a given playlist
      * @param playlist the ID of a playlist
      * @return http response object
      */
     @GetMapping("/playlist-songs")
     @ResponseBody
-    public ResponseEntity getPlaylistSongByPlaylist(@RequestParam Integer playlist) {
+    public ResponseEntity returnPlaylistSongByPlaylist(@RequestParam Integer playlist) {
         try {
             return new ResponseEntity<>(dao.getPlaylistSongByPlaylist(playlist), HttpStatus.OK);
         } catch(SQLException e) {

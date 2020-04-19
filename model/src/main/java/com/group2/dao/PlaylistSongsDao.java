@@ -35,35 +35,21 @@ public class PlaylistSongsDao extends AbstractBaseDao {
     }
 
     /**
-     * get all the playlists a given song is in
-     * @param song_id the ID of a {@code song} in the audio table
-     * @return a {@code Set} of rows returned by the query, representing the playlists a song is in
-     * @throws SQLException on errors interacting with the database
-     */
-    public Set<PlaylistSongs> getPlaylistSongBySongID(@RequestBody int song_id) throws SQLException {
-        String SQL = "SELECT * FROM playlist_songs WHERE song = ?";
-        PreparedStatement ps = conn.prepareStatement(SQL);
-        ps.setInt(1, song_id);
-        ResultSet rs = ps.executeQuery();
-        Set<PlaylistSongs> playlist = null;
-        while (rs.next()){
-            PlaylistSongs song = new PlaylistSongs(rs.getInt(1), rs.getInt(2), rs.getDate(3));
-            playlist.add(song);
-        }
-        return playlist;
-    }
-
-    /**
      * get all the songs in a given playlist
-     * @param playlist the ID of a {@code playlist} in the playlist
+     * @param playlistId the ID of a {@code playlist} in the playlist
      * @return a {@code Set} of rows returned by the query, representing the songs a given playlist has
      * @throws SQLException on errors interacting with the database
      */
-    public PlaylistSongs getPlaylistSongByPlaylist(@RequestBody int playlist) throws SQLException {
+    public Set<PlaylistSongs> getPlaylistSongByPlaylist(@RequestBody int playlistId) throws SQLException {
         String SQL = "SELECT * FROM playlist_songs WHERE playlist = ?";
         PreparedStatement ps = conn.prepareStatement(SQL);
-        ps.setInt(1, playlist);
+        ps.setInt(1, playlistId);
         ResultSet rs = ps.executeQuery();
-        return new PlaylistSongs(rs.getInt(1), rs.getInt(2), rs.getDate(3));
+        Set<PlaylistSongs> playlist = null;
+        while (rs.next()){
+            PlaylistSongs song = new PlaylistSongs(rs.getInt(1), rs.getInt(2));
+            playlist.add(song);
+        }
+        return playlist;
     }
 }
