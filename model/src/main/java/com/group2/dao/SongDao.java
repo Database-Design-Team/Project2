@@ -2,6 +2,7 @@ package com.group2.dao;
 
 import com.group2.model.Song;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.web.multipart.MultipartFile;
 import org.json.JSONObject;
 
@@ -14,8 +15,8 @@ public class SongDao extends AbstractBaseDao {
     public SongDao() throws SQLException {
         super();
     }
-
-    public void AddSongFile(MultipartFile file, Song song) throws SQLException, IOException {
+    
+    public void AddSongFile(@NotNull MultipartFile file, @NotNull Song song) throws SQLException, IOException {
         String SQL = "INSERT INTO audio (audio_file, song_name, musician, deleted) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setBytes(1, file.getBytes());

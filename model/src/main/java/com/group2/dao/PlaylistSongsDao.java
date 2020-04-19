@@ -1,11 +1,13 @@
 package com.group2.dao;
 
+import com.group2.model.PlaylistSongs;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Set;
 
 /**
  * @author Timothy Chandler
@@ -34,41 +36,34 @@ public class PlaylistSongsDao extends AbstractBaseDao {
 
     /**
      * get all the playlists a given song is in
-     * @param song the ID of a {@code song} in the audio table
-     * @return a {@code JSONObject} representing the playlists a given song is saved in
+     * @param song_id the ID of a {@code song} in the audio table
+     * @return a {@code Set} of rows returned by the query, representing the playlists a song is in
      * @throws SQLException on errors interacting with the database
      */
-    public JSONObject getPlaylistSongBySongID(@RequestBody int song) throws SQLException {
+    public Set<PlaylistSongs> getPlaylistSongBySongID(@RequestBody int song_id) throws SQLException {
         String SQL = "SELECT * FROM playlist_songs WHERE song = ?";
         PreparedStatement ps = conn.prepareStatement(SQL);
-        ps.setInt(1, song);
+        ps.setInt(1, song_id);
         ResultSet rs = ps.executeQuery();
-        JSONObject playlists = new JSONObject();
+        Set<PlaylistSongs> playlist = null;
         while (rs.next()){
-            playlists.put("song", rs.getInt(1));
-            playlists.put("playlist", rs.getInt(2));
-            playlists.put("date_added", rs.getDate(3));
+            PlaylistSongs song = new PlaylistSongs(rs.getInt(1), rs.getInt(2), rs.getDate(3));
+            playlist.add(song);
         }
-        return playlists;
+        return playlist;
     }
 
     /**
      * get all the songs in a given playlist
      * @param playlist the ID of a {@code playlist} in the playlist
-     * @return a {@code JSONObject} representing the songs saved in a given playlist
+     * @return a {@code Set} of rows returned by the query, representing the songs a given playlist has
      * @throws SQLException on errors interacting with the database
      */
-    public JSONObject getPlaylistSongByPlaylist(@RequestBody int playlist) throws SQLException {
+    public PlaylistSongs getPlaylistSongByPlaylist(@RequestBody int playlist) throws SQLException {
         String SQL = "SELECT * FROM playlist_songs WHERE playlist = ?";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setInt(1, playlist);
         ResultSet rs = ps.executeQuery();
-        JSONObject songs = new JSONObject();
-        while (rs.next()){
-            songs.put("song", rs.getInt(1));
-            songs.put("playlist", rs.getInt(2));
-            songs.put("date_added", rs.getDate(3));
-        }
-        return songs;
+        return new PlaylistSongs(rs.getInt(1), rs.getInt(2), rs.getDate(3));
     }
 }
