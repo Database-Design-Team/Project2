@@ -13,6 +13,8 @@ public class Song {
     int musician;
     boolean isDeleted;
 
+    public Song() {}
+
     public Song(String song_name, int musician, boolean isDeleted) {
 
         this.song_name = song_name;

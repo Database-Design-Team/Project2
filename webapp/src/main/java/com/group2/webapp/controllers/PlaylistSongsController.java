@@ -56,18 +56,5 @@ public class PlaylistSongsController {
         }
     }
 
-    /**
-     * gets all the songs in a given playlist
-     * @param playlist the ID of a playlist
-     * @return http response object
-     */
-    @GetMapping("/playlist-songs")
-    @ResponseBody
-    public ResponseEntity getPlaylistSongByPlaylist(@RequestParam Integer playlist) {
-        try {
-            return new ResponseEntity<>(dao.getPlaylistSongByPlaylist(playlist), HttpStatus.OK);
-        } catch(SQLException e) {
-            return new ResponseEntity(false, HttpStatus.NOT_FOUND);
-        }
-    }
+
 }
