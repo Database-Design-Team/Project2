@@ -19,7 +19,7 @@ import java.sql.SQLException;
  */
 @Controller
 public class PlaylistSongsController {
-    private PlaylistSongsDao dao = new PlaylistSongsDao();
+    private final PlaylistSongsDao dao = new PlaylistSongsDao();
 
     public PlaylistSongsController() throws SQLException {}
 

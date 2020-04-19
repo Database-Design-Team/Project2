@@ -18,14 +18,14 @@ import java.sql.SQLException;
 @Controller
 public class SongController {
 
-    private SongDao dao = new SongDao();
+    private final SongDao dao = new SongDao();
 
     public SongController() throws SQLException {
     }
 
     @RequestMapping(value = "/upload-files", headers = "content-type=multipart/*", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Boolean> upload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("song_name") String song_name, @RequestParam("musician") int musician) throws IOException, SQLException {
+    public ResponseEntity<Boolean> upload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("song_name") String song_name, @RequestParam("musician") int musician) throws IOException {
         try {
             Song song = new Song(song_name, musician, false);
             dao.AddSongFile(multipartFile, song);

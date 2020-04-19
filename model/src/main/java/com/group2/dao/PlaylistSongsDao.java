@@ -2,7 +2,6 @@ package com.group2.dao;
 
 import com.group2.model.PlaylistSongs;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
