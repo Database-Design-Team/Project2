@@ -1,13 +1,11 @@
 package com.group2.dao;
 
 import com.group2.model.Song;
-
 import org.springframework.web.multipart.MultipartFile;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.sql.*;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SongDao extends AbstractBaseDao {
 
@@ -16,7 +14,7 @@ public class SongDao extends AbstractBaseDao {
     }
 
     public void AddSongFile(MultipartFile file, Song song) throws SQLException, IOException {
-        String SQL = "INSERT INTO audio (audio_file, song_name, musician, deleted) VALUES (?, ?, ?, ?)";
+        String SQL = "INSERT INTO audio (audio_file, song_name, artist, deleted) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setBytes(1, file.getBytes());
         ps.setString(2, song.getSong_name());
@@ -39,18 +37,22 @@ public class SongDao extends AbstractBaseDao {
         return songBytes;
     }
 
-    public HashMap<Integer, String> getAllSongs() throws SQLException {
-        PreparedStatement ps = conn.prepareStatement("SELECT song_name, audio_id FROM public.audio");
+    /**
+     * gets the id and name of every available song
+     * @return a {@code Set} of {@code Song} objects, initialized with only the song's ID and name
+     * @throws SQLException on errors interacting with the database
+     */
+    public Set<Song> getAllSongs() throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("SELECT audio_id, song_name FROM public.audio WHERE deleted = false");
         ResultSet rs = ps.executeQuery();
-        HashMap<Integer, String> songList = new HashMap<Integer, String>();
+        Set<Song> songList = new HashSet<Song>();
         while (rs.next()) {
-            songList.put(rs.getInt(2), rs.getString(1));
+            Song song = new Song(rs.getInt(1), rs.getString(2));
+            songList.add(song);
         }
         rs.close();
         ps.close();
-
         return songList;
-
     }
 
     // public JSONObject getAllSongs() throws SQLException {
@@ -65,6 +67,6 @@ public class SongDao extends AbstractBaseDao {
     //     ps.close();
     //     System.out.println(songList.toString());
     //     return songList;
-        
+
     // }
 }

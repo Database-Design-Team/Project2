@@ -1,6 +1,7 @@
 package com.group2.dao;
 
 import com.group2.model.UserAccount;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
 import java.util.List;
@@ -20,7 +21,7 @@ public class UserAccountDao extends AbstractBaseDao {
         return new UserAccount(rs.getString("username"), rs.getInt("student_id"), rs.getBoolean("admin"), rs.getString("password"), rs.getString("email"));
     }
 
-    public void addUserAccount(UserAccount uc) throws SQLException {
+    public void addUserAccount(@NotNull UserAccount uc) throws SQLException {
         String SQL = "INSERT INTO user_account(username, student_id, admin, password, email) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setString(1, uc.getUsername());
@@ -31,7 +32,7 @@ public class UserAccountDao extends AbstractBaseDao {
         ps.executeUpdate();
     }
 
-    public void addUserAccount(List<UserAccount> ucList) throws SQLException {
+    public void addUserAccount(@NotNull List<UserAccount> ucList) throws SQLException {
         for(UserAccount u : ucList) {
             addUserAccount(u);
         }

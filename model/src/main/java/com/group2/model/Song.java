@@ -1,6 +1,8 @@
 package com.group2.model;
 
 
+import org.jetbrains.annotations.Contract;
+
 /**
  * @author Timothy
  */
@@ -13,13 +15,24 @@ public class Song {
     int musician;
     boolean isDeleted;
 
-    public Song() {}
-
     public Song(String song_name, int musician, boolean isDeleted) {
 
         this.song_name = song_name;
         this.musician = musician;
         this.isDeleted = isDeleted;
+    }
+
+    @Contract(pure = true)
+    public Song(int song_id, float aggregate_popularity, String song_name) {
+        this.song_id = song_id;
+        this.aggregate_popularity = aggregate_popularity;
+        this.song_name = song_name;
+    }
+
+    @Contract(pure = true)
+    public Song(int song_id, String song_name) {
+        this.song_id = song_id;
+        this.song_name = song_name;
     }
 
     public int getSong_id() {

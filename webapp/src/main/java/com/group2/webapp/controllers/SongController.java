@@ -14,18 +14,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Set;
 
 @Controller
 public class SongController {
 
-    private SongDao dao = new SongDao();
+    private final SongDao dao = new SongDao();
 
     public SongController() throws SQLException {
     }
 
     @RequestMapping(value = "/upload-files", headers = "content-type=multipart/*", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Boolean> upload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("song_name") String song_name, @RequestParam("musician") int musician) throws IOException, SQLException {
+    public ResponseEntity<Boolean> upload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("song_name") String song_name, @RequestParam("musician") int musician) throws IOException {
         try {
             Song song = new Song(song_name, musician, false);
             dao.AddSongFile(multipartFile, song);
@@ -45,7 +46,11 @@ public class SongController {
 
     @GetMapping(value="/getAllSongs")
     public ResponseEntity<String> getAllSongs() throws SQLException {
-        JSONObject json = new JSONObject(dao.getAllSongs());
+        Set<Song> songList = dao.getAllSongs();
+        JSONObject json = new JSONObject();
+        for(Song song : songList) {
+            json.put(String.valueOf(song.getSong_id()), song.getSong_name());
+        }
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);
         return new ResponseEntity<>(json.toString(), headers, HttpStatus.OK);

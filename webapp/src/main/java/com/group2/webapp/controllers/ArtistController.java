@@ -12,9 +12,10 @@ import java.sql.SQLException;
 /**
  * @author Timothy
  */
+@SuppressWarnings("unchecked")
 @Controller
 public class ArtistController {
-    private ArtistDao dao = new ArtistDao();
+    private final ArtistDao dao = new ArtistDao();
 
     public ArtistController() throws SQLException {}
 
@@ -46,7 +47,8 @@ public class ArtistController {
     public ResponseEntity<Artist> getArtistByID(@RequestParam Integer id) {
         try {
             return new ResponseEntity<>(dao.getArtistByID(id), HttpStatus.OK);
-        } catch(SQLException e) {
+        } catch (SQLException e) {
+            e.getMessage();
             return new ResponseEntity(false, HttpStatus.NOT_FOUND);
         }
     }
