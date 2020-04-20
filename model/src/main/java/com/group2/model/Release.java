@@ -7,7 +7,6 @@ import java.sql.Date;
 public class Release {
     int releaseID;
     String title;
-    int releaseType;
     Date dateCreated;
 
     /**
@@ -21,14 +20,12 @@ public class Release {
      * constructor with full parameters
      * @param releaseID unique ID number for release
      * @param title name of the release
-     * @param releaseType type of the release
      * @param dateCreated the date of release
      */
     @Contract(pure = true)
-    public Release(int releaseID, String title, int releaseType, Date dateCreated) {
+    public Release(int releaseID, String title, Date dateCreated) {
         this.releaseID = releaseID;
         this.title = title;
-        this.releaseType = releaseType;
         this.dateCreated = dateCreated;
     }
 
@@ -62,22 +59,6 @@ public class Release {
      */
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    /**
-     * getter for release type
-     * @return type of the release
-     */
-    public int getReleaseType() {
-        return releaseType;
-    }
-
-    /**
-     * setter for release type
-     * @param releaseType type of the release
-     */
-    public void setReleaseType(int releaseType) {
-        this.releaseType = releaseType;
     }
 
     /**
