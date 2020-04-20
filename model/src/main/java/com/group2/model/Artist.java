@@ -1,5 +1,7 @@
 package com.group2.model;
 
+import org.jetbrains.annotations.Contract;
+
 import java.sql.Date;
 
 /**
@@ -13,7 +15,17 @@ public class Artist {
     /**
      * constructor without parameters
      */
+    @Contract(pure = true)
     public Artist() {
+    }
+
+    /**
+     * constructor with non-defaultable parameters
+     * @param artistName the name of the artist
+     */
+    @Contract(pure = true)
+    public Artist(String artistName) {
+        this.artistName = artistName;
     }
 
     /**
@@ -22,6 +34,7 @@ public class Artist {
      * @param artistName the name of the artist
      * @param dateFormed the date an artist became active
      */
+    @Contract(pure = true)
     public Artist(int artistID, String artistName, Date dateFormed) {
         this.artistID = artistID;
         this.artistName = artistName;

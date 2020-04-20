@@ -1,5 +1,7 @@
 package com.group2.model;
 
+import org.jetbrains.annotations.Contract;
+
 import java.sql.Date;
 
 /**
@@ -13,6 +15,7 @@ public class PlaylistSongs {
     /**
      * constructor with no parameters
      */
+    @Contract(pure = true)
     public PlaylistSongs() {
     }
 
@@ -21,6 +24,7 @@ public class PlaylistSongs {
      * @param song the ID of a song in the audio table
      * @param playlist the ID of a playlist in the playlist table
      */
+    @Contract(pure = true)
     public PlaylistSongs(int song, int playlist) {
         this.song = song;
         this.playlist = playlist;
@@ -32,6 +36,7 @@ public class PlaylistSongs {
      * @param playlist the ID of the playlist getting added to
      * @param dateAdded the date the song was added to the playlist
      */
+    @Contract(pure = true)
     public PlaylistSongs(int song, int playlist, Date dateAdded) {
         this.song = song;
         this.playlist = playlist;

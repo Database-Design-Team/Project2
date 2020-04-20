@@ -1,5 +1,7 @@
 package com.group2.model;
 
+import org.jetbrains.annotations.Contract;
+
 import java.sql.Date;
 
 /**
@@ -15,8 +17,21 @@ public class Playlist {
     /**
      * constructor with no parameters, initializing to defaults
      */
+    @Contract(pure = true)
     public Playlist() {
         isPrivate = false;
+    }
+
+    /**
+     * constructor with non-default parameters
+     * @param playlistName the name of the playlist
+     * @param owner the name of the owner of the playlist
+     */
+    @Contract(pure = true)
+    public Playlist(String playlistName, String owner) {
+        this.playlistName = playlistName;
+        this.owner = owner;
+
     }
 
     /**
@@ -27,6 +42,7 @@ public class Playlist {
      * @param playlistName the name of the playlist
      * @param owner the owner of the playlist
      */
+    @Contract(pure = true)
     public Playlist(int playlistID, Date dateCreated, boolean isPrivate, String playlistName, String owner) {
         this.playlist_id = playlistID;
         this.dateCreated = dateCreated;
