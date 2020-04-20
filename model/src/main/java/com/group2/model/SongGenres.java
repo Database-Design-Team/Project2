@@ -1,5 +1,7 @@
 package com.group2.model;
 
+import org.jetbrains.annotations.Contract;
+
 /**
  * @author Timothy
  */
@@ -10,6 +12,7 @@ public class SongGenres {
     /**
      * empty constructor
      */
+    @Contract(pure = true)
     public SongGenres() {
     }
 
@@ -18,6 +21,7 @@ public class SongGenres {
      * @param song the ID of the song
      * @param genre the ID of one of the song's genres
      */
+    @Contract(pure = true)
     public SongGenres(int song, int genre) {
         this.song = song;
         this.genre = genre;

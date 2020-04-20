@@ -1,5 +1,7 @@
 package com.group2.model;
 
+import org.jetbrains.annotations.Contract;
+
 import java.sql.Date;
 
 public class Release {
@@ -7,11 +9,11 @@ public class Release {
     String title;
     int releaseType;
     Date dateCreated;
-    int numberOfTracks;
 
     /**
      * constructor with no parameters
      */
+    @Contract(pure = true)
     public Release() {
     }
 
@@ -21,14 +23,13 @@ public class Release {
      * @param title name of the release
      * @param releaseType type of the release
      * @param dateCreated the date of release
-     * @param numberOfTracks the number of tracks
      */
-    public Release(int releaseID, String title, int releaseType, Date dateCreated, int numberOfTracks) {
+    @Contract(pure = true)
+    public Release(int releaseID, String title, int releaseType, Date dateCreated) {
         this.releaseID = releaseID;
         this.title = title;
         this.releaseType = releaseType;
         this.dateCreated = dateCreated;
-        this.numberOfTracks = numberOfTracks;
     }
 
     /**
@@ -95,19 +96,4 @@ public class Release {
         this.dateCreated = dateCreated;
     }
 
-    /**
-     * getter for number of tracks
-     * @return the number of tracks
-     */
-    public int getNumberOfTracks() {
-        return numberOfTracks;
-    }
-
-    /**
-     * setter for number of tracks
-     * @param numberOfTracks the number of tracks
-     */
-    public void setNumberOfTracks(int numberOfTracks) {
-        this.numberOfTracks = numberOfTracks;
-    }
 }

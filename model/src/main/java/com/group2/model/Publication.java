@@ -1,5 +1,7 @@
 package com.group2.model;
 
+import org.jetbrains.annotations.Contract;
+
 public class Publication {
     int artist;
     int release;
@@ -7,6 +9,7 @@ public class Publication {
     /**
      * constructor without parameters
      */
+    @Contract(pure = true)
     public Publication() {
     }
 
@@ -15,6 +18,7 @@ public class Publication {
      * @param artist one of the owners of the album
      * @param release the released
      */
+    @Contract(pure = true)
     public Publication(int artist, int release) {
         this.artist = artist;
         this.release = release;
