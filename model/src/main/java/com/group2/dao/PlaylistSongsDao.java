@@ -30,7 +30,7 @@ public class PlaylistSongsDao extends AbstractBaseDao {
         String SQL = "INSERT INTO playlist_songs(song, playlist) VALUES (?, ?)";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setInt(1, song);
-        ps.setInt(2, song);
+        ps.setInt(2, playlist);
         ps.executeUpdate();
         ps.close();
     }
@@ -51,8 +51,8 @@ public class PlaylistSongsDao extends AbstractBaseDao {
             PlaylistSongs song = new PlaylistSongs(rs.getInt(1), rs.getInt(2), rs.getDate(3));
             playlist.add(song);
         }
-        ps.close();
         rs.close();
+        ps.close();
         return playlist;
     }
 }

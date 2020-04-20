@@ -3,7 +3,10 @@ package com.group2.webapp.controllers;
 import com.group2.dao.PlaylistSongsDao;
 import com.group2.model.PlaylistSongs;
 
+import org.json.JSONObject;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +55,16 @@ public class PlaylistSongsController {
      */
     @GetMapping("/playlist-songs")
     @ResponseBody
-    public ResponseEntity<Set<PlaylistSongs>> getPlaylistSongByPlaylist(@RequestParam Integer playlist) throws SQLException {
-        return new ResponseEntity<Set<PlaylistSongs>>(dao.getPlaylistSongByPlaylist(playlist), HttpStatus.OK);
+    public ResponseEntity<String> getPlaylistSongByPlaylist(@RequestParam Integer playlist) throws SQLException {
+        Set<PlaylistSongs> playlistSongsList = dao.getPlaylistSongByPlaylist(playlist);
+        JSONObject json = new JSONObject();
+        for (PlaylistSongs song : playlistSongsList) {
+            JSONObject temp = new JSONObject();
+            temp.put(String.valueOf(song.getPlaylist()), song.getDateAdded());
+            json.put(String.valueOf(song.getSong()), temp);
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+        return new ResponseEntity<>(json.toString(), headers,  HttpStatus.OK);
     }
 }
