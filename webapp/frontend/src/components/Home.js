@@ -6,8 +6,8 @@ const Home = (props) => {
   const [{ credentials }, dispatch] = useStateValue();
 
   return (
-    <div>
-      <h1>Welcome back {credentials.login_name}</h1>
+    <div className="home-container">
+      <h1>Welcome back {credentials.username}</h1>
     </div>
   );
 };

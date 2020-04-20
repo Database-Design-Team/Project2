@@ -1,15 +1,18 @@
 package com.group2.model;
 
+import org.jetbrains.annotations.Contract;
+
 /**
  * @author Timothy
  */
-class BandMember {
+public class BandMember {
     String memberName;
     int bandID;
 
     /**
      * empty constructor
      */
+    @Contract(pure = true)
     public BandMember() {
     }
 
@@ -18,6 +21,7 @@ class BandMember {
      * @param memberName the name of this particular band member
      * @param bandID the band's unique integer id
      */
+    @Contract(pure = true)
     public BandMember(String memberName, int bandID) {
         this.memberName = memberName;
         this.bandID = bandID;

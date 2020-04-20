@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import axios from "axios";
 import "./Login.scss";
 import { useStateValue } from "../state";
@@ -12,14 +12,12 @@ const Login = (props) => {
   let history = useHistory();
 
   const onSubmit = (values) => {
-    console.log(values);
-
     axios.interceptors.response.use(
       (response) => response,
       (error) => {
         const { status } = error.response;
         if (status === 401) {
-          alert("The username and/or password are incorrect.");
+          alert("The username already exists.");
         }
         window.location.reload(false);
         return Promise.reject(error);
@@ -27,15 +25,15 @@ const Login = (props) => {
     );
 
     axios
-      .post("/user-credentials-login", {
-        login_name: values["username"],
+      .post("/user-account-login", {
+        username: values["username"],
         password: values["password"],
       })
       .then(function(response) {
         dispatch({
           type: "changeCredentials",
           postCredentials: {
-            login_name: values["username"],
+            username: values["username"],
             password: values["password"],
           },
         });

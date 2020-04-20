@@ -1,4 +1,4 @@
-.feed-container {
+.artists-container {
   background-image: radial-gradient(
     circle farthest-corner at 10% 20%,
     rgba(255, 249, 255, 1) 11.1%,
@@ -7,41 +7,34 @@
   border-radius: 10px;
   max-width: 1000px;
   display: grid;
-  grid-template-rows: 200px 30px 650px;
+  grid-template-rows: 750px;
 }
 
-.feed-title-container {
-  text-align: center;
-  font-weight: 600;
-  font-size: 40px;
-}
-
-.playlist-headers-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 215px);
-  justify-items: center;
-  align-items: center;
-  justify-content: space-between;
-  margin-left: 15px;
-  margin-right: 20px;
-  color: #3d4061;
+.artists-header-container {
+  color: white;
   font-weight: 700;
+  font-size: 30px;
+  display: grid;
+  grid-template-columns: 500px 200px;
+  grid-template-rows: 90px;
+  align-items: center;
 }
 
-.feed-grid-container {
+.current-artists-container {
   overflow: auto;
   display: grid;
   gap: 10px;
+  list-style-type: none;
 }
-.feed-grid-container::-webkit-scrollbar {
+.current-artists-container::-webkit-scrollbar {
   display: none;
 }
 
-.feed-element-container {
+.current-artists-element-container {
   margin-left: -22px;
   margin-right: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 215px);
+  grid-template-columns: 215px 215px 215px;
   justify-items: center;
   align-items: center;
   justify-content: space-between;

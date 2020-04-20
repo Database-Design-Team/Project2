@@ -1,5 +1,7 @@
 package com.group2.model;
 
+import org.jetbrains.annotations.Contract;
+
 /**
  * @author Timothy
  */
@@ -11,6 +13,7 @@ public class Track {
     /**
      * empty constructor
      */
+    @Contract(pure = true)
     public Track() {
     }
 
@@ -20,6 +23,7 @@ public class Track {
      * @param song ID of the song in the release
      * @param trackNumber the track number in the release
      */
+    @Contract(pure = true)
     public Track(int release, int song, int trackNumber) {
         this.release = release;
         this.song = song;

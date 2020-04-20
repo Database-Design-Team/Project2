@@ -1,5 +1,7 @@
 package com.group2.model;
 
+import org.jetbrains.annotations.Contract;
+
 import java.sql.Date;
 
 /**
@@ -13,7 +15,19 @@ public class Library {
     /**
      * constructor with no parameters
      */
+    @Contract(pure = true)
     public Library() {
+    }
+
+    /**
+     * constructor with non-defaulted parameters
+     * @param song the ID number of the song saved
+     * @param owner the user who saved the song
+     */
+    @Contract(pure = true)
+    public Library(int song, String owner) {
+        this.song = song;
+        this.owner = owner;
     }
 
     /**
@@ -22,6 +36,7 @@ public class Library {
      * @param owner the name of the library's owner
      * @param dateAdded the date that this song was added to the library
      */
+    @Contract(pure = true)
     public Library(int song, String owner, Date dateAdded) {
         this.song = song;
         this.owner = owner;

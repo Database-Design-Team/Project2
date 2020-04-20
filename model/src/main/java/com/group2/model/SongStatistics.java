@@ -1,20 +1,33 @@
 package com.group2.model;
 
-import java.sql.Time;
+import org.jetbrains.annotations.Contract;
+import java.sql.Date;
 
 /**
  * @author Timothy
  */
 public class SongStatistics {
     String user;
-    Time timeStamp;
-    float rating;
+    Date timeStamp;
+    int rating;
     int song;
 
     /**
      * empty constructor
      */
+    @Contract(pure = true)
     public SongStatistics() {
+    }
+
+    /**
+     * constructor with non-default attributes
+     * @param user the username of the user
+     * @param song the ID of the song
+     */
+    @Contract(pure = true)
+    public SongStatistics(String user, int song) {
+        this.user = user;
+        this.song = song;
     }
 
     /**
@@ -24,7 +37,8 @@ public class SongStatistics {
      * @param rating user's rating, if any
      * @param song ID of the song listened to
      */
-    public SongStatistics(String user, Time timeStamp, float rating, int song) {
+    @Contract(pure = true)
+    public SongStatistics(String user, Date timeStamp, int rating, int song) {
         this.user = user;
         this.timeStamp = timeStamp;
         this.rating = rating;
@@ -39,19 +53,19 @@ public class SongStatistics {
         this.user = user;
     }
 
-    public Time getTimeStamp() {
+    public Date getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(Time timeStamp) {
+    public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
     }
 
-    public float getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 

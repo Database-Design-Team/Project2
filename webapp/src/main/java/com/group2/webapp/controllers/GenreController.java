@@ -1,7 +1,6 @@
 package com.group2.webapp.controllers;
 
 import com.group2.dao.GenreDao;
-import com.group2.model.Genre;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,7 @@ import java.sql.SQLException;
  */
 @Controller
 public class GenreController {
-    private GenreDao dao = new GenreDao();
+    private final GenreDao dao = new GenreDao();
 
     public GenreController() throws SQLException {}
 

@@ -1,17 +1,18 @@
 package com.group2.model;
 
+import org.jetbrains.annotations.Contract;
+
 import java.sql.Date;
 
 public class Release {
     int releaseID;
     String title;
-    int releaseType;
     Date dateCreated;
-    int numberOfTracks;
 
     /**
      * constructor with no parameters
      */
+    @Contract(pure = true)
     public Release() {
     }
 
@@ -19,16 +20,13 @@ public class Release {
      * constructor with full parameters
      * @param releaseID unique ID number for release
      * @param title name of the release
-     * @param releaseType type of the release
      * @param dateCreated the date of release
-     * @param numberOfTracks the number of tracks
      */
-    public Release(int releaseID, String title, int releaseType, Date dateCreated, int numberOfTracks) {
+    @Contract(pure = true)
+    public Release(int releaseID, String title, Date dateCreated) {
         this.releaseID = releaseID;
         this.title = title;
-        this.releaseType = releaseType;
         this.dateCreated = dateCreated;
-        this.numberOfTracks = numberOfTracks;
     }
 
     /**
@@ -64,22 +62,6 @@ public class Release {
     }
 
     /**
-     * getter for release type
-     * @return type of the release
-     */
-    public int getReleaseType() {
-        return releaseType;
-    }
-
-    /**
-     * setter for release type
-     * @param releaseType type of the release
-     */
-    public void setReleaseType(int releaseType) {
-        this.releaseType = releaseType;
-    }
-
-    /**
      * getter for date created
      * @return the date of release
      */
@@ -95,19 +77,4 @@ public class Release {
         this.dateCreated = dateCreated;
     }
 
-    /**
-     * getter for number of tracks
-     * @return the number of tracks
-     */
-    public int getNumberOfTracks() {
-        return numberOfTracks;
-    }
-
-    /**
-     * setter for number of tracks
-     * @param numberOfTracks the number of tracks
-     */
-    public void setNumberOfTracks(int numberOfTracks) {
-        this.numberOfTracks = numberOfTracks;
-    }
 }
