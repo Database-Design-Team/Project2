@@ -77,7 +77,6 @@ public class ArtistController {
     @ResponseBody
     public ResponseEntity<Boolean> joinArtist(@RequestParam("artist_id") Integer artist_id, @RequestParam("username") String username) {
         try {
-            System.out.println(artist_id + " " + username);
             dao.addUserToArtist(artist_id, username);
             // return true;
             return new ResponseEntity<>(true, HttpStatus.OK);
