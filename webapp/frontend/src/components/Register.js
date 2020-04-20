@@ -3,9 +3,10 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./Register.scss";
+import { useStateValue } from "../state";
 
 const Register = (props) => {
-  // const { handleSubmit, register, errors } = useForm();
+  const [{ credentials }, dispatch] = useStateValue();
   const { register, errors, getValues, handleSubmit } = useForm();
   let history = useHistory();
   const onSubmit = (values) => {
@@ -28,18 +29,20 @@ const Register = (props) => {
       .post("/user-account-register", {
         username: values["username"],
         email: values["email"],
-        student_id: values["student_id"],
+        studentID: values["student_id"],
         password: values["password"],
       })
       .then(function(response) {
-        console.log(response);
+        dispatch({
+          type: "changeCredentials",
+          postCredentials: {
+            username: values["username"],
+            password: values["password"],
+          },
+        });
         if (response.data) {
           history.push({
             pathname: "/dashboard",
-            state: {
-              username: values["username"],
-              password: values["password"],
-            },
           });
         }
       })

@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Contract;
 /**
  * @author Timothy
  */
-class BandMember {
+public class BandMember {
     String memberName;
     int bandID;
 

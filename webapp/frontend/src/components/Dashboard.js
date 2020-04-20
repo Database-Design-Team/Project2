@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import SideNav, { NavItem } from "@trendmicro/react-sidenav";
+import { useStateValue } from "../state";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -23,6 +23,7 @@ import "./Dashboard.scss";
 const Dashboard = (props) => {
   let history = useHistory();
   const handleSignOut = () => {
+    //TODO: Flush global state.
     history.push(`/`);
   };
 
@@ -58,38 +59,56 @@ const Dashboard = (props) => {
         </div>
       </div>
       <div className="sidebar-container">
-        <SideNav
-          onSelect={(selected) => {
-            changePage(selected);
-          }}
-        >
-          <SideNav.Nav className="sidenav-container" defaultSelected="home">
-            <NavItem className="nav-item-container" eventKey="Home">
-              <FontAwesomeIcon className="navi" icon={faHome} />
-              {"Home"}
-            </NavItem>
-            <NavItem className="nav-item-container" eventKey="Feed">
-              <FontAwesomeIcon className="navi" icon={faListUl} />
-              {" Feed"}
-            </NavItem>
-            <NavItem className="nav-item-container" eventKey="Songs">
-              <FontAwesomeIcon className="navi" icon={faMusic} />
-              {" Songs"}
-            </NavItem>
-            <NavItem className="nav-item-container" eventKey="Playlists">
-              <FontAwesomeIcon className="navi" icon={faIndent} />
-              {" Playlists"}
-            </NavItem>
-            <NavItem className="nav-item-container" eventKey="Upload">
-              <FontAwesomeIcon className="navi" icon={faUpload} />
-              {" Upload"}
-            </NavItem>
-            <NavItem className="nav-item-container" eventKey="Artists">
-              <FontAwesomeIcon className="navi" icon={faUsers} />
-              {" Artists"}
-            </NavItem>
-          </SideNav.Nav>
-        </SideNav>
+        <ul className="sidenav-container">
+          <li className="nav-item-container">
+            <FontAwesomeIcon
+              className="navi"
+              icon={faHome}
+              onClick={() => changePage("Home")}
+            />
+            <p>Home</p>
+          </li>
+          <li className="nav-item-container">
+            <FontAwesomeIcon
+              className="navi"
+              icon={faListUl}
+              onClick={() => changePage("Feed")}
+            />
+            <p>Feed</p>
+          </li>
+          <li className="nav-item-container">
+            <FontAwesomeIcon
+              className="navi"
+              icon={faMusic}
+              onClick={() => changePage("Songs")}
+            />
+            <p>Songs</p>
+          </li>
+          <li className="nav-item-container">
+            <FontAwesomeIcon
+              className="navi"
+              icon={faIndent}
+              onClick={() => changePage("Playlists")}
+            />
+            <p>Playlists</p>
+          </li>
+          <li className="nav-item-container">
+            <FontAwesomeIcon
+              className="navi"
+              icon={faUpload}
+              onClick={() => changePage("Upload")}
+            />
+            <p>Upload</p>
+          </li>
+          <li className="nav-item-container">
+            <FontAwesomeIcon
+              className="navi"
+              icon={faUsers}
+              onClick={() => changePage("Artists")}
+            />
+            <p>Artists</p>
+          </li>
+        </ul>
       </div>
       <div className="dashboard-body-container">
         <div className="home-content-container">
