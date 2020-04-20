@@ -1,5 +1,7 @@
 package com.group2.model;
 
+import org.jetbrains.annotations.Contract;
+import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -11,10 +13,12 @@ public class UserAccount {
     boolean isAdmin;
     String password;
     String email;
+    Date dateJoined;
 
     /**
      * empty constructor, setting defaults
      */
+    @Contract(pure = true)
     public UserAccount() {
         isAdmin = false;
     }
@@ -27,12 +31,47 @@ public class UserAccount {
      * @param password user's password
      * @param email user's email
      */
+    @Contract(pure = true)
     public UserAccount(String username, int student_id, boolean admin, String password, String email) {
         this.username = username;
         this.studentID = student_id;
         this.isAdmin = admin;
         this.password = password;
         this.email = email;
+    }
+
+    /**
+     * constructor with non-default parameters
+     * @param username the username of the user's account
+     * @param studentID the user's UH student ID number
+     * @param password the user's password
+     * @param email the user's email
+     */
+    @Contract(pure = true)
+    public UserAccount(String username, int studentID, String password, String email) {
+        this.username = username;
+        this.studentID = studentID;
+        this.password = password;
+        this.email = email;
+    }
+
+    /**
+     * constructor with full parameters
+     * @param username the username of the user's account
+     * @param studentID the user's UH student ID number
+     * @param isAdmin specifies if the account belongs to an administrator
+     * @param password the user's password
+     * @param email the user's email
+     * @param dateJoined the date the account was created
+     */
+    @Contract(pure = true)
+    public UserAccount(String username, int studentID, boolean isAdmin, String password, String email, Date dateJoined) {
+        this.username = username;
+        this.studentID = studentID;
+        this.isAdmin = isAdmin;
+        this.password = password;
+        this.email = email;
+        this.dateJoined = dateJoined;
     }
 
     public String getUsername() {
