@@ -5,7 +5,7 @@ import java.sql.Date;
 /**
  * @author Timothy
  */
-class Library {
+public class Library {
     int song;
     String owner;
     Date dateAdded;

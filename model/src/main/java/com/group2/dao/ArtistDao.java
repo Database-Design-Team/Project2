@@ -1,8 +1,9 @@
 package com.group2.dao;
 
 import com.group2.model.Artist;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import javax.validation.constraints.NotNull;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
