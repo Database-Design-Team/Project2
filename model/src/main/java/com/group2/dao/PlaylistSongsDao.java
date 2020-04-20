@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -31,6 +32,7 @@ public class PlaylistSongsDao extends AbstractBaseDao {
         ps.setInt(1, song);
         ps.setInt(2, song);
         ps.executeUpdate();
+        ps.close();
     }
 
     /**
@@ -44,11 +46,13 @@ public class PlaylistSongsDao extends AbstractBaseDao {
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setInt(1, playlistId);
         ResultSet rs = ps.executeQuery();
-        Set<PlaylistSongs> playlist = null;
+        Set<PlaylistSongs> playlist = new HashSet<PlaylistSongs>();
         while (rs.next()){
-            PlaylistSongs song = new PlaylistSongs(rs.getInt(1), rs.getInt(2));
+            PlaylistSongs song = new PlaylistSongs(rs.getInt(1), rs.getInt(2), rs.getDate(3));
             playlist.add(song);
         }
+        ps.close();
+        rs.close();
         return playlist;
     }
 }

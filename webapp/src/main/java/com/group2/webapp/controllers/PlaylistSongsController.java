@@ -1,6 +1,8 @@
 package com.group2.webapp.controllers;
 
 import com.group2.dao.PlaylistSongsDao;
+import com.group2.model.PlaylistSongs;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.SQLException;
+import java.util.Set;
 
 /**
  * @author Timothy Chandler
@@ -42,32 +45,14 @@ public class PlaylistSongsController {
     }
 
     /**
-     * get the playlists a given song is in
-     * @param song the ID of a song in the audio table
-     * @return http response object
-     */
-    @GetMapping("/playlist-songs")
-    @ResponseBody
-    public ResponseEntity getPlaylistSongBySongID(@RequestParam Integer song) {
-        try {
-            return new ResponseEntity<>(dao.getPlaylistSongBySongID(song), HttpStatus.OK);
-        } catch(SQLException e) {
-            return new ResponseEntity(false, HttpStatus.NOT_FOUND);
-        }
-    }
-
-    /**
      * gets all the songs in a given playlist
      * @param playlist the ID of a playlist
      * @return http response object
+     * @throws SQLException
      */
     @GetMapping("/playlist-songs")
     @ResponseBody
-    public ResponseEntity getPlaylistSongByPlaylist(@RequestParam Integer playlist) {
-        try {
-            return new ResponseEntity<>(dao.getPlaylistSongByPlaylist(playlist), HttpStatus.OK);
-        } catch(SQLException e) {
-            return new ResponseEntity(false, HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Set<PlaylistSongs>> getPlaylistSongByPlaylist(@RequestParam Integer playlist) throws SQLException {
+        return new ResponseEntity<Set<PlaylistSongs>>(dao.getPlaylistSongByPlaylist(playlist), HttpStatus.OK);
     }
 }
