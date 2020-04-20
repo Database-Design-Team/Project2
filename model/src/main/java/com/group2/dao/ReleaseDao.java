@@ -20,8 +20,7 @@ public class ReleaseDao extends AbstractBaseDao {
         ResultSet rs = ps.executeQuery();
         rs.next();
 
-        return new Release(rs.getInt("release_id"), rs.getString("title"), rs.getInt("release_type"),
-                rs.getDate("date_created"), rs.getInt("number_of_tracks"));
+        return new Release(rs.getInt("release_id"), rs.getString("title"), rs.getDate("date_created"));
     }
 
 
