@@ -10,6 +10,7 @@ function App() {
   const initialState = {
     currentSong: { url: "" },
     credentials: { username: "", password: "" },
+    artistList: { artists: {} },
   };
 
   const reducer = (state, action) => {
@@ -23,6 +24,11 @@ function App() {
         return {
           ...state,
           credentials: action.postCredentials,
+        };
+      case "changeArtistList":
+        return {
+          ...state,
+          artistList: action.newArtists,
         };
       default:
         return state;

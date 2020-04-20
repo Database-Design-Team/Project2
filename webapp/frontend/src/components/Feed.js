@@ -9,14 +9,20 @@ const Feed = (props) => {
   const [{ currentSong }, dispatch] = useStateValue();
   const [list, setList] = useState({});
   useEffect(() => {
+    const abortController = new AbortController();
+    // const signal = abortController.signal;
+
     axios({
       url: "/getAllSongs",
       method: "GET",
-      responseType: "json", // important
+      responseType: "json",
     }).then((response) => {
       setList(response.data);
     });
-  });
+    return function cleanup() {
+      abortController.abort();
+    };
+  }, []);
 
   const handleClick = (item) => {
     const song_id = item.item;

@@ -2,9 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./CreateArtist.scss";
+import { useStateValue } from "../state";
 
 const CreateArtist = (props) => {
   const { register, errors, handleSubmit } = useForm();
+  const [{ artistList }, dispatch] = useStateValue();
   const onSubmit = (values) => {
     let artistName = values["username"];
     axios.interceptors.response.use(
@@ -27,6 +29,22 @@ const CreateArtist = (props) => {
       .then(function(response) {
         if (response.data) {
           alert("artist created successfully");
+          const abortController = new AbortController();
+          // const signal = abortController.signal;
+
+          axios({
+            url: "/getAllArtists",
+            method: "GET",
+            responseType: "json",
+          }).then((response) => {
+            dispatch({
+              type: "changeArtistList",
+              newArtists: { artists: response.data },
+            });
+          });
+          return function cleanup() {
+            abortController.abort();
+          };
         }
       })
       .catch(function(error) {
