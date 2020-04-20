@@ -10,15 +10,17 @@
     #cfdef3,
     #e0eafc
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  // width: 500px;
-  // height: 250px;
-  margin: 10px;
+  // margin: 10px;
   border-radius: 20px;
   p {
     padding: 20px;
     font-size: 20px;
     font-weight: 600;
   }
+
+  display: grid;
+  grid-template-columns: 500px 500px;
+  // column-gap: 50px;
 }
 
 .song-input-container {
@@ -29,4 +31,61 @@
   margin-top: -10px;
   margin-left: -20px;
   width: 520px;
+}
+
+.member-artists-container {
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(255, 249, 255, 1) 11.1%,
+    rgba(255, 241, 255, 1) 90%
+  );
+  border-radius: 10px;
+  max-width: 1000px;
+  display: grid;
+  grid-template-rows: 750px;
+}
+
+.current-member-artists-container {
+  overflow: auto;
+  display: grid;
+  grid-template-rows: repeat(auto-fill, 80px);
+  gap: 10px;
+}
+.current-member-artists-container::-webkit-scrollbar {
+  display: none;
+}
+
+.current-member-artists-element-container {
+  margin-left: -22px;
+  margin-right: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+  grid-template-rows: 70px;
+  justify-items: center;
+  align-items: center;
+  justify-content: space-between;
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(255, 249, 255, 1) 11.1%,
+    rgba(255, 241, 255, 1) 90%
+  );
+  border: 2px solid #d9d9da;
+  border-radius: 10px;
+  height: 70px;
+  .fa-icon {
+    color: #3d4061;
+    &:hover {
+      transition-duration: 200ms;
+      color: #a6accd;
+      cursor: pointer;
+    }
+  }
+  p {
+    color: #3d4061;
+    font-weight: 600;
+  }
+  &:hover {
+    transition-duration: 400ms;
+    border: 2px solid #a6accd;
+  }
 }

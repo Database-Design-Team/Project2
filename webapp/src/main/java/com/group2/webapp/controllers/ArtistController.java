@@ -73,11 +73,39 @@ public class ArtistController {
         return new ResponseEntity<>(json.toString(), headers, HttpStatus.OK);
     }
 
+    @GetMapping(value="/getAllArtistsByBandMember")
+    public ResponseEntity<String> getAllArtistsByBandMember(@RequestParam("band_member") String band_member) throws SQLException {
+        Set<Artist> artistList = dao.getAllArtistsByBandMember(band_member);
+        JSONObject json = new JSONObject();
+        for (Artist artist : artistList) {
+            JSONObject temp = new JSONObject();
+            temp.put(artist.getArtistName(), artist.getDateFormed());
+            json.put(String.valueOf(artist.getArtistID()), temp);
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+        return new ResponseEntity<>(json.toString(), headers, HttpStatus.OK);
+    }
+
     @PostMapping("/join-artist")
     @ResponseBody
     public ResponseEntity<Boolean> joinArtist(@RequestParam("artist_id") Integer artist_id, @RequestParam("username") String username) {
         try {
             dao.addUserToArtist(artist_id, username);
+            // return true;
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch (SQLException e) {
+            e.getMessage();
+            return new ResponseEntity<>(false, HttpStatus.CONFLICT);
+        }
+    }
+
+    @DeleteMapping("/remove-artist-member")
+    @ResponseBody
+    public ResponseEntity<Boolean> removeArtistMember(@RequestParam("artist_id") Integer artist_id, @RequestParam("username") String username) {
+        try {
+            dao.removeUserFromArtist(artist_id, username);
             // return true;
             return new ResponseEntity<>(true, HttpStatus.OK);
         } catch (SQLException e) {

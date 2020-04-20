@@ -3,7 +3,7 @@ package com.group2.model;
 /**
  * @author Timothy
  */
-class BandMember {
+public class BandMember {
     String memberName;
     int bandID;
 

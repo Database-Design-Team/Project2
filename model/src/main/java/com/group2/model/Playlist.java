@@ -9,7 +9,6 @@ public class Playlist {
     int playlist_id;
     Date dateCreated;
     boolean isPrivate;
-    int numberOfSongs;
     String playlistName;
     String owner;
 
@@ -18,7 +17,6 @@ public class Playlist {
      */
     public Playlist() {
         isPrivate = false;
-        numberOfSongs = 0;
     }
 
     /**
@@ -26,15 +24,13 @@ public class Playlist {
      * @param playlistID the unique ID number of the playlist
      * @param dateCreated the date this playlist was created on
      * @param isPrivate boolean indicating if the playlist is private
-     * @param numberOfSongs the number of songs
      * @param playlistName the name of the playlist
      * @param owner the owner of the playlist
      */
-    public Playlist(int playlistID, Date dateCreated, boolean isPrivate, int numberOfSongs, String playlistName, String owner) {
+    public Playlist(int playlistID, Date dateCreated, boolean isPrivate, String playlistName, String owner) {
         this.playlist_id = playlistID;
         this.dateCreated = dateCreated;
         this.isPrivate = isPrivate;
-        this.numberOfSongs = numberOfSongs;
         this.playlistName = playlistName;
         this.owner = owner;
     }
@@ -85,22 +81,6 @@ public class Playlist {
      */
     public void setPrivate(boolean isPrivate) {
         this.isPrivate = isPrivate;
-    }
-
-    /**
-     * getter for number of songs
-     * @return the amount of songs in the playlist
-     */
-    public int getNumberOfSongs() {
-        return numberOfSongs;
-    }
-
-    /**
-     * setter for number of songs
-     * @param numberOfSongs the number of songs in the playlist
-     */
-    public void setNumberOfSongs(int numberOfSongs) {
-        this.numberOfSongs = numberOfSongs;
     }
 
     /**

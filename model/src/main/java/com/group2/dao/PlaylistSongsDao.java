@@ -51,8 +51,8 @@ public class PlaylistSongsDao extends AbstractBaseDao {
             PlaylistSongs song = new PlaylistSongs(rs.getInt(1), rs.getInt(2), rs.getDate(3));
             playlist.add(song);
         }
-        ps.close();
         rs.close();
+        ps.close();
         return playlist;
     }
 }

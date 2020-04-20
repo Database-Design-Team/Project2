@@ -25,7 +25,7 @@ const Artists = (props) => {
       responseType: "json",
     })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         dispatch({
           type: "changeArtistList",
           newArtists: { artists: response.data },

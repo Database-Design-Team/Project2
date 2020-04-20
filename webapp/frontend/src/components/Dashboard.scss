@@ -113,35 +113,38 @@ html {
 
 .sidebar-container {
   grid-area: sidebar;
-  background-color: #2b2d30;
+  background-color: #f2f4fb;
   position: fixed;
   margin-top: 65px;
   height: 100%;
   width: 200px;
-  color: white;
+  color: #4e5683;
 }
 
 .sidenav-container {
   display: grid;
   grid-template-rows: repeat(6, 100px);
-  font-size: 25px;
-  font-weight: 700;
-  justify-items: start;
-  align-items: center;
-  margin-left: 40px;
-}
-
-.navi {
-  margin-left: -10px;
-  margin-right: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  list-style-type: none;
+  li:after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 270%;
+    margin: 10px;
+    background: #4e5683;
+  }
 }
 
 .nav-item-container {
   cursor: pointer;
+  display: grid;
+  grid-template-columns: 40px 10px;
+  align-items: center;
 }
 
 .content-body-container {
-  // background-image: linear-gradient(45deg, #fff4f4 0%, #e7f0fd 100%);
   display: grid;
   grid-template-rows: 900px;
   grid-template-columns: 1000px;

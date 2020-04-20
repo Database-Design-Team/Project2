@@ -58,11 +58,35 @@ public class ArtistDao extends AbstractBaseDao {
         return artistList;
     }
 
+    public Set<Artist> getAllArtistsByBandMember(String bandMember) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement(
+                "SELECT * FROM artist WHERE artist_id IN (SELECT band_id from band_member WHERE member_name = ?)");
+        ps.setString(1, bandMember);
+        ResultSet rs = ps.executeQuery();
+        Set<Artist> artistList = new HashSet<Artist>();
+        while (rs.next()) {
+            Artist artist = new Artist(rs.getInt(1), rs.getString(2), rs.getDate(3));
+            artistList.add(artist);
+        }
+        rs.close();
+        ps.close();
+
+        return artistList;
+    }
+
     public void addUserToArtist(Integer artist_id, String username) throws SQLException {
         String SQL = "INSERT INTO band_member(member_name, band_id) VALUES (?, ?)";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setString(1, username);
         ps.setInt(2, artist_id);
+        ps.executeUpdate();
+    }
+
+    public void removeUserFromArtist(Integer artist_id, String username) throws SQLException {
+        String SQL = "DELETE FROM band_member WHERE band_id = ? AND member_name = ?";
+        PreparedStatement ps = conn.prepareStatement(SQL);
+        ps.setInt(1, artist_id);
+        ps.setString(2, username);
         ps.executeUpdate();
     }
 }
