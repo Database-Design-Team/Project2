@@ -8,6 +8,7 @@ public class Release {
     int releaseID;
     String title;
     Date dateCreated;
+    int artistID;
 
     /**
      * constructor with no parameters
@@ -23,10 +24,11 @@ public class Release {
      * @param dateCreated the date of release
      */
     @Contract(pure = true)
-    public Release(int releaseID, String title, Date dateCreated) {
+    public Release(int releaseID, String title, Date dateCreated, int artistID) {
         this.releaseID = releaseID;
         this.title = title;
         this.dateCreated = dateCreated;
+        this.artistID = artistID;
     }
 
     /**
@@ -59,6 +61,14 @@ public class Release {
      */
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getArtistID() {
+        return artistID;
+    }
+
+    public void setArtistID(int artistID) {
+        this.artistID = artistID;
     }
 
     /**
