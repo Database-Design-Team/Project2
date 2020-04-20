@@ -11,7 +11,12 @@ function App() {
     currentSong: { url: "" },
     credentials: { username: "", password: "" },
     artistList: { artists: {} },
-    currentArtist: { artist: "No artist selected." },
+    currentArtist: { artist: "No artist selected.", artist_id: "" },
+    releaseList: {
+      releases: {},
+      release_id: "",
+      release_name: "No release selected.",
+    },
   };
 
   const reducer = (state, action) => {
@@ -35,6 +40,11 @@ function App() {
         return {
           ...state,
           currentArtist: action.changeArtist,
+        };
+      case "changeReleaseList":
+        return {
+          ...state,
+          releaseList: action.newReleases,
         };
       default:
         return state;

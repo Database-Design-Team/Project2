@@ -15,7 +15,10 @@ const Upload = (props) => {
 
   const { handleSubmit, register, errors } = useForm();
   const [{ credentials }] = useStateValue();
-  const [{ artistList, currentArtist }, dispatch] = useStateValue();
+  const [
+    { artistList, currentArtist, releaseList },
+    dispatch,
+  ] = useStateValue();
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -65,12 +68,66 @@ const Upload = (props) => {
       });
   };
 
-  const handleArtistChange = (item) => {
+  const changeCurrentRelease = (item, name) => {
+    dispatch({
+      type: "changeReleaseList",
+      newReleases: {
+        releases: releaseList.releases,
+        release_id: item,
+        release_name: name,
+      },
+    });
+  };
+
+  const handleArtistChange = (item, i) => {
+    console.log(item);
     dispatch({
       type: "changeCurrentArtist",
-      changeArtist: { artist: `Uploading as ${item}` },
+      changeArtist: { artist: item, artist_id: i },
     });
-    //TODO: Render list of releases under current artist.
+    axios({
+      url: "/release-by-artist",
+      method: "GET",
+      responseType: "json",
+      params: { artist_id: i },
+    }).then((response) => {
+      console.log(response.data);
+      dispatch({
+        type: "changeReleaseList",
+        newReleases: {
+          releases: response.data,
+          release_id: "",
+          release_name: "No release selected.",
+        },
+      });
+    });
+  };
+
+  const handleDeleteRelease = (item) => {
+    axios({
+      url: "/remove-release",
+      method: "DELETE",
+      params: {
+        release_id: item,
+      },
+    }).then((response) => {
+      axios({
+        url: "/release-by-artist",
+        method: "GET",
+        responseType: "json",
+        params: { artist_id: currentArtist.artist_id },
+      }).then((response) => {
+        console.log(response.data);
+        dispatch({
+          type: "changeReleaseList",
+          newReleases: {
+            releases: response.data,
+            release_id: "",
+            release_name: "No release selected.",
+          },
+        });
+      });
+    });
   };
 
   const handleDeleteMember = (item) => {
@@ -92,6 +149,10 @@ const Upload = (props) => {
           dispatch({
             type: "changeArtistList",
             newArtists: { artists: response.data },
+          });
+          dispatch({
+            type: "changeReleaseList",
+            newReleases: { releases: {} },
           });
         });
       })
@@ -120,7 +181,10 @@ const Upload = (props) => {
                     className="fa-icon add"
                     icon={faPlusCircle}
                     onClick={() =>
-                      handleArtistChange(Object.keys(artistList.artists[item]))
+                      handleArtistChange(
+                        Object.keys(artistList.artists[item]),
+                        item
+                      )
                     }
                   />
                   <FontAwesomeIcon
@@ -136,11 +200,40 @@ const Upload = (props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="">
           <div className="">
-            <p>{currentArtist.artist}</p>
-            <p>Enter song information.</p>
+            <p>{`Uploading as: ${currentArtist.artist}`}</p>
+            <p>{`Uploading to release: ${releaseList.release_name}`}</p>
           </div>
-
+          <div className="main-release-container">
+            <ul className="release-container">
+              {Object.keys(releaseList.releases)
+                .reverse()
+                .map((item, i) => (
+                  <li
+                    className="current-member-artists-element-container"
+                    key={i}
+                  >
+                    <p>{Object.keys(releaseList.releases[item])}</p>
+                    <FontAwesomeIcon
+                      className="fa-icon add"
+                      icon={faPlusCircle}
+                      onClick={() =>
+                        changeCurrentRelease(
+                          item,
+                          Object.keys(releaseList.releases[item])
+                        )
+                      }
+                    />
+                    <FontAwesomeIcon
+                      className="fa-icon remove"
+                      icon={faMinusCircle}
+                      onClick={() => handleDeleteRelease(item)}
+                    />
+                  </li>
+                ))}
+            </ul>
+          </div>
           <div className="song-input-container">
+            <p>Enter song information.</p>
             <div className="input-container">
               <input
                 name="song_name"

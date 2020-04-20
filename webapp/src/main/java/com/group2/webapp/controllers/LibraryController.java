@@ -3,7 +3,11 @@ package com.group2.webapp.controllers;
 import com.group2.dao.LibraryDao;
 import com.group2.model.Library;
 import com.group2.model.Song;
+
+import org.json.JSONObject;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +20,7 @@ import java.util.HashMap;
 import java.sql.SQLException;
 import java.util.List;
 
-
+@Controller
 public class LibraryController {
     LibraryDao dao = new LibraryDao();
 
@@ -54,36 +58,38 @@ public class LibraryController {
     // }
 
 
-    // @DeleteMapping("/library-delete")
-    // @ResponseBody
-    // public ResponseEntity removeSongFromLibrary(@RequestParam("song_id") int songId) {
-    //     try {
-    //         dao.removeSongFromLibrary(songId);
-    //         return new ResponseEntity<Boolean>(true, HttpStatus.OK);
-    //     } catch (SQLException e) {
-    //         String c = e.getMessage();
-    //         return new ResponseEntity<String>(c, HttpStatus.CONFLICT);
-    //     }
-
-    // }
-
-
-
-
-    @GetMapping(value="library")
+    @DeleteMapping("/library-delete")
     @ResponseBody
-    public ResponseEntity<List<Song>> getEntireLibrary(@RequestParam String username) {
+    public ResponseEntity<Boolean> removeSongFromLibrary(@RequestParam("song_id") int songId) {
         try {
-            return new ResponseEntity<List<Song>>(dao.getUserLibrary(username), HttpStatus.OK);
+            dao.removeSongFromLibrary(songId);
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } catch (SQLException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Boolean>(false, HttpStatus.CONFLICT);
         }
+
     }
 
-    @PostMapping(value="library")
+
+
+
+    @GetMapping(value="/library")
     @ResponseBody
-    public ResponseEntity<Boolean> addSongToLibrary(@RequestParam int songID, @RequestParam String username) {
+    public ResponseEntity<String> getEntireLibrary(@RequestParam("username") String username) throws SQLException {
+        List<Song> songList = dao.getUserLibrary(username);
+        JSONObject json = new JSONObject();
+        for(Song song : songList) {
+            json.put(String.valueOf(song.getSong_id()), song.getSong_name());
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+        return new ResponseEntity<String>(json.toString(), headers, HttpStatus.OK);
+        
+    }
+
+    @PostMapping(value="/library")
+    @ResponseBody
+    public ResponseEntity<Boolean> addSongToLibrary(@RequestParam("song_id") int songID, @RequestParam("username") String username) {
         try {
             dao.addToLibrary(songID, username);
             return new ResponseEntity<>(true, HttpStatus.OK);

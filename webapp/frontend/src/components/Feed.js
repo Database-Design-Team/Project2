@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay, faPlusCircle } from "@fortawesome/fontawesome-free-solid";
 
 const Feed = (props) => {
-  const [{ currentSong }, dispatch] = useStateValue();
+  const [{ currentSong, credentials }, dispatch] = useStateValue();
   const [list, setList] = useState({});
   useEffect(() => {
     const abortController = new AbortController();
@@ -40,6 +40,22 @@ const Feed = (props) => {
     });
   };
 
+  const handleAddToLibrary = (item) => {
+    axios({
+      url: "/library",
+      method: "POST",
+      params: { song_id: item, username: credentials.username },
+    })
+      .then(function(response) {
+        if (response.data) {
+          alert("Added song to library successfully!");
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="feed-container">
       <div className="feed-title-container">
@@ -63,7 +79,11 @@ const Feed = (props) => {
               />
               <p>{list[item]}</p>
               <p>{"Artist"}</p>
-              <FontAwesomeIcon className="fa-icon add" icon={faPlusCircle} />
+              <FontAwesomeIcon
+                className="fa-icon add"
+                icon={faPlusCircle}
+                onClick={() => handleAddToLibrary(item)}
+              />
             </li>
           ))}
       </ul>

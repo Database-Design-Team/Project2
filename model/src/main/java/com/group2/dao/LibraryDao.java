@@ -76,7 +76,7 @@ public class LibraryDao extends AbstractBaseDao {
             Song song = new Song();
             song.setSong_id(rs.getInt("audio_id"));
             song.setSong_name(rs.getString("song_name"));
-            song.setMusician(rs.getInt("audio_id"));
+            song.setMusician(rs.getInt("artist"));
             songList.add(song);
         }
         return songList;
