@@ -27,7 +27,7 @@ public class SongDao extends AbstractBaseDao {
     }
 
     public byte[] GetSongFile(int song_id, String username) throws SQLException {
-        PreparedStatement ps = conn.prepareStatement("SELECT audio_file FROM audio WHERE audio_id = ?");
+        PreparedStatement ps = conn.prepareStatement("SELECT audio_file FROM audio WHERE audio_id = ? AND deleted = false");
         ps.setInt(1, song_id);
         ResultSet rs = ps.executeQuery();
         byte[] songBytes = null;
