@@ -26,7 +26,7 @@ public class SongDao extends AbstractBaseDao {
         ps.close();
     }
 
-    public byte[] GetSongFile(int song_id) throws SQLException {
+    public byte[] GetSongFile(int song_id, String user_name) throws SQLException {
         PreparedStatement ps = conn.prepareStatement("SELECT audio_file FROM audio WHERE audio_id = ?");
         ps.setInt(1, song_id);
         ResultSet rs = ps.executeQuery();
@@ -36,6 +36,11 @@ public class SongDao extends AbstractBaseDao {
             rs.close();
         }
         ps.close();
+        PreparedStatement listen = conn.prepareStatement("INSERT INTO song_listens (song, user_name) VALUES (?, ?)");
+        listen.setInt(1, song_id);
+        listen.setString(2, user_name);
+        listen.executeQuery();
+        listen.close();
         return songBytes;
     }
 
