@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 /**
  * @author Timothy Chandler
- * @version 1.0
+ * @version 1.0.1
  * @since 4/20/20
  * inside the package - com.group2.dao.report
  */
@@ -20,16 +20,18 @@ public class SongListens extends AbstractBaseDao {
 
     /**
      * Returns the number of listens over the past given number of days, broken down by the day
+     * 1st column: days, number of days ago
+     * 2nd column: listens
      * @param days the number of days being considered
      * @return the result set
      * @throws SQLException on errors interacting with the database
      */
     public ResultSet getSongListens(@RequestParam  int days) throws SQLException {
-        String SQL = "SELECT time_stamp, count(*) " +
+        String SQL = "SELECT current_date-time_stamp+1 AS Days, count(*) AS listens " +
                 "FROM song_statistics " +
-                "WHERE " +
-                "    time_stamp > current_date-? " +
-                "GROUP BY time_stamp";
+                "WHERE time_stamp > current_date-?" +
+                "GROUP BY time_stamp " +
+                "ORDER BY time_stamp DESC";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setInt(1, days);
         return ps.executeQuery();
