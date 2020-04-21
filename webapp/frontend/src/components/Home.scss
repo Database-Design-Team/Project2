@@ -22,3 +22,22 @@
   grid-template-columns: 500px 500px;
   justify-items: center;
 }
+
+.profile-info-container {
+  p {
+    font-weight: 700;
+  }
+}
+
+.profile-info-list {
+  label {
+    font-weight: 500;
+    // margin-left: -100px;
+  }
+}
+
+.stats-container {
+  p {
+    font-weight: 700;
+  }
+}

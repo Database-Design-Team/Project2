@@ -19,7 +19,16 @@ const Home = (props) => {
         username: credentials.username,
       },
     }).then((response) => {
-      setUserInfo(response.data);
+      let json = JSON.parse(
+        JSON.stringify(response.data, [
+          "email",
+          "student_id",
+          "username",
+          "password",
+          "date_joined",
+        ])
+      );
+      setUserInfo(json);
     });
     return function cleanup() {
       abortController.abort();
@@ -37,8 +46,8 @@ const Home = (props) => {
           <div className="profile-info-list">
             {Object.keys(userInfo).map((item, i) => (
               <div className="input-container">
-                {item}
-                <input placeholder={userInfo[item]}></input>
+                <label for="credentials">{item}</label>
+                <input id="credentials" placeholder={userInfo[item]}></input>
               </div>
             ))}
           </div>

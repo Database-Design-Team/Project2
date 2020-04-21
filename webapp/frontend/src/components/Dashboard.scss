@@ -15,6 +15,11 @@ html {
   grid-template-columns: 200px 10fr;
 }
 
+.now-playing-container {
+  color: #3f4357;
+  font-weight: 600;
+}
+
 .header-container {
   grid-area: header;
   background-color: #f2f4fb;

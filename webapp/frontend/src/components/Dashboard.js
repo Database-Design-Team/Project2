@@ -52,7 +52,7 @@ const Dashboard = (props) => {
         <div className="search-container">
           <input type="text" placeholder="Search" />
         </div>
-        <div>{`${currentSong.songName}`}</div>
+        <div className="now-playing-container">{`${currentSong.songName}`}</div>
         <div className="btn-group">
           <div>
             <button className="btn btn-sign-out" onClick={handleSignOut}>

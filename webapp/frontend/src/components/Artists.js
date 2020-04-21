@@ -68,6 +68,11 @@ const Artists = (props) => {
           <CreateArtist />
         </Modali.Modal>
       </div>
+      <div className="artists-list-header-container">
+        <p>Artist</p>
+        <p>Date Formed</p>
+        <p>Join Artist</p>
+      </div>
       <div className="artists-container">
         <ul className="current-artists-container">
           {Object.keys(artistList)
