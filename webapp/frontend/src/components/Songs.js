@@ -35,6 +35,7 @@ const Songs = (props) => {
     let song_name = `Now Playing: ${song.split("|")[0]} ~ ${
       song.split("|")[1]
     }`;
+    let currUser = credentials.username;
     axios({
       url: "/download-files",
       method: "GET",

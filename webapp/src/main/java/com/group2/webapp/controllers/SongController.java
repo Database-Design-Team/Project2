@@ -39,7 +39,8 @@ public class SongController {
     }
 
     @GetMapping(value="/download-files")
-    public ResponseEntity<byte[]> getFile(@RequestParam("song_id") int song_id) throws SQLException {
+    public ResponseEntity<byte[]> getFile(@RequestParam("song_id") int song_id, @RequestParam("username") String username) throws SQLException {
+        //TODO: insert username in song listens for given id
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
         return new ResponseEntity<>(dao.GetSongFile(song_id), headers, HttpStatus.OK);
