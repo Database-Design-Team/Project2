@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Set;
 
 @Controller
@@ -47,9 +48,11 @@ public class SongController {
     @GetMapping(value="/getAllSongs")
     public ResponseEntity<String> getAllSongs() throws SQLException {
         Set<Song> songList = dao.getAllSongs();
+        HashMap<Integer, String> artistNames = dao.getAristNames();
         JSONObject json = new JSONObject();
-        for(Song song : songList) {
-            json.put(String.valueOf(song.getSong_id()), song.getSong_name());
+        for (Song song : songList) {
+            String song_artist = artistNames.get(song.getMusician()) + "|" + song.getSong_name();
+            json.put(String.valueOf(song.getSong_id()), song_artist);
         }
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);

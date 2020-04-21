@@ -91,8 +91,8 @@ const Feed = (props) => {
                 icon={faPlay}
                 onClick={() => handleClick({ item })}
               />
-              <p>{list[item]}</p>
-              <p>{"Artist"}</p>
+              <p>{list[item].split("|")[1]}</p>
+              <p>{list[item].split("|")[0]}</p>
               <FontAwesomeIcon
                 className="fa-icon add"
                 icon={faPlusCircle}

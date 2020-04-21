@@ -4,6 +4,7 @@ import com.group2.model.Song;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.sql.*;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -44,11 +45,11 @@ public class SongDao extends AbstractBaseDao {
      * @throws SQLException on errors interacting with the database
      */
     public Set<Song> getAllSongs() throws SQLException {
-        PreparedStatement ps = conn.prepareStatement("SELECT audio_id, song_name FROM public.audio WHERE deleted = false");
+        PreparedStatement ps = conn.prepareStatement("SELECT audio_id, song_name, artist FROM public.audio WHERE deleted = false");
         ResultSet rs = ps.executeQuery();
         Set<Song> songList = new HashSet<Song>();
         while (rs.next()) {
-            Song song = new Song(rs.getInt(1), rs.getString(2));
+            Song song = new Song(rs.getInt(1), rs.getString(2), rs.getInt(3));
             songList.add(song);
         }
         rs.close();
@@ -56,6 +57,19 @@ public class SongDao extends AbstractBaseDao {
         return songList;
     }
 
+    public HashMap<Integer, String> getAristNames() throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("SELECT artist_id, artist_name FROM artist");
+        ResultSet rs = ps.executeQuery();
+        HashMap<Integer, String> artistNames = new HashMap<Integer, String>();
+        while (rs.next()) {
+            artistNames.put(rs.getInt(1), rs.getString(2));
+        }
+        rs.close();
+        ps.close();
+        return artistNames;
+
+    }
+    
     // public JSONObject getAllSongs() throws SQLException {
     //     PreparedStatement ps = conn.prepareStatement("SELECT song_name, audio_id FROM public.audio");
     //     ResultSet rs = ps.executeQuery();

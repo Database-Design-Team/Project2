@@ -1,6 +1,7 @@
 package com.group2.webapp.controllers;
 
 import com.group2.dao.LibraryDao;
+import com.group2.dao.SongDao;
 import com.group2.model.Library;
 import com.group2.model.Song;
 
@@ -22,6 +23,7 @@ import java.util.List;
 @Controller
 public class LibraryController {
     LibraryDao dao = new LibraryDao();
+    SongDao sDAO = new SongDao();
 
     public LibraryController() throws SQLException {
     }
@@ -76,9 +78,11 @@ public class LibraryController {
     @ResponseBody
     public ResponseEntity<String> getEntireLibrary(@RequestParam("username") String username) throws SQLException {
         List<Song> songList = dao.getUserLibrary(username);
+        HashMap<Integer, String> artistNames = sDAO.getAristNames();
         JSONObject json = new JSONObject();
-        for(Song song : songList) {
-            json.put(String.valueOf(song.getSong_id()), song.getSong_name());
+        for (Song song : songList) {
+            String song_artist = artistNames.get(song.getMusician()) + "|" + song.getSong_name();
+            json.put(String.valueOf(song.getSong_id()), song_artist);
         }
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);

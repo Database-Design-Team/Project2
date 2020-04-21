@@ -50,6 +50,11 @@ public class Song {
         this.musician = musician;
     }
 
+    public Song(int song_id, String song_name, int artist ) {
+        this.song_id = song_id;
+        this.song_name = song_name;
+        this.musician = artist;
+    }
     /**
      * constructor with full parameters
      * @param song_id the ID of the song
