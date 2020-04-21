@@ -48,6 +48,7 @@ public class ReleaseDao extends AbstractBaseDao {
         ps.setString(1, title);
         ps.setInt(2, artist_id);
         ps.executeUpdate();
+        ps.close();
     }
 
     public void changeReleaseTitleById(String title, int ID) throws SQLException {
@@ -56,6 +57,7 @@ public class ReleaseDao extends AbstractBaseDao {
         ps.setString(1, title);
         ps.setInt(2, ID);
         ps.executeUpdate();
+        ps.close();
     }
 
     public void deleteReleaseById(int ID) throws SQLException {
@@ -63,5 +65,6 @@ public class ReleaseDao extends AbstractBaseDao {
         PreparedStatement ps = conn.prepareStatement(SQLStatement);
         ps.setInt(1, ID);
         ps.executeUpdate();
+        ps.close();
     }
 }

@@ -34,6 +34,7 @@ public class UserAccountDao extends AbstractBaseDao {
         ps.setString(4, uc.getPassword());
         ps.setString(5, uc.getEmail());
         ps.executeUpdate();
+        ps.close();
     }
 
     public void addUserAccount(@NotNull List<UserAccount> ucList) throws SQLException {

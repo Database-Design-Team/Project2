@@ -28,6 +28,7 @@ public class ArtistDao extends AbstractBaseDao {
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setString(1, artist);
         ps.executeUpdate();
+        ps.close();
     }
 
     /**
@@ -42,6 +43,8 @@ public class ArtistDao extends AbstractBaseDao {
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         rs.next();
+        ps.close();
+        rs.close();
         return new Artist(rs.getInt("artist_id"), rs.getString("artist_name"), rs.getDate("date_formed"));
     }
 
@@ -81,6 +84,7 @@ public class ArtistDao extends AbstractBaseDao {
         ps.setString(1, username);
         ps.setInt(2, artist_id);
         ps.executeUpdate();
+        ps.close();
     }
 
     public void removeUserFromArtist(Integer artist_id, String username) throws SQLException {
@@ -89,5 +93,6 @@ public class ArtistDao extends AbstractBaseDao {
         ps.setInt(1, artist_id);
         ps.setString(2, username);
         ps.executeUpdate();
+        ps.close();
     }
 }
