@@ -51,6 +51,7 @@ public class PlaylistDao extends AbstractBaseDao {
         ps.setString(2, Artisan.getPlaylistName());
         ps.setBoolean(3, Artisan.isPrivate());
         ps.executeUpdate();
+        ps.close();
     }
 }
  

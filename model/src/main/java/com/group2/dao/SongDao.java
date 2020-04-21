@@ -35,6 +35,7 @@ public class SongDao extends AbstractBaseDao {
             songBytes = rs.getBytes(1);
             rs.close();
         }
+        rs.close();
         ps.close();
         return songBytes;
     }

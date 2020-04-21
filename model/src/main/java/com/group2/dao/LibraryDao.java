@@ -37,6 +37,9 @@ public class LibraryDao extends AbstractBaseDao {
             lib.put(rs.getString("song_name"), rs1.getDate("date_added"));
         }
 
+        ps.close();
+        rs.close();
+        rs1.close();
         return lib;
     }
 
@@ -46,6 +49,7 @@ public class LibraryDao extends AbstractBaseDao {
         ps.setString(1, lib);
         ps.setInt(2, songId);
         ps.executeUpdate();
+        ps.close();
     }
 
     public void removeSongFromLibrary(int songId) throws SQLException {
@@ -53,6 +57,7 @@ public class LibraryDao extends AbstractBaseDao {
         PreparedStatement ps = conn.prepareStatement(SQLStatement);
         ps.setInt(1, songId);
         ps.executeUpdate();
+        ps.close();
     }
 
 
@@ -79,6 +84,8 @@ public class LibraryDao extends AbstractBaseDao {
             song.setMusician(rs.getInt("artist"));
             songList.add(song);
         }
+        ps.close();
+        rs.close();
         return songList;
     }
 }

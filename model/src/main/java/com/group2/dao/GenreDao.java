@@ -26,6 +26,7 @@ public class GenreDao extends AbstractBaseDao {
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setString(1, genre);
         ps.executeUpdate();
+        ps.close();
     }
 
     /**
@@ -40,6 +41,8 @@ public class GenreDao extends AbstractBaseDao {
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         rs.next();
+        ps.close();
+        rs.close();
         return new Genre(rs.getInt("genre_id"), rs.getString("genre_title"));
     }
 }
