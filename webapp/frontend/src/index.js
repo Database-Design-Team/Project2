@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./index.scss";
 import Landing from "./components/Landing";
 import Dashboard from "./components/Dashboard";
+import Admin from "./Admin";
 import { StateProvider } from "./state";
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route path="/dashboard" component={Dashboard} />
+        <Route path="/admin" component={Admin} />
       </Switch>
     </StateProvider>
   );

@@ -4,7 +4,12 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useStateValue } from "../state";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faPlusCircle } from "@fortawesome/fontawesome-free-solid";
+import {
+  faPlay,
+  faPlusCircle,
+  faThumbsUp,
+  faThumbsDown,
+} from "@fortawesome/fontawesome-free-solid";
 
 const Feed = (props) => {
   const [{ currentSong, credentials }, dispatch] = useStateValue();
@@ -35,7 +40,7 @@ const Feed = (props) => {
       url: "/download-files",
       method: "GET",
       responseType: "blob",
-      params: { song_id },
+      params: { song_id: song_id, username: credentials.username },
     }).then((response) => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       dispatch({
@@ -73,6 +78,11 @@ const Feed = (props) => {
       });
   };
 
+  const handleRating = (rating, song_id) => {
+    let currUser = credentials.username;
+    console.log(`Rating: ${rating} Song: ${song_id} User: ${currUser} `);
+  };
+
   return (
     <div className="feed-container">
       <div className="feed-title-container">
@@ -82,6 +92,7 @@ const Feed = (props) => {
         <p>Play</p>
         <p>Title</p>
         <p>Artist</p>
+        <p>Rating</p>
         <p>Add to Library</p>
       </div>
       <ul className="feed-grid-container">
@@ -96,6 +107,18 @@ const Feed = (props) => {
               />
               <p>{list[item].split("|")[1]}</p>
               <p>{list[item].split("|")[0]}</p>
+              <div className="rating-container">
+                <FontAwesomeIcon
+                  className="fa-icon up"
+                  icon={faThumbsUp}
+                  onClick={() => handleRating(1, item)}
+                />
+                <FontAwesomeIcon
+                  className="fa-icon down"
+                  icon={faThumbsDown}
+                  onClick={() => handleRating(-1, item)}
+                />
+              </div>
               <FontAwesomeIcon
                 className="fa-icon add"
                 icon={faPlusCircle}

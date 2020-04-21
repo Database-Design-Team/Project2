@@ -3,7 +3,12 @@ import "./Songs.scss";
 import axios from "axios";
 import { useStateValue } from "../state";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faMinusCircle } from "@fortawesome/fontawesome-free-solid";
+import {
+  faPlay,
+  faMinusCircle,
+  faThumbsUp,
+  faThumbsDown,
+} from "@fortawesome/fontawesome-free-solid";
 
 const Songs = (props) => {
   const [{ currentSong, credentials }, dispatch] = useStateValue();
@@ -30,6 +35,7 @@ const Songs = (props) => {
     let song_name = `Now Playing: ${song.split("|")[0]} ~ ${
       song.split("|")[1]
     }`;
+    let currUser = credentials.username;
     axios({
       url: "/download-files",
       method: "GET",
@@ -72,6 +78,7 @@ const Songs = (props) => {
         <p>Play</p>
         <p>Title</p>
         <p>Artist</p>
+        <p>Rating</p>
         <p>Remove</p>
       </div>
       <ul className="feed-grid-container">
@@ -86,6 +93,10 @@ const Songs = (props) => {
               />
               <p>{list[item].split("|")[1]}</p>
               <p>{list[item].split("|")[0]}</p>
+              <div className="rating-container">
+                <FontAwesomeIcon className="fa-icon up" icon={faThumbsUp} />
+                <FontAwesomeIcon className="fa-icon down" icon={faThumbsDown} />
+              </div>
               <FontAwesomeIcon
                 className="fa-icon add"
                 icon={faMinusCircle}

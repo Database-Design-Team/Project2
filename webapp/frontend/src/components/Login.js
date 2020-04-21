@@ -37,7 +37,11 @@ const Login = (props) => {
             password: values["password"],
           },
         });
-        if (response.data) {
+        if (response.data && values["username"] === "admin") {
+          history.push({
+            pathname: "/admin",
+          });
+        } else if (response.data) {
           history.push({
             pathname: "/dashboard",
           });
