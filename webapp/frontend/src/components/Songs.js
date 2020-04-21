@@ -80,6 +80,8 @@ const Songs = (props) => {
       .then(function(response) {
         if (response.data) {
           alert("Your response has been recorded. (Remind me to change this)");
+        } else {
+          alert("You've already rated the song.");
         }
       })
       .catch(function(error) {

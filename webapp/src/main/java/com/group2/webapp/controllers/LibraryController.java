@@ -95,9 +95,9 @@ public class LibraryController {
     public ResponseEntity<Boolean> addSongToLibrary(@RequestParam("song_id") int songID, @RequestParam("username") String username) {
         try {
             dao.addToLibrary(songID, username);
-            return new ResponseEntity<>(true, HttpStatus.OK);
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } catch(SQLException e) {
-            return new ResponseEntity<>(false, HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity<Boolean>(false, HttpStatus.OK);
         }
     }
 }

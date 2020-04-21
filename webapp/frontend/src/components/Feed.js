@@ -51,26 +51,29 @@ const Feed = (props) => {
   };
 
   const handleAddToLibrary = (item) => {
-    axios.interceptors.response.use(
-      function(response) {
-        return response;
-      },
-      function(error) {
-        if (406 === error.response.status) {
-          alert("Song is already in your library");
-        } else {
-          return Promise.reject(error);
-        }
-      }
-    );
+    // axios.interceptors.response.use(
+    //   function(response) {
+    //     return response;
+    //   },
+    //   function(error) {
+    //     if (406 === error.response.status) {
+    //       alert("Song is already in your library");
+    //     } else {
+    //       return Promise.reject(error);
+    //     }
+    //   }
+    // );
     axios({
       url: "/library",
       method: "POST",
       params: { song_id: item, username: credentials.username },
     })
       .then(function(response) {
+        console.log(response.data);
         if (response.data) {
           alert("Added song to library successfully!");
+        } else {
+          alert("The song is already in your library.");
         }
       })
       .catch(function(error) {
@@ -89,6 +92,8 @@ const Feed = (props) => {
       .then(function(response) {
         if (response.data) {
           alert("Your response has been recorded. (Remind me to change this)");
+        } else {
+          alert("You've already rated the song.");
         }
       })
       .catch(function(error) {

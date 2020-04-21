@@ -30,7 +30,7 @@ public class SongStatisticsController {
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } catch (SQLException e) {
             e.getMessage();
-            return new ResponseEntity<Boolean>(false, HttpStatus.CONFLICT);
+            return new ResponseEntity<Boolean>(false, HttpStatus.OK);
         }
     }
 
