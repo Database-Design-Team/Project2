@@ -6,17 +6,16 @@ import java.sql.Date;
 /**
  * @author Timothy
  */
-public class SongStatistics {
+public class SongListens {
     String user;
     Date timeStamp;
-    int rating;
     int song;
 
     /**
      * empty constructor
      */
     @Contract(pure = true)
-    public SongStatistics() {
+    public SongListens() {
     }
 
     /**
@@ -25,7 +24,7 @@ public class SongStatistics {
      * @param song the ID of the song
      */
     @Contract(pure = true)
-    public SongStatistics(String user, int song) {
+    public SongListens(String user, int song) {
         this.user = user;
         this.song = song;
     }
@@ -38,10 +37,9 @@ public class SongStatistics {
      * @param song ID of the song listened to
      */
     @Contract(pure = true)
-    public SongStatistics(String user, Date timeStamp, int rating, int song) {
+    public SongListens(String user, Date timeStamp, int rating, int song) {
         this.user = user;
         this.timeStamp = timeStamp;
-        this.rating = rating;
         this.song = song;
     }
 
@@ -59,14 +57,6 @@ public class SongStatistics {
 
     public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
     }
 
     public int getSong() {
