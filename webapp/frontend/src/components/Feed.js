@@ -4,7 +4,12 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useStateValue } from "../state";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faPlusCircle } from "@fortawesome/fontawesome-free-solid";
+import {
+  faPlay,
+  faPlusCircle,
+  faThumbsUp,
+  faThumbsDown,
+} from "@fortawesome/fontawesome-free-solid";
 
 const Feed = (props) => {
   const [{ currentSong, credentials }, dispatch] = useStateValue();
@@ -82,6 +87,7 @@ const Feed = (props) => {
         <p>Play</p>
         <p>Title</p>
         <p>Artist</p>
+        <p>Rating</p>
         <p>Add to Library</p>
       </div>
       <ul className="feed-grid-container">
@@ -96,6 +102,10 @@ const Feed = (props) => {
               />
               <p>{list[item].split("|")[1]}</p>
               <p>{list[item].split("|")[0]}</p>
+              <div className="rating-container">
+                <FontAwesomeIcon className="fa-icon up" icon={faThumbsUp} />
+                <FontAwesomeIcon className="fa-icon down" icon={faThumbsDown} />
+              </div>
               <FontAwesomeIcon
                 className="fa-icon add"
                 icon={faPlusCircle}
