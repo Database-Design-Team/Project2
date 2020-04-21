@@ -14,12 +14,13 @@ public class SongDao extends AbstractBaseDao {
     }
 
     public void AddSongFile(MultipartFile file, Song song) throws SQLException, IOException {
-        String SQL = "INSERT INTO audio (audio_file, song_name, artist, deleted) VALUES (?, ?, ?, ?)";
+        String SQL = "INSERT INTO audio (audio_file, song_name, artist, deleted, genre) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setBytes(1, file.getBytes());
         ps.setString(2, song.getSong_name());
         ps.setInt(3, song.getMusician());
         ps.setBoolean(4, false);
+        ps.setInt(5, song.getGenre());
         ps.executeUpdate();
         ps.close();
     }

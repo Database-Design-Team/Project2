@@ -13,6 +13,7 @@ public class Song {
     byte[] audio_file;
     int musician;
     boolean isDeleted;
+    int genre;
 
     /**
      * constructor with no parameters, setting default isDeleted
@@ -29,10 +30,11 @@ public class Song {
      * @param isDeleted determines if the song is flagged as deleted
      */
     @Contract(pure = true)
-    public Song(String song_name, int musician, boolean isDeleted) {
+    public Song(String song_name, int musician, boolean isDeleted, int genre) {
         this.song_name = song_name;
         this.musician = musician;
         this.isDeleted = isDeleted;
+        this.genre = genre;
     }
 
     /**
@@ -137,5 +139,13 @@ public class Song {
 
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
+    }
+
+    public int getGenre() {
+        return genre;
+    }
+
+    public void setGenre(int genre) {
+        this.genre = genre;
     }
 }

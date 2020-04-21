@@ -5,6 +5,8 @@ import { useDropzone } from "react-dropzone";
 import "./Upload.scss";
 import { useStateValue } from "../state";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Modali, { useModali } from "modali";
+import CreateRelease from "./CreateRelease";
 import {
   faPlusCircle,
   faMinusCircle,
@@ -12,13 +14,21 @@ import {
 
 const Upload = (props) => {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
+  const [createReleaseModal, togglecreateReleaseModal] = useModali({
+    animated: true,
+  });
 
+  const [songGenre, setSongGenre] = useState("");
   const { handleSubmit, register, errors } = useForm();
   const [{ credentials }] = useStateValue();
   const [
     { artistList, currentArtist, releaseList },
     dispatch,
   ] = useStateValue();
+
+  function handleChange(e) {
+    setSongGenre(e.target.value);
+  }
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -50,7 +60,8 @@ const Upload = (props) => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("song_name", values.song_name);
-    formData.append("musician", 1); //change this to the artist_id
+    formData.append("musician", currentArtist.artist_id);
+    formData.append("genre", songGenre);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -60,6 +71,7 @@ const Upload = (props) => {
       .post("/upload-files", formData, config)
       .then(function(response) {
         if (response.data) {
+          console.log(response.data);
           alert("Successfully uploaded files.");
         }
       })
@@ -68,16 +80,16 @@ const Upload = (props) => {
       });
   };
 
-  const changeCurrentRelease = (item, name) => {
-    dispatch({
-      type: "changeReleaseList",
-      newReleases: {
-        releases: releaseList.releases,
-        release_id: item,
-        release_name: name,
-      },
-    });
-  };
+  // const changeCurrentRelease = (item, name) => {
+  //   dispatch({
+  //     type: "changeReleaseList",
+  //     newReleases: {
+  //       releases: releaseList.releases,
+  //       release_id: item,
+  //       release_name: name,
+  //     },
+  //   });
+  // };
 
   const handleArtistChange = (item, i) => {
     console.log(item);
@@ -92,43 +104,43 @@ const Upload = (props) => {
       params: { artist_id: i },
     }).then((response) => {
       console.log(response.data);
-      dispatch({
-        type: "changeReleaseList",
-        newReleases: {
-          releases: response.data,
-          release_id: "",
-          release_name: "No release selected.",
-        },
-      });
+      // dispatch({
+      //   type: "changeReleaseList",
+      //   newReleases: {
+      //     releases: response.data,
+      //     release_id: "",
+      //     release_name: "No release selected.",
+      //   },
+      // });
     });
   };
 
-  const handleDeleteRelease = (item) => {
-    axios({
-      url: "/remove-release",
-      method: "DELETE",
-      params: {
-        release_id: item,
-      },
-    }).then((response) => {
-      axios({
-        url: "/release-by-artist",
-        method: "GET",
-        responseType: "json",
-        params: { artist_id: currentArtist.artist_id },
-      }).then((response) => {
-        console.log(response.data);
-        dispatch({
-          type: "changeReleaseList",
-          newReleases: {
-            releases: response.data,
-            release_id: "",
-            release_name: "No release selected.",
-          },
-        });
-      });
-    });
-  };
+  // const handleDeleteRelease = (item) => {
+  //   axios({
+  //     url: "/remove-release",
+  //     method: "DELETE",
+  //     params: {
+  //       release_id: item,
+  //     },
+  //   }).then((response) => {
+  //     axios({
+  //       url: "/release-by-artist",
+  //       method: "GET",
+  //       responseType: "json",
+  //       params: { artist_id: currentArtist.artist_id },
+  //     }).then((response) => {
+  //       console.log(response.data);
+  //       dispatch({
+  //         type: "changeReleaseList",
+  //         newReleases: {
+  //           releases: response.data,
+  //           release_id: "",
+  //           release_name: "No release selected.",
+  //         },
+  //       });
+  //     });
+  //   });
+  // };
 
   const handleDeleteMember = (item) => {
     axios({
@@ -150,10 +162,10 @@ const Upload = (props) => {
             type: "changeArtistList",
             newArtists: { artists: response.data },
           });
-          dispatch({
-            type: "changeReleaseList",
-            newReleases: { releases: {} },
-          });
+          // dispatch({
+          //   type: "changeReleaseList",
+          //   newReleases: { releases: {} },
+          // });
         });
       })
       .catch(function(error) {
@@ -196,14 +208,20 @@ const Upload = (props) => {
               ))}
           </ul>
         </div>
+        {/* <button className="btn btn--1 btnCA" onClick={togglecreateReleaseModal}>
+          Create a New Release
+        </button>
+        <Modali.Modal {...createReleaseModal}>
+          <CreateRelease />
+        </Modali.Modal> */}
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="">
           <div className="">
             <p>{`Uploading as: ${currentArtist.artist}`}</p>
-            <p>{`Uploading to release: ${releaseList.release_name}`}</p>
+            {/* <p>{`Uploading to release: ${releaseList.release_name}`}</p> */}
           </div>
-          <div className="main-release-container">
+          {/* <div className="main-release-container">
             <ul className="release-container">
               {Object.keys(releaseList.releases)
                 .reverse()
@@ -231,7 +249,7 @@ const Upload = (props) => {
                   </li>
                 ))}
             </ul>
-          </div>
+          </div> */}
           <div className="song-input-container">
             <p>Enter song information.</p>
             <div className="input-container">
@@ -243,6 +261,24 @@ const Upload = (props) => {
                 })}
                 placeholder="Song Title"
               />
+              <select onChange={handleChange} value={songGenre}>
+                <option value="1">Classical</option>
+                <option value="2">HipHop</option>
+                <option value="3">Rap</option>
+                <option value="4">Country</option>
+                <option value="5">Folk</option>
+                <option value="6">Rock</option>
+                <option value="7">Pop</option>
+                <option value="8">Jazz</option>
+                <option value="9">Metal</option>
+                <option value="10">Punk</option>
+                <option value="11">Instrumental</option>
+                <option value="12">Acapella</option>
+                <option value="13">Dubstep</option>
+                <option value="14">Blues</option>
+                <option value="15">Ska</option>
+                <option value="16">New Age</option>
+              </select>
             </div>
 
             <div className="dropzone-container">

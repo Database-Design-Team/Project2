@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Feed.scss";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useStateValue } from "../state";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +9,7 @@ import { faPlay, faPlusCircle } from "@fortawesome/fontawesome-free-solid";
 const Feed = (props) => {
   const [{ currentSong, credentials }, dispatch] = useStateValue();
   const [list, setList] = useState({});
+  let history = useHistory();
   useEffect(() => {
     const abortController = new AbortController();
     // const signal = abortController.signal;
@@ -41,6 +43,18 @@ const Feed = (props) => {
   };
 
   const handleAddToLibrary = (item) => {
+    axios.interceptors.response.use(
+      function(response) {
+        return response;
+      },
+      function(error) {
+        if (406 === error.response.status) {
+          alert("Song is already in your library");
+        } else {
+          return Promise.reject(error);
+        }
+      }
+    );
     axios({
       url: "/library",
       method: "POST",
