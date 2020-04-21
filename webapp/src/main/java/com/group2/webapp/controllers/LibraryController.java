@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -94,7 +93,6 @@ public class LibraryController {
             dao.addToLibrary(songID, username);
             return new ResponseEntity<>(true, HttpStatus.OK);
         } catch(SQLException e) {
-            e.printStackTrace();
             return new ResponseEntity<>(false, HttpStatus.NOT_ACCEPTABLE);
         }
     }

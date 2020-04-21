@@ -26,9 +26,9 @@ public class SongController {
 
     @RequestMapping(value = "/upload-files", headers = "content-type=multipart/*", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Boolean> upload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("song_name") String song_name, @RequestParam("musician") int musician) throws IOException {
+    public ResponseEntity<Boolean> upload(@RequestParam("file") MultipartFile multipartFile, @RequestParam("song_name") String song_name, @RequestParam("musician") int musician, @RequestParam("genre") int genre) throws IOException {
         try {
-            Song song = new Song(song_name, musician, false);
+            Song song = new Song(song_name, musician, false, genre);
             dao.AddSongFile(multipartFile, song);
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } catch (SQLException e) {
