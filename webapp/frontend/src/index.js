@@ -4,11 +4,12 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./index.scss";
 import Landing from "./components/Landing";
 import Dashboard from "./components/Dashboard";
+import Admin from "./Admin";
 import { StateProvider } from "./state";
 
 function App() {
   const initialState = {
-    currentSong: { url: "" },
+    currentSong: { url: "", songName: "" },
     credentials: { username: "", password: "" },
     artistList: { artists: {} },
     currentArtist: { artist: "No artist selected.", artist_id: "" },
@@ -17,6 +18,7 @@ function App() {
       release_id: "",
       release_name: "No release selected.",
     },
+    userInfo: { info: {} },
   };
 
   const reducer = (state, action) => {
@@ -46,6 +48,11 @@ function App() {
           ...state,
           releaseList: action.newReleases,
         };
+      case "changeInfo":
+        return {
+          ...state,
+          info: action.changeInfo,
+        };
       default:
         return state;
     }
@@ -56,6 +63,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route path="/dashboard" component={Dashboard} />
+        <Route path="/admin" component={Admin} />
       </Switch>
     </StateProvider>
   );

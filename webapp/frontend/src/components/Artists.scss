@@ -34,7 +34,7 @@
   margin-left: -22px;
   margin-right: 20px;
   display: grid;
-  grid-template-columns: 215px 215px 215px;
+  grid-template-columns: 250px 215px 250px;
   justify-items: center;
   align-items: center;
   justify-content: space-between;
@@ -62,4 +62,16 @@
     transition-duration: 400ms;
     border: 2px solid #a6accd;
   }
+}
+
+.artists-list-header-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  justify-items: center;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 15px;
+  margin-right: 20px;
+  color: #ffffff;
+  font-weight: 700;
 }

@@ -114,6 +114,14 @@ public class UserAccount {
         this.email = email;
     }
 
+    public Date getDateJoined() {
+        return dateJoined;
+    }
+
+    public void setDate(Date date_joined) {
+        this.dateJoined = date_joined;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

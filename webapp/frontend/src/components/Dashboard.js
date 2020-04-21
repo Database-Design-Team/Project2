@@ -27,6 +27,8 @@ const Dashboard = (props) => {
     history.push(`/`);
   };
 
+  const [{ credentials, currentSong }, dispatch] = useStateValue();
+
   const components = {
     Home: Home,
     Feed: Feed,
@@ -50,6 +52,7 @@ const Dashboard = (props) => {
         <div className="search-container">
           <input type="text" placeholder="Search" />
         </div>
+        <div className="now-playing-container">{`${currentSong.songName}`}</div>
         <div className="btn-group">
           <div>
             <button className="btn btn-sign-out" onClick={handleSignOut}>
@@ -82,7 +85,7 @@ const Dashboard = (props) => {
               icon={faMusic}
               onClick={() => changePage("Songs")}
             />
-            <p>Songs</p>
+            <p>Library</p>
           </li>
           <li className="nav-item-container">
             <FontAwesomeIcon
