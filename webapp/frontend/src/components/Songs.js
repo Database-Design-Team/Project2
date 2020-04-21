@@ -40,7 +40,7 @@ const Songs = (props) => {
       url: "/download-files",
       method: "GET",
       responseType: "blob",
-      params: { song_id },
+      params: { song_id: song_id, username: credentials.username },
     }).then((response) => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       dispatch({
