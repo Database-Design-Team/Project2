@@ -80,7 +80,20 @@ const Feed = (props) => {
 
   const handleRating = (rating, song_id) => {
     let currUser = credentials.username;
-    console.log(`Rating: ${rating} Song: ${song_id} User: ${currUser} `);
+
+    axios({
+      url: "/add-song-statistic",
+      method: "POST",
+      params: { username: currUser, songID: song_id, rating: rating },
+    })
+      .then(function(response) {
+        if (response.data) {
+          alert("Your response has been recorded. (Remind me to change this)");
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   };
 
   return (

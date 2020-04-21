@@ -69,6 +69,24 @@ const Songs = (props) => {
     });
   };
 
+  const handleRating = (rating, song_id) => {
+    let currUser = credentials.username;
+
+    axios({
+      url: "/add-song-statistic",
+      method: "POST",
+      params: { username: currUser, songID: song_id, rating: rating },
+    })
+      .then(function(response) {
+        if (response.data) {
+          alert("Your response has been recorded. (Remind me to change this)");
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="feed-container">
       <div className="feed-title-container">
@@ -94,8 +112,16 @@ const Songs = (props) => {
               <p>{list[item].split("|")[1]}</p>
               <p>{list[item].split("|")[0]}</p>
               <div className="rating-container">
-                <FontAwesomeIcon className="fa-icon up" icon={faThumbsUp} />
-                <FontAwesomeIcon className="fa-icon down" icon={faThumbsDown} />
+                <FontAwesomeIcon
+                  className="fa-icon up"
+                  icon={faThumbsUp}
+                  onClick={() => handleRating(1, item)}
+                />
+                <FontAwesomeIcon
+                  className="fa-icon down"
+                  icon={faThumbsDown}
+                  onClick={() => handleRating(-1, item)}
+                />
               </div>
               <FontAwesomeIcon
                 className="fa-icon add"
