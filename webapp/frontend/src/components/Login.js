@@ -17,7 +17,7 @@ const Login = (props) => {
       (error) => {
         const { status } = error.response;
         if (status === 401) {
-          alert("The username already exists.");
+          alert("The username and/or password are incorrect.");
         }
         window.location.reload(false);
         return Promise.reject(error);

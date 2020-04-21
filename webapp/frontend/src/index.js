@@ -8,7 +8,7 @@ import { StateProvider } from "./state";
 
 function App() {
   const initialState = {
-    currentSong: { url: "" },
+    currentSong: { url: "", songName: "" },
     credentials: { username: "", password: "" },
     artistList: { artists: {} },
     currentArtist: { artist: "No artist selected.", artist_id: "" },
@@ -17,6 +17,7 @@ function App() {
       release_id: "",
       release_name: "No release selected.",
     },
+    userInfo: { info: {} },
   };
 
   const reducer = (state, action) => {
@@ -45,6 +46,11 @@ function App() {
         return {
           ...state,
           releaseList: action.newReleases,
+        };
+      case "changeInfo":
+        return {
+          ...state,
+          info: action.changeInfo,
         };
       default:
         return state;

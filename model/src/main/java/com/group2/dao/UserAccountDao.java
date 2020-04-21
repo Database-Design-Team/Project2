@@ -18,7 +18,11 @@ public class UserAccountDao extends AbstractBaseDao {
         ps.setString(1, username);
         ResultSet rs = ps.executeQuery();
         rs.next();
-        return new UserAccount(rs.getString("username"), rs.getInt("student_id"), rs.getBoolean("admin"), rs.getString("password"), rs.getString("email"));
+        UserAccount uc = new UserAccount(rs.getString("username"), rs.getInt("student_id"), rs.getBoolean("admin"),
+                rs.getString("password"), rs.getString("email"), rs.getDate("date_joined"));
+        rs.close();
+        ps.close();
+        return uc;
     }
 
     public void addUserAccount(@NotNull UserAccount uc) throws SQLException {
@@ -33,10 +37,11 @@ public class UserAccountDao extends AbstractBaseDao {
     }
 
     public void addUserAccount(@NotNull List<UserAccount> ucList) throws SQLException {
-        for(UserAccount u : ucList) {
+        for (UserAccount u : ucList) {
             addUserAccount(u);
         }
     }
+    
 
 
 

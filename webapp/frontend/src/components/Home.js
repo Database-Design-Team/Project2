@@ -1,13 +1,52 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.scss";
+import axios from "axios";
 import { useStateValue } from "../state";
 
 const Home = (props) => {
   const [{ credentials }, dispatch] = useStateValue();
+  const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    // const signal = abortController.signal;
+
+    axios({
+      url: "/user-account-info",
+      method: "GET",
+      responseType: "json",
+      params: {
+        username: credentials.username,
+      },
+    }).then((response) => {
+      setUserInfo(response.data);
+    });
+    return function cleanup() {
+      abortController.abort();
+    };
+  }, []);
 
   return (
-    <div className="home-container">
-      <h1>Welcome back {credentials.username}</h1>
+    <div className="home-tab-container">
+      <div className="home-header">
+        <p>Welcome back {credentials.username}!</p>
+      </div>
+      <div className="asdf-content-container">
+        <div className="profile-info-container">
+          <p>Profile Information</p>
+          <div className="profile-info-list">
+            {Object.keys(userInfo).map((item, i) => (
+              <div className="input-container">
+                {item}
+                <input placeholder={userInfo[item]}></input>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="stats-container">
+          <p>Top 10 Songs</p>
+        </div>
+      </div>
     </div>
   );
 };

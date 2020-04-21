@@ -9,11 +9,11 @@ import { faPlusCircle } from "@fortawesome/fontawesome-free-solid";
 
 const Artists = (props) => {
   const [{ credentials }] = useStateValue();
-  const [{ artistList }, dispatch] = useStateValue();
+  // const [{ artistList }, dispatch] = useStateValue();
   const [createArtistModal, toggleCreateArtistModal] = useModali({
     animated: true,
   });
-  // const [artistList, setArtistList] = useState({});
+  const [artistList, setArtistList] = useState({});
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -25,11 +25,12 @@ const Artists = (props) => {
       responseType: "json",
     })
       .then((response) => {
-        // console.log(response.data);
-        dispatch({
-          type: "changeArtistList",
-          newArtists: { artists: response.data },
-        });
+        console.log(response.data);
+        setArtistList(response.data);
+        // dispatch({
+        //   type: "changeArtistList",
+        //   newArtists: { artists: response.data },
+        // });
       })
       .catch(function(error) {
         console.error(error);
@@ -69,12 +70,12 @@ const Artists = (props) => {
       </div>
       <div className="artists-container">
         <ul className="current-artists-container">
-          {Object.keys(artistList.artists)
+          {Object.keys(artistList)
             .reverse()
             .map((item, i) => (
               <li className="current-artists-element-container" key={i}>
-                <p>{Object.keys(artistList.artists[item])}</p>
-                <p>{Object.values(artistList.artists[item])}</p>
+                <p>{Object.keys(artistList[item])}</p>
+                <p>{Object.values(artistList[item])}</p>
                 <FontAwesomeIcon
                   className="fa-icon add"
                   icon={faPlusCircle}

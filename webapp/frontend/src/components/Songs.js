@@ -25,8 +25,11 @@ const Songs = (props) => {
     };
   }, []);
 
-  const handleClick = (item) => {
-    const song_id = item.item;
+  const handleClick = (item, song) => {
+    const song_id = item;
+    let song_name = `Now Playing: ${song.split("|")[0]} ~ ${
+      song.split("|")[1]
+    }`;
     axios({
       url: "/download-files",
       method: "GET",
@@ -36,7 +39,7 @@ const Songs = (props) => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       dispatch({
         type: "changeSong",
-        newSong: { url: url },
+        newSong: { url: url, songName: song_name },
       });
     });
   };
@@ -79,7 +82,7 @@ const Songs = (props) => {
               <FontAwesomeIcon
                 className="fa-icon play"
                 icon={faPlay}
-                onClick={() => handleClick({ item })}
+                onClick={() => handleClick(item, list[item])}
               />
               <p>{list[item].split("|")[1]}</p>
               <p>{list[item].split("|")[0]}</p>

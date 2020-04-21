@@ -18,7 +18,7 @@ const Register = (props) => {
       (error) => {
         const { status } = error.response;
         if (status === 409) {
-          alert("The username already exists.");
+          alert("The email, username, and/or ID are unavailable.");
         }
         window.location.reload(false);
         return Promise.reject(error);

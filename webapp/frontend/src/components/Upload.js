@@ -21,10 +21,9 @@ const Upload = (props) => {
   const [songGenre, setSongGenre] = useState("");
   const { handleSubmit, register, errors } = useForm();
   const [{ credentials }] = useStateValue();
-  const [
-    { artistList, currentArtist, releaseList },
-    dispatch,
-  ] = useStateValue();
+  const [{ currentArtist, releaseList }, dispatch] = useStateValue();
+
+  const [artistList, setArtistList] = useState({});
 
   function handleChange(e) {
     setSongGenre(e.target.value);
@@ -41,10 +40,11 @@ const Upload = (props) => {
       params: { band_member: credentials.username },
     })
       .then((response) => {
-        dispatch({
-          type: "changeArtistList",
-          newArtists: { artists: response.data },
-        });
+        setArtistList(response.data);
+        // dispatch({
+        //   type: "changeArtistList",
+        //   newArtists: { artists: response.data },
+        // });
       })
       .catch(function(error) {
         console.error(error);
@@ -143,6 +143,10 @@ const Upload = (props) => {
   // };
 
   const handleDeleteMember = (item) => {
+    dispatch({
+      type: "changeCurrentArtist",
+      changeArtist: { artist: "No artist selected.", artist_id: "" },
+    });
     axios({
       url: "/remove-artist-member",
       method: "DELETE",
@@ -158,10 +162,11 @@ const Upload = (props) => {
           responseType: "json",
           params: { band_member: credentials.username },
         }).then((response) => {
-          dispatch({
-            type: "changeArtistList",
-            newArtists: { artists: response.data },
-          });
+          setArtistList(response.data);
+          // dispatch({
+          //   type: "changeArtistList",
+          //   newArtists: { artists: response.data },
+          // });
           // dispatch({
           //   type: "changeReleaseList",
           //   newReleases: { releases: {} },
@@ -181,22 +186,19 @@ const Upload = (props) => {
         </div>
         <div className="member-artists-container">
           <ul className="current-member-artists-container">
-            {Object.keys(artistList.artists)
+            {Object.keys(artistList)
               .reverse()
               .map((item, i) => (
                 <li
                   className="current-member-artists-element-container"
                   key={i}
                 >
-                  <p>{Object.keys(artistList.artists[item])}</p>
+                  <p>{Object.keys(artistList[item])}</p>
                   <FontAwesomeIcon
                     className="fa-icon add"
                     icon={faPlusCircle}
                     onClick={() =>
-                      handleArtistChange(
-                        Object.keys(artistList.artists[item]),
-                        item
-                      )
+                      handleArtistChange(Object.keys(artistList[item]), item)
                     }
                   />
                   <FontAwesomeIcon
