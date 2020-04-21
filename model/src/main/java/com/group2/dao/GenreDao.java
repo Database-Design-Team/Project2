@@ -41,8 +41,9 @@ public class GenreDao extends AbstractBaseDao {
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         rs.next();
+        Genre gen = new Genre(rs.getInt("genre_id"), rs.getString("genre_title"));
         ps.close();
         rs.close();
-        return new Genre(rs.getInt("genre_id"), rs.getString("genre_title"));
+        return gen;
     }
 }

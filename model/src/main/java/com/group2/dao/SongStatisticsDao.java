@@ -17,7 +17,6 @@ public class SongStatisticsDao extends AbstractBaseDao {
         ps.setInt(2, songID);
         ps.setString(3, username);
         ps.executeUpdate();
-
         ps.close();
     }
 

@@ -18,9 +18,10 @@ public class UserAccountDao extends AbstractBaseDao {
         ps.setString(1, username);
         ResultSet rs = ps.executeQuery();
         rs.next();
+        UserAccount usrAct = new UserAccount(rs.getString("username"), rs.getInt("student_id"), rs.getBoolean("admin"), rs.getString("password"), rs.getString("email"));
         ps.close();
         rs.close();
-        return new UserAccount(rs.getString("username"), rs.getInt("student_id"), rs.getBoolean("admin"), rs.getString("password"), rs.getString("email"));
+        return usrAct;
     }
 
     public void addUserAccount(@NotNull UserAccount uc) throws SQLException {
