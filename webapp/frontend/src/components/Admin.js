@@ -2,25 +2,19 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useStateValue } from "../state";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHome,
-  faListUl,
-  faMusic,
-  faUpload,
-  faIndent,
-  faUsers,
-} from "@fortawesome/fontawesome-free-solid";
+import { faFlag, faMusic, faUsers } from "@fortawesome/fontawesome-free-solid";
 
 import Feed from "./Feed";
 import Home from "./Home";
-import Library from "./Songs";
+import Songs from "./Songs";
 import Playlists from "./Playlists";
 import MusicPlayer from "./MusicPlayer";
 import Upload from "./Upload";
 import Artists from "./Artists";
+import Reports from "./Reports";
 import "./Dashboard.scss";
 
-const Dashboard = (props) => {
+const Admin = (props) => {
   let history = useHistory();
   const handleSignOut = () => {
     //TODO: Flush global state.
@@ -30,15 +24,12 @@ const Dashboard = (props) => {
   const [{ currentSong }] = useStateValue();
 
   const components = {
-    Home: Home,
-    Feed: Feed,
-    Library: Library,
-    Playlists: Playlists,
-    Upload: Upload,
+    Reports: Reports,
+    Songs: Songs,
     Artists: Artists,
   };
 
-  const [page, changePage] = useState("Home");
+  const [page, changePage] = useState("Reports");
 
   function DynamicComponent(props) {
     const SelectPage = components[props.page];
@@ -66,42 +57,26 @@ const Dashboard = (props) => {
           <li className="nav-item-container">
             <FontAwesomeIcon
               className="navi"
-              icon={faHome}
-              onClick={() => changePage("Home")}
+              icon={faFlag}
+              onClick={() => changePage("Reports")}
             />
-            <p>Home</p>
-          </li>
-          <li className="nav-item-container">
-            <FontAwesomeIcon
-              className="navi"
-              icon={faListUl}
-              onClick={() => changePage("Feed")}
-            />
-            <p>Feed</p>
+            <p>Reports</p>
           </li>
           <li className="nav-item-container">
             <FontAwesomeIcon
               className="navi"
               icon={faMusic}
-              onClick={() => changePage("Library")}
+              onClick={() => changePage("Songs")}
             />
-            <p>Library</p>
+            <p>Songs</p>
           </li>
-          {/* <li className="nav-item-container">
-            <FontAwesomeIcon
-              className="navi"
-              icon={faIndent}
-              onClick={() => changePage("Playlists")}
-            />
-            <p>Playlists</p>
-          </li> */}
           <li className="nav-item-container">
             <FontAwesomeIcon
               className="navi"
-              icon={faUpload}
-              onClick={() => changePage("Upload")}
+              icon={faUsers}
+              onClick={() => changePage("Artists")}
             />
-            <p>Upload</p>
+            <p>Artists</p>
           </li>
         </ul>
       </div>
@@ -120,4 +95,4 @@ const Dashboard = (props) => {
   );
 };
 
-export default Dashboard;
+export default Admin;

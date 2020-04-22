@@ -5,8 +5,6 @@ import { useDropzone } from "react-dropzone";
 import "./Upload.scss";
 import { useStateValue } from "../state";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Modali, { useModali } from "modali";
-import CreateRelease from "./CreateRelease";
 import {
   faPlusCircle,
   faMinusCircle,
@@ -14,14 +12,11 @@ import {
 
 const Upload = (props) => {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
-  const [createReleaseModal, togglecreateReleaseModal] = useModali({
-    animated: true,
-  });
 
   const [songGenre, setSongGenre] = useState("");
   const { handleSubmit, register, errors } = useForm();
   const [{ credentials }] = useStateValue();
-  const [{ currentArtist, releaseList }, dispatch] = useStateValue();
+  const [{ currentArtist }, dispatch] = useStateValue();
 
   const [artistList, setArtistList] = useState({});
 

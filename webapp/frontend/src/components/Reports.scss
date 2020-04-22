@@ -1,0 +1,88 @@
+.artists-container {
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(255, 249, 255, 1) 11.1%,
+    rgba(255, 241, 255, 1) 90%
+  );
+  border-radius: 10px;
+  max-width: 1000px;
+  display: grid;
+  grid-template-rows: 750px;
+}
+
+.reports-header-container {
+  color: white;
+  font-weight: 700;
+  font-size: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+  grid-template-rows: 90px;
+  align-items: center;
+}
+
+.current-artists-container {
+  overflow: auto;
+  display: grid;
+  gap: 10px;
+  list-style-type: none;
+}
+.current-artists-container::-webkit-scrollbar {
+  display: none;
+}
+
+.current-artists-element-container {
+  margin-left: -22px;
+  margin-right: 20px;
+  display: grid;
+  grid-template-columns: 250px 215px 250px;
+  justify-items: center;
+  align-items: center;
+  justify-content: space-between;
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(255, 249, 255, 1) 11.1%,
+    rgba(255, 241, 255, 1) 90%
+  );
+  border: 2px solid #d9d9da;
+  border-radius: 10px;
+  height: 70px;
+  .fa-icon {
+    color: #3d4061;
+    &:hover {
+      transition-duration: 200ms;
+      color: #a6accd;
+      cursor: pointer;
+    }
+  }
+  p {
+    color: #3d4061;
+    font-weight: 600;
+  }
+  &:hover {
+    transition-duration: 400ms;
+    border: 2px solid #a6accd;
+  }
+}
+
+.artists-list-header-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  justify-items: center;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 15px;
+  margin-right: 20px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.report-json-container {
+  overflow: auto;
+  font-weight: 700;
+  color: white;
+  height: 700px;
+}
+
+.report-json-container::-webkit-scrollbar {
+  display: none;
+}

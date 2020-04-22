@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/fontawesome-free-solid";
 
 const Songs = (props) => {
-  const [{ currentSong, credentials }, dispatch] = useStateValue();
+  const [{ credentials }, dispatch] = useStateValue();
   const [list, setList] = useState({});
   useEffect(() => {
     const abortController = new AbortController();
@@ -35,7 +35,6 @@ const Songs = (props) => {
     let song_name = `Now Playing: ${song.split("|")[0]} ~ ${
       song.split("|")[1]
     }`;
-    let currUser = credentials.username;
     axios({
       url: "/download-files",
       method: "GET",

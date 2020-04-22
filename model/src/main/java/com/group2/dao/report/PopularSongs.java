@@ -31,8 +31,9 @@ public class PopularSongs extends AbstractBaseDao {
         String SQL = "SELECT artist_name AS Artist, song_name AS song, aggregate_popularity AS rating " +
                 "                FROM artist, audio " +
                 "                WHERE artist = artist_id " +
+                "                AND aggregate_popularity IS NOT NULL " +
                 "                GROUP BY audio.audio_id, artist_name, aggregate_popularity " +
-                "                ORDER BY aggregate_popularity ASC " +
+                "                ORDER BY aggregate_popularity DESC " +
                 "                LIMIT ?";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setInt(1, songs);
