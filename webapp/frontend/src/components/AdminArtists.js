@@ -5,11 +5,10 @@ import { useStateValue } from "../state";
 import Modali, { useModali } from "modali";
 import CreateArtist from "./CreateArtist";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/fontawesome-free-solid";
+import { faMinusCircle } from "@fortawesome/fontawesome-free-solid";
 
 const Artists = (props) => {
   const [{ credentials }] = useStateValue();
-  // const [{ artistList }, dispatch] = useStateValue();
   const [createArtistModal, toggleCreateArtistModal] = useModali({
     animated: true,
   });
@@ -17,7 +16,6 @@ const Artists = (props) => {
 
   useEffect(() => {
     const abortController = new AbortController();
-    // const signal = abortController.signal;
 
     axios({
       url: "/getAllArtists",
@@ -27,10 +25,6 @@ const Artists = (props) => {
       .then((response) => {
         console.log(response.data);
         setArtistList(response.data);
-        // dispatch({
-        //   type: "changeArtistList",
-        //   newArtists: { artists: response.data },
-        // });
       })
       .catch(function(error) {
         console.error(error);
@@ -43,13 +37,25 @@ const Artists = (props) => {
 
   const handleClick = (artist_id) => {
     axios({
-      url: "/join-artist",
-      method: "POST",
-      params: { artist_id: artist_id.item, username: credentials.username },
+      url: "/remove-artist",
+      method: "DELETE",
+      params: { artist_id: artist_id.item },
     })
       .then(function(response) {
         if (response.data) {
-          alert("Joined artist successfully");
+          alert("Removed Artist");
+          axios({
+            url: "/getAllArtists",
+            method: "GET",
+            responseType: "json",
+          })
+            .then((response) => {
+              console.log(response.data);
+              setArtistList(response.data);
+            })
+            .catch(function(error) {
+              console.error(error);
+            });
         }
       })
       .catch(function(error) {
@@ -60,7 +66,7 @@ const Artists = (props) => {
   return (
     <div>
       <div className="artists-header-container">
-        <p>Join other artists</p>
+        <p>Add or Delete Artists</p>
         <button className="btn btn--1 btnCA" onClick={toggleCreateArtistModal}>
           Create Artist
         </button>
@@ -71,7 +77,7 @@ const Artists = (props) => {
       <div className="artists-list-header-container">
         <p>Artist</p>
         <p>Date Formed</p>
-        <p>Join Artist</p>
+        <p>Remove Artist</p>
       </div>
       <div className="artists-container">
         <ul className="current-artists-container">
@@ -83,7 +89,7 @@ const Artists = (props) => {
                 <p>{Object.values(artistList[item])}</p>
                 <FontAwesomeIcon
                   className="fa-icon add"
-                  icon={faPlusCircle}
+                  icon={faMinusCircle}
                   onClick={() => handleClick({ item })}
                 />
               </li>

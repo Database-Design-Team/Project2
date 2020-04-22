@@ -4,13 +4,9 @@ import { useStateValue } from "../state";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlag, faMusic, faUsers } from "@fortawesome/fontawesome-free-solid";
 
-import Feed from "./Feed";
-import Home from "./Home";
-import Songs from "./Songs";
-import Playlists from "./Playlists";
+import AdminSongs from "./AdminSongs";
 import MusicPlayer from "./MusicPlayer";
-import Upload from "./Upload";
-import Artists from "./Artists";
+import AdminArtists from "./AdminArtists";
 import Reports from "./Reports";
 import "./Dashboard.scss";
 
@@ -25,8 +21,8 @@ const Admin = (props) => {
 
   const components = {
     Reports: Reports,
-    Songs: Songs,
-    Artists: Artists,
+    AdminSongs: AdminSongs,
+    AdminArtists: AdminArtists,
   };
 
   const [page, changePage] = useState("Reports");
@@ -66,7 +62,7 @@ const Admin = (props) => {
             <FontAwesomeIcon
               className="navi"
               icon={faMusic}
-              onClick={() => changePage("Songs")}
+              onClick={() => changePage("AdminSongs")}
             />
             <p>Songs</p>
           </li>
@@ -74,7 +70,7 @@ const Admin = (props) => {
             <FontAwesomeIcon
               className="navi"
               icon={faUsers}
-              onClick={() => changePage("Artists")}
+              onClick={() => changePage("AdminArtists")}
             />
             <p>Artists</p>
           </li>
