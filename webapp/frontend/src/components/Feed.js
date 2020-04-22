@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./Feed.scss";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useStateValue } from "../state";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,9 +11,8 @@ import {
 } from "@fortawesome/fontawesome-free-solid";
 
 const Feed = (props) => {
-  const [{ currentSong, credentials }, dispatch] = useStateValue();
+  const [{ credentials }, dispatch] = useStateValue();
   const [list, setList] = useState({});
-  let history = useHistory();
   useEffect(() => {
     const abortController = new AbortController();
     // const signal = abortController.signal;

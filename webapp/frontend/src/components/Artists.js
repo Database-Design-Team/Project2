@@ -60,7 +60,7 @@ const Artists = (props) => {
   return (
     <div>
       <div className="artists-header-container">
-        <p>Find other artists or become one</p>
+        <p>Add or Delete Artists</p>
         <button className="btn btn--1 btnCA" onClick={toggleCreateArtistModal}>
           Create Artist
         </button>
@@ -95,16 +95,3 @@ const Artists = (props) => {
 };
 
 export default Artists;
-
-//id
-//name
-//date formed
-
-{
-  /* <div>
-  <p>{item}</p>
-  <p>{Object.keys(artistList[item])}</p>
-  <p>{Object.values(artistList[item])}</p>
-  <FontAwesomeIcon className="fa-icon add" icon={faPlusCircle} />
-</div> */
-}

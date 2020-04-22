@@ -30,7 +30,7 @@ public class SongsAdded extends AbstractBaseDao {
         String SQL = "SELECT date_uploaded, count(*) AS Uploads " +
                 "FROM audio " +
                 "WHERE date_uploaded > current_date-? " +
-                "GROUP BY date_uploaded" +
+                "GROUP BY date_uploaded " +
                 "ORDER BY date_uploaded";
         PreparedStatement ps = conn.prepareStatement(SQL);
         ps.setInt(1, days);

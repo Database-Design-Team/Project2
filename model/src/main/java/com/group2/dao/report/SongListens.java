@@ -27,7 +27,7 @@ public class SongListens extends AbstractBaseDao {
      * @return the result set
      * @throws SQLException on errors interacting with the database
      */
-    public ResultSet getSongListens(@RequestParam  int days) throws SQLException {
+    public ResultSet getSongListens(@RequestParam int days) throws SQLException {
         String SQL = "SELECT current_date-time_stamp+1 AS Days, count(*) AS listens " +
                 "FROM song_listens " +
                 "WHERE time_stamp > current_date-?" +

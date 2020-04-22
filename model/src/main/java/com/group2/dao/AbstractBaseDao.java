@@ -15,4 +15,6 @@ public class AbstractBaseDao {
     public AbstractBaseDao() throws SQLException {
         conn = DriverManager.getConnection(url, user, password);
     }
+
+    
 }

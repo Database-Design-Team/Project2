@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 
+import javax.validation.constraints.NotNull;
+
 @Controller
 public class UserAccountController {
 
@@ -36,7 +38,7 @@ public class UserAccountController {
     
     @PostMapping("/user-account-login")
     @ResponseBody
-    public ResponseEntity<Boolean> login(@RequestBody UserAccount uc) {
+    public ResponseEntity<Boolean> login(@NotNull @RequestBody UserAccount uc) {
         UserAccount uc2 = null;
         try {
             uc2 = dao.getUserAccountByLoginName(uc.getUsername());
@@ -64,6 +66,17 @@ public class UserAccountController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);
         return new ResponseEntity<String>(json.toString(), headers, HttpStatus.OK);
-        
+
+    }
+    
+    @PutMapping("/update-password")
+    public ResponseEntity<Boolean> changePassword(@RequestParam("username") String username, @RequestParam("password") String password) {
+        try {
+            dao.updatePassword(username, password);
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        } catch (SQLException e) {
+            e.getMessage();
+            return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+        }
     }
 }

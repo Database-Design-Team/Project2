@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./index.scss";
 import Landing from "./components/Landing";
 import Dashboard from "./components/Dashboard";
-import Admin from "./Admin";
+import Admin from "./components/Admin";
 import { StateProvider } from "./state";
 
 function App() {
@@ -19,6 +19,14 @@ function App() {
       release_name: "No release selected.",
     },
     userInfo: { info: {} },
+    reports: {
+      popularSongs: [],
+      artistsJoined: [],
+      artistSongs: [],
+      songListens: [],
+      songsAdded: [],
+      topSongs: [],
+    },
   };
 
   const reducer = (state, action) => {
@@ -52,6 +60,11 @@ function App() {
         return {
           ...state,
           info: action.changeInfo,
+        };
+      case "changeReport":
+        return {
+          ...state,
+          reports: action.changeReport,
         };
       default:
         return state;

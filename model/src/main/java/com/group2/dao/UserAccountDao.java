@@ -43,7 +43,21 @@ public class UserAccountDao extends AbstractBaseDao {
         }
     }
     
-
+    /**
+      * This function updates the password of a given user
+      * @param username the user who's password it getting changed
+      * @param password the user's new password
+      * @throws SQLException on errors interacting with the database
+      */
+      public void updatePassword(String username, String password) throws SQLException {
+        String SQL = "UPDATE user_account " +
+                "SET password = ? " +
+                "WHERE username = ?";
+        PreparedStatement ps = conn.prepareStatement(SQL);
+        ps.setString(1, password);
+        ps.setString(2, username);
+        ps.executeQuery();
+    }
 
 
 }
