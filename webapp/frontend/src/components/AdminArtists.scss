@@ -1,8 +1,40 @@
-.admin-feed-element-container {
+.artists-container {
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(255, 249, 255, 1) 11.1%,
+    rgba(255, 241, 255, 1) 90%
+  );
+  border-radius: 10px;
+  max-width: 1000px;
+  display: grid;
+  grid-template-rows: 750px;
+}
+
+.artists-header-container {
+  color: white;
+  font-weight: 700;
+  font-size: 30px;
+  display: grid;
+  grid-template-columns: 500px 200px 200px;
+  grid-template-rows: 90px;
+  align-items: center;
+}
+
+.current-artists-container {
+  overflow: auto;
+  display: grid;
+  gap: 10px;
+  list-style-type: none;
+}
+.current-artists-container::-webkit-scrollbar {
+  display: none;
+}
+
+.current-adminartists-element-container {
   margin-left: -22px;
   margin-right: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-columns: 200px 200px 200px 200px;
   justify-items: center;
   align-items: center;
   justify-content: space-between;
@@ -32,7 +64,7 @@
   }
 }
 
-.admin-feed-headers-container {
+.adminartists-list-header-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, 200px);
   justify-items: center;
@@ -40,16 +72,6 @@
   justify-content: space-between;
   margin-left: 15px;
   margin-right: 20px;
-  color: #3d4061;
+  color: #ffffff;
   font-weight: 700;
-}
-
-.adminartists-header-container {
-  color: white;
-  font-weight: 700;
-  font-size: 30px;
-  display: grid;
-  grid-template-columns: 500px 220px;
-  grid-template-rows: 90px;
-  align-items: center;
 }

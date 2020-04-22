@@ -80,7 +80,7 @@ const Home = (props) => {
         </div>
         <div className="stats-container">
           <p>Top 10 Songs</p>
-          <ul>
+          <ul className="top10-stats-container">
             {top10Info.map((item) => (
               <li>
                 <div>{`Artist Name: ${item.ArtistName}`}</div>
