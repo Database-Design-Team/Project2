@@ -10,11 +10,14 @@ public class AbstractBaseDao {
     private static final String user = "zgqjvuamulzrzb";
     private static final String password = "8853622559b8d9f06685388e005b737729ad3175006e14bd266677fcd44ab005";
 
-    protected Connection conn;
+    protected static Connection conn;
 
-    public AbstractBaseDao() throws SQLException {
-        conn = DriverManager.getConnection(url, user, password);
+    static {
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-
     
 }
