@@ -83,7 +83,16 @@ public class SongDao extends AbstractBaseDao {
         return artistNames;
 
     }
-    
+
+    public void deleteSong(int songId) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("UPDATE audio " +
+                "SET deleted = true " +
+                "WHERE audio_id = ?");
+        ps.executeUpdate();
+        ps.close();
+    }
+
+
     // public JSONObject getAllSongs() throws SQLException {
     //     PreparedStatement ps = conn.prepareStatement("SELECT song_name, audio_id FROM public.audio");
     //     ResultSet rs = ps.executeQuery();
