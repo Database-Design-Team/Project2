@@ -20,6 +20,7 @@ public class ArtistDao extends AbstractBaseDao {
 
     /**
      * adds an artist to the Artist table
+     *
      * @param artist the Artist object representing the entity to be entered
      * @throws SQLException on errors interacting with the database
      */
@@ -33,6 +34,7 @@ public class ArtistDao extends AbstractBaseDao {
 
     /**
      * searches for an artist using the unique ID number
+     *
      * @param id the unique ID number getting searched for
      * @return an Artist object representing the entry in the database
      * @throws SQLException on errors interacting with the database

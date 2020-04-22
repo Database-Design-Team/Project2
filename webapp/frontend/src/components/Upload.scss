@@ -1,16 +1,21 @@
 .upload-container {
   background: #e0eafc; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #cfdef3,
-    #e0eafc
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #cfdef3,
-    #e0eafc
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  // margin: 10px;
+  // background: -webkit-linear-gradient(
+  //   to right,
+  //   #cfdef3,
+  //   #e0eafc
+  // ); /* Chrome 10-25, Safari 5.1-6 */
+  // background: linear-gradient(
+  //   to right,
+  //   #cfdef3,
+  //   #e0eafc
+  // ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  // // margin: 10px;
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(255, 249, 255, 1) 11.1%,
+    rgba(255, 241, 255, 1) 90%
+  );
   border-radius: 20px;
   p {
     padding: 20px;
@@ -21,6 +26,10 @@
   display: grid;
   grid-template-columns: 500px 500px;
   // column-gap: 50px;
+}
+
+.band-container {
+  margin-left: 30px;
 }
 
 .song-input-container {
@@ -34,11 +43,11 @@
 }
 
 .member-artists-container {
-  background-image: radial-gradient(
-    circle farthest-corner at 10% 20%,
-    rgba(255, 249, 255, 1) 11.1%,
-    rgba(255, 241, 255, 1) 90%
-  );
+  // background-image: radial-gradient(
+  //   circle farthest-corner at 10% 20%,
+  //   rgba(255, 249, 255, 1) 11.1%,
+  //   rgba(255, 241, 255, 1) 90%
+  // );
   border-radius: 10px;
   max-width: 1000px;
   display: grid;
@@ -59,7 +68,7 @@
   margin-left: -22px;
   margin-right: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 150px);
+  grid-template-columns: repeat(auto-fill, 120px);
   grid-template-rows: 70px;
   justify-items: center;
   align-items: center;
@@ -87,5 +96,124 @@
   &:hover {
     transition-duration: 400ms;
     border: 2px solid #a6accd;
+  }
+}
+
+.song-name-input-container {
+  justify-items: center;
+  align-items: center;
+}
+
+.dropdown {
+  margin-top: 20px;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: 28px;
+  width: 150px;
+  background: #ffffff;
+  border: 1px solid;
+  border-color: #d9d9da;
+  border-radius: 3px;
+  background-image: -webkit-linear-gradient(
+    top,
+    transparent,
+    rgba(0, 0, 0, 0.06)
+  );
+  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.06));
+  background-image: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 0, 0, 0.06)
+  );
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+}
+
+.dropdown:before,
+.dropdown:after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 9px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 4px dashed;
+  border-color: #888888 transparent;
+  pointer-events: none;
+}
+
+.dropdown:before {
+  border-bottom-style: solid;
+  border-top: none;
+}
+
+.dropdown:after {
+  margin-top: 7px;
+  border-top-style: solid;
+  border-bottom: none;
+}
+
+.dropdown-select {
+  position: relative;
+  width: 130%;
+  margin: 0;
+  padding: 6px 8px 6px 10px;
+  height: 28px;
+  line-height: 14px;
+  font-size: 12px;
+  color: #62717a;
+  text-shadow: 0 1px white;
+  background: #f2f2f2; /* Fallback for IE 8 */
+  background: rgba(
+    0,
+    0,
+    0,
+    0
+  ) !important; /* "transparent" doesn't work with Opera */
+  border: 0;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+.dropdown-select:focus {
+  z-index: 3;
+  width: 100%;
+  color: #394349;
+  outline: 2px solid #49aff2;
+  outline: 2px solid -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.dropdown-select > option {
+  margin: 3px;
+  padding: 6px 8px;
+  text-shadow: none;
+  background: #f2f2f2;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* Fix for IE 8 putting the arrows behind the select element. */
+
+.lt-ie9 .dropdown {
+  z-index: 1;
+}
+
+.lt-ie9 .dropdown-select {
+  z-index: -1;
+}
+
+.lt-ie9 .dropdown-select:focus {
+  z-index: 3;
+}
+
+/* Dirty fix for Firefox adding padding where it shouldn't. */
+
+@-moz-document url-prefix() {
+  .dropdown-select {
+    padding-left: 6px;
   }
 }

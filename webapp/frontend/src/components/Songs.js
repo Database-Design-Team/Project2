@@ -3,10 +3,15 @@ import "./Songs.scss";
 import axios from "axios";
 import { useStateValue } from "../state";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faMinusCircle } from "@fortawesome/fontawesome-free-solid";
+import {
+  faPlay,
+  faMinusCircle,
+  faThumbsUp,
+  faThumbsDown,
+} from "@fortawesome/fontawesome-free-solid";
 
 const Songs = (props) => {
-  const [{ currentSong, credentials }, dispatch] = useStateValue();
+  const [{ credentials }, dispatch] = useStateValue();
   const [list, setList] = useState({});
   useEffect(() => {
     const abortController = new AbortController();
@@ -25,18 +30,21 @@ const Songs = (props) => {
     };
   }, []);
 
-  const handleClick = (item) => {
-    const song_id = item.item;
+  const handleClick = (item, song) => {
+    const song_id = item;
+    let song_name = `Now Playing: ${song.split("|")[0]} ~ ${
+      song.split("|")[1]
+    }`;
     axios({
       url: "/download-files",
       method: "GET",
       responseType: "blob",
-      params: { song_id },
+      params: { song_id: song_id, username: credentials.username },
     }).then((response) => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       dispatch({
         type: "changeSong",
-        newSong: { url: url },
+        newSong: { url: url, songName: song_name },
       });
     });
   };
@@ -60,6 +68,26 @@ const Songs = (props) => {
     });
   };
 
+  const handleRating = (rating, song_id) => {
+    let currUser = credentials.username;
+
+    axios({
+      url: "/add-song-statistic",
+      method: "POST",
+      params: { username: currUser, songID: song_id, rating: rating },
+    })
+      .then(function(response) {
+        if (response.data) {
+          alert("Your response has been recorded. (Remind me to change this)");
+        } else {
+          alert("You've already rated the song.");
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="feed-container">
       <div className="feed-title-container">
@@ -69,6 +97,7 @@ const Songs = (props) => {
         <p>Play</p>
         <p>Title</p>
         <p>Artist</p>
+        <p>Rating</p>
         <p>Remove</p>
       </div>
       <ul className="feed-grid-container">
@@ -79,10 +108,22 @@ const Songs = (props) => {
               <FontAwesomeIcon
                 className="fa-icon play"
                 icon={faPlay}
-                onClick={() => handleClick({ item })}
+                onClick={() => handleClick(item, list[item])}
               />
               <p>{list[item].split("|")[1]}</p>
               <p>{list[item].split("|")[0]}</p>
+              <div className="rating-container">
+                <FontAwesomeIcon
+                  className="fa-icon up"
+                  icon={faThumbsUp}
+                  onClick={() => handleRating(1, item)}
+                />
+                <FontAwesomeIcon
+                  className="fa-icon down"
+                  icon={faThumbsDown}
+                  onClick={() => handleRating(-1, item)}
+                />
+              </div>
               <FontAwesomeIcon
                 className="fa-icon add"
                 icon={faMinusCircle}

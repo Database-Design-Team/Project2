@@ -6,7 +6,7 @@ import { useStateValue } from "../state";
 
 const CreateArtist = (props) => {
   const { register, errors, handleSubmit } = useForm();
-  const [{ artistList }, dispatch] = useStateValue();
+  const [dispatch] = useStateValue();
   const onSubmit = (values) => {
     let artistName = values["username"];
     axios.interceptors.response.use(

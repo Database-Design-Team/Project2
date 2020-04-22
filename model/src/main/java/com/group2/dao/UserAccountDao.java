@@ -18,10 +18,11 @@ public class UserAccountDao extends AbstractBaseDao {
         ps.setString(1, username);
         ResultSet rs = ps.executeQuery();
         rs.next();
-        UserAccount usrAct = new UserAccount(rs.getString("username"), rs.getInt("student_id"), rs.getBoolean("admin"), rs.getString("password"), rs.getString("email"));
-        ps.close();
+        UserAccount uc = new UserAccount(rs.getString("username"), rs.getInt("student_id"), rs.getBoolean("admin"),
+                rs.getString("password"), rs.getString("email"), rs.getDate("date_joined"));
         rs.close();
-        return usrAct;
+        ps.close();
+        return uc;
     }
 
     public void addUserAccount(@NotNull UserAccount uc) throws SQLException {
@@ -37,11 +38,26 @@ public class UserAccountDao extends AbstractBaseDao {
     }
 
     public void addUserAccount(@NotNull List<UserAccount> ucList) throws SQLException {
-        for(UserAccount u : ucList) {
+        for (UserAccount u : ucList) {
             addUserAccount(u);
         }
     }
-
+    
+    /**
+      * This function updates the password of a given user
+      * @param username the user who's password it getting changed
+      * @param password the user's new password
+      * @throws SQLException on errors interacting with the database
+      */
+      public void updatePassword(String username, String password) throws SQLException {
+        String SQL = "UPDATE user_account " +
+                "SET password = ? " +
+                "WHERE username = ?";
+        PreparedStatement ps = conn.prepareStatement(SQL);
+        ps.setString(1, password);
+        ps.setString(2, username);
+        ps.executeQuery();
+    }
 
 
 }

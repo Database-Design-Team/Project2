@@ -1,2 +1,48 @@
-.home-container {
+.home-tab-container {
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    rgba(255, 249, 255, 1) 11.1%,
+    rgba(255, 241, 255, 1) 90%
+  );
+  border-radius: 10px;
+  max-width: 1000px;
+  display: grid;
+  grid-template-rows: 200px 30px 650px;
+}
+
+.home-header {
+  text-align: center;
+  p {
+    font-size: 40px;
+  }
+}
+
+.asdf-content-container {
+  display: grid;
+  grid-template-columns: 500px 500px;
+  justify-items: center;
+}
+
+.profile-info-container {
+  p {
+    font-weight: 700;
+  }
+}
+
+.profile-info-list {
+  label {
+    font-weight: 500;
+    // margin-left: -100px;
+  }
+}
+
+.stats-container {
+  p {
+    font-weight: 700;
+  }
+}
+
+.credentials {
+  display: flex;
+  flex-direction: row;
 }

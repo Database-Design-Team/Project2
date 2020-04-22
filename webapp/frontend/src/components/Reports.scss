@@ -10,12 +10,12 @@
   grid-template-rows: 750px;
 }
 
-.artists-header-container {
+.reports-header-container {
   color: white;
   font-weight: 700;
   font-size: 30px;
   display: grid;
-  grid-template-columns: 500px 200px;
+  grid-template-columns: repeat(auto-fill, 150px);
   grid-template-rows: 90px;
   align-items: center;
 }
@@ -74,4 +74,15 @@
   margin-right: 20px;
   color: #ffffff;
   font-weight: 700;
+}
+
+.report-json-container {
+  overflow: auto;
+  font-weight: 700;
+  color: white;
+  height: 700px;
+}
+
+.report-json-container::-webkit-scrollbar {
+  display: none;
 }

@@ -23,13 +23,14 @@ public class SongStatisticsController {
 
     @PostMapping("/add-song-statistic")
     @ResponseBody
-    public ResponseEntity addSongStatistic(@RequestParam("username") String userName, @RequestParam("songID") int songID,
+    public ResponseEntity<Boolean> addSongStatistic(@RequestParam("username") String userName, @RequestParam("songID") int songID,
                                            @RequestParam("rating") int rating) {
         try {
             dao.addToSongStatistics(userName, songID, rating);
             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
         } catch (SQLException e) {
-            return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+            e.getMessage();
+            return new ResponseEntity<Boolean>(false, HttpStatus.OK);
         }
     }
 

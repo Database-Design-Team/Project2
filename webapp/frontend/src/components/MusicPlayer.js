@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./MusicPlayer.scss";
 import ReactPlayer from "react-player";
 import { useStateValue } from "../state";
 
 const MusicPlayer = (props) => {
-  const [{ currentSong }, dispatch] = useStateValue();
+  const [{ currentSong }] = useStateValue();
 
   return (
     <div>

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 /**
  * @author Timothy Chandler
- * @version 1.0
+ * @version 1.1
  * @since 4/20/20
  * inside the package - com.group2.dao.report
  */
@@ -19,14 +19,17 @@ public class ArtistSongs extends AbstractBaseDao {
     }
 
     /**
-     * returns a table of the artists and the amount of songs they uploaded in the past number of days,
-     * from most active to least active
+     * Returns a table of the artists and the amount of songs they uploaded in the past number of days,
+     * from most active to least active.
+     * This report is meant for administrators.
+     * 1st column: artist_name
+     * 2nd column: count(*), the amount of songs uploaded in the past number of days
      * @param days the max age of a song which counts towards recent uploads
      * @return the result set from the query
      * @throws SQLException on errors interactive with the database
      */
     public ResultSet getArtistSongs(@RequestParam int days) throws SQLException {
-        String SQL = "SELECT artist_name, count(*) " +
+        String SQL = "SELECT artist_name AS Artist, count(*) " +
                 "FROM artist, audio " +
                 "WHERE " +
                 "    audio.date_uploaded > current_date-? " +

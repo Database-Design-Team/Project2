@@ -5,7 +5,7 @@ import axios from "axios";
 import "./Register.scss";
 import { useStateValue } from "../state";
 
-const Register = (props) => {
+const ChangePassword = (props) => {
   const [{ credentials }, dispatch] = useStateValue();
   const { register, errors, getValues, handleSubmit } = useForm();
   let history = useHistory();
@@ -13,38 +13,21 @@ const Register = (props) => {
     delete values["passwordConfirmation"];
     console.log(values);
 
-    axios.interceptors.response.use(
-      (response) => response,
-      (error) => {
-        const { status } = error.response;
-        if (status === 409) {
-          alert("The email, username, and/or ID are unavailable.");
-        }
-        window.location.reload(false);
-        return Promise.reject(error);
-      }
-    );
-
-    axios
-      .post("/user-account-register", {
-        username: values["username"],
-        email: values["email"],
-        studentID: values["student_id"],
-        password: values["password"],
-      })
+    axios({
+      url: "/update-password",
+      method: "PUT",
+      params: { username: credentials.username, password: values["password"] },
+    })
       .then(function(response) {
+        console.log(response.data);
+        alert("Password sucessfully changed.");
         dispatch({
           type: "changeCredentials",
           postCredentials: {
-            username: values["username"],
+            username: credentials.username,
             password: values["password"],
           },
         });
-        if (response.data) {
-          history.push({
-            pathname: "/dashboard",
-          });
-        }
       })
       .catch(function(error) {
         console.log(error);
@@ -55,42 +38,7 @@ const Register = (props) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="login-container">
         <div className="title-container">
-          <h1>Sign up</h1>
-        </div>
-
-        <div className="input-container">
-          <input
-            name="email"
-            ref={register({
-              required: "Required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                message: "Please enter a valid email address.",
-              },
-            })}
-            placeholder="student@uh.edu"
-          />
-        </div>
-        <div className="input-container">
-          <input
-            name="username"
-            ref={register({
-              required: "Required",
-              max: 20,
-            })}
-            placeholder="username"
-          />
-        </div>
-
-        <div className="input-container">
-          <input
-            name="student_id"
-            ref={register({
-              required: "Required",
-              max: 20,
-            })}
-            placeholder="student_id"
-          />
+          <h1>Change Password</h1>
         </div>
 
         <div className="input-container">
@@ -126,7 +74,7 @@ const Register = (props) => {
         <div className="submit-btn-group">
           <div>
             <button type="submit" className="btn btn-register">
-              Sign up
+              Confirm Changes
             </button>
           </div>
         </div>
@@ -142,4 +90,4 @@ const Register = (props) => {
   );
 };
 
-export default Register;
+export default ChangePassword;

@@ -39,10 +39,10 @@ public class SongController {
     }
 
     @GetMapping(value="/download-files")
-    public ResponseEntity<byte[]> getFile(@RequestParam("song_id") int song_id) throws SQLException {
+    public ResponseEntity<byte[]> getFile(@RequestParam("song_id") int song_id, @RequestParam("username") String username) throws SQLException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
-        return new ResponseEntity<>(dao.GetSongFile(song_id), headers, HttpStatus.OK);
+        return new ResponseEntity<>(dao.GetSongFile(song_id, username), headers, HttpStatus.OK);
     }
 
     @GetMapping(value="/getAllSongs")
@@ -58,4 +58,29 @@ public class SongController {
         headers.setContentType(MediaType.TEXT_PLAIN);
         return new ResponseEntity<>(json.toString(), headers, HttpStatus.OK);
     }
+
+    @PutMapping("/delete-song")
+    public ResponseEntity<Boolean> deleteSong(@RequestParam("song_id") int song_id) {
+        try {
+            dao.deleteSong(song_id);
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        } catch (SQLException e) {
+            e.getMessage();
+            return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+        }
+    }
+
+    @PutMapping("/update-song-title")
+    @ResponseBody
+    public ResponseEntity updateSongTitle(@RequestParam("song_id") int songID, @RequestParam("upd_song_title") String updatedTitle) {
+        try {
+            dao.changeSongTitleById(songID, updatedTitle);
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        } catch(SQLException e) {
+            e.getMessage();
+            return new ResponseEntity<Boolean>(false, HttpStatus.CONFLICT);
+        }
+
+    }
+
 }

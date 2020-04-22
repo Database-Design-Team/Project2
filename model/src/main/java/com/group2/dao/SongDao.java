@@ -26,8 +26,8 @@ public class SongDao extends AbstractBaseDao {
         ps.close();
     }
 
-    public byte[] GetSongFile(int song_id) throws SQLException {
-        PreparedStatement ps = conn.prepareStatement("SELECT audio_file FROM audio WHERE audio_id = ?");
+    public byte[] GetSongFile(int song_id, String username) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("SELECT audio_file FROM audio WHERE audio_id = ? AND deleted = false");
         ps.setInt(1, song_id);
         ResultSet rs = ps.executeQuery();
         byte[] songBytes = null;
@@ -37,8 +37,21 @@ public class SongDao extends AbstractBaseDao {
         }
         rs.close();
         ps.close();
+        PreparedStatement listen = conn.prepareStatement("INSERT INTO song_listens (song, username) VALUES (?, ?)");
+        listen.setInt(1, song_id);
+        listen.setString(2, username);
+        listen.executeUpdate();
+        listen.close();
         return songBytes;
     }
+
+    // public void insertListen(int song_id, String username) throws SQLException {
+    //     PreparedStatement listen = conn.prepareStatement("INSERT INTO song_listens (song, username) VALUES (?, ?)");
+    //     listen.setInt(1, song_id);
+    //     listen.setString(2, username);
+    //     listen.executeUpdate();
+    //     listen.close();
+    // }
 
     /**
      * gets the id and name of every available song
@@ -70,7 +83,26 @@ public class SongDao extends AbstractBaseDao {
         return artistNames;
 
     }
-    
+
+    public void deleteSong(int songId) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("UPDATE audio " +
+                "SET deleted = true " +
+                "WHERE audio_id = ?");
+        ps.executeUpdate();
+        ps.close();
+    }
+
+
+
+    public void changeSongTitleById(int songID, String updatedSongTitle) throws SQLException {
+        String SQLStatement = "UPDATE audio SET song_name = ? WHERE audio_id = ?";
+        PreparedStatement ps = conn.prepareStatement(SQLStatement);
+        ps.setString(1, updatedSongTitle);
+        ps.setInt(2, songID);
+        ps.executeUpdate();
+
+        ps.close();
+    }
     // public JSONObject getAllSongs() throws SQLException {
     //     PreparedStatement ps = conn.prepareStatement("SELECT song_name, audio_id FROM public.audio");
     //     ResultSet rs = ps.executeQuery();
