@@ -1,6 +1,8 @@
 package com.group2.dao;
  
 import com.group2.model.*;
+import org.jetbrains.annotations.NotNull;
+
 import java.sql.*;
 import java.util.*;
  
@@ -43,8 +45,7 @@ public class PlaylistDao extends AbstractBaseDao {
     //         return playlists;
     // }
  
-    public void addPlaylist(Playlist Artisan) throws SQLException {
-        // INSERT INTO playlist(owner, playlist_name, "isPrivate") VALUES ('ryan', 'lofi', false);
+    public void addPlaylist(@NotNull Playlist Artisan) throws SQLException {
         String SQLStatement = "INSERT INTO playlist(owner, playlist_name, \"isPrivate\") VALUES (?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(SQLStatement);
         ps.setString(1, Artisan.getOwner());

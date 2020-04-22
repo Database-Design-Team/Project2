@@ -79,4 +79,15 @@ public class UserAccountController {
             return new ResponseEntity<Boolean>(false, HttpStatus.OK);
         }
     }
+
+    @DeleteMapping ("/delete-account")
+    public ResponseEntity<Boolean> deleteAccount(@RequestParam("username") String username) {
+        try {
+            dao.deleteAccount(username);
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        } catch (SQLException e) {
+            e.getMessage();
+            return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+        }
+    }
 }

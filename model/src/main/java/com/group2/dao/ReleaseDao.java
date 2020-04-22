@@ -21,8 +21,10 @@ public class ReleaseDao extends AbstractBaseDao {
         ps.setInt(1, releaseId);
         ResultSet rs = ps.executeQuery();
         rs.next();
-
-        return new Release(rs.getInt("release_id"), rs.getString("title"), rs.getDate("date_created"), rs.getInt("artist"));
+        Release release = new Release(rs.getInt("release_id"), rs.getString("title"), rs.getDate("date_created"), rs.getInt("artist"));
+        ps.close();
+        rs.close();
+        return release;
     }
 
     public Set<Release> getReleaseByArtist(int artist_id) throws SQLException {

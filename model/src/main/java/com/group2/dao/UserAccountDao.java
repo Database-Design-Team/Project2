@@ -1,6 +1,7 @@
 package com.group2.dao;
 
 import com.group2.model.UserAccount;
+import org.apache.coyote.http11.filters.SavedRequestInputFilter;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
@@ -57,7 +58,19 @@ public class UserAccountDao extends AbstractBaseDao {
         ps.setString(1, password);
         ps.setString(2, username);
         ps.executeQuery();
+        ps.close();
     }
 
-
+    /**
+     * This function deleted a specified account
+     * @param username The username of the account getting deleted
+     * @throws SQLException on errors interacting with the database
+     */
+    public void deleteAccount(String username) throws SQLException {
+        String SQL = "DELETE FROM user_account WHERE username = ?";
+        PreparedStatement ps = conn.prepareStatement(SQL);
+        ps.setString(1, username);
+        ps.executeQuery();
+        ps.close();
+    }
 }

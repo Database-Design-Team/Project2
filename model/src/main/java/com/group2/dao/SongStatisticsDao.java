@@ -22,19 +22,15 @@ public class SongStatisticsDao extends AbstractBaseDao {
 
 
     public double getAggregratePopularityBySong(int songID) throws SQLException {
-        int totalPop = 0;
-        int count = 0;
-        String SQLStatement = "SELECT rating FROM song_ratings WHERE song_id = ?";
+        double popularity;
+        String SQLStatement = "SELECT aggregate_popularity FROM audio WHERE audio_id = ?";
         PreparedStatement ps = conn.prepareStatement(SQLStatement);
         ps.setInt(1, songID);
         ResultSet rs = ps.executeQuery();
-        while(rs.next()) {
-            totalPop += rs.getInt("rating");
-            count += 1;
-        }
-
+        rs.next();
+        popularity = rs.getDouble("aggregate_popularity");
         ps.close();
         rs.close();
-        return (double)(totalPop / count);
+        return (popularity);
     }
 }
