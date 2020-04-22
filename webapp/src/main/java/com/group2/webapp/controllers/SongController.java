@@ -58,4 +58,15 @@ public class SongController {
         headers.setContentType(MediaType.TEXT_PLAIN);
         return new ResponseEntity<>(json.toString(), headers, HttpStatus.OK);
     }
+
+    @PutMapping("/delete-song")
+    public ResponseEntity<Boolean> deleteSong(@RequestParam("song_id") int song_id) {
+        try {
+            dao.deleteSong(song_id);
+            return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+        } catch (SQLException e) {
+            e.getMessage();
+            return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+        }
+    }
 }
