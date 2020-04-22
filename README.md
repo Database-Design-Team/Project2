@@ -48,7 +48,7 @@ This [website](https://coog-music.herokuapp.com/) is a music library for Univers
     </ul>
   </details>
   <details>
-  <summary>Administrator credentials:</summary>
+  <summary>Basic user credentials:</summary>
   <ul>
     <li> Username: ryan</li>
     <li> Password: password</li>
