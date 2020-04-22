@@ -113,4 +113,18 @@ public class ArtistController {
             return new ResponseEntity<>(false, HttpStatus.CONFLICT);
         }
     }
+
+    @DeleteMapping("/remove-artist")
+    @ResponseBody
+    public ResponseEntity removeArtistById(@RequestParam("artist_id") Integer artist_id) {
+        try {
+            dao.removeArtistById(artist_id);
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } catch(SQLException e) {
+            e.getMessage();
+            return new ResponseEntity<>(false, HttpStatus.CONFLICT);
+        }
+
+    }
 }
+
