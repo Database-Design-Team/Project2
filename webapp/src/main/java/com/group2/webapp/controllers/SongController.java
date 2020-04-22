@@ -69,4 +69,17 @@ public class SongController {
             return new ResponseEntity<Boolean>(false, HttpStatus.OK);
         }
     }
+
+    @PutMapping("/update-song-title")
+     @ResponseBody
+     public ResponseEntity<Boolean> updateSongTitle(@RequestParam("song_id") int songID, @RequestParam("songName") String songName) {
+         try {
+             dao.changeSongTitleById(songID, songName);
+             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+         } catch(SQLException e) {
+             e.getMessage();
+             return new ResponseEntity<Boolean>(false, HttpStatus.OK);
+         }
+
+     }
 }

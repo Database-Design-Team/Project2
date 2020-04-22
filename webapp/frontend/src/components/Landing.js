@@ -45,9 +45,7 @@ const Landing = (props) => {
             </p>
           </div>
         </div>
-        <div className="trending-container">
-          <Trending />
-        </div>
+        <div className="trending-container">{/* <Trending /> */}</div>
         <div className="info-container">
           <p>
             With Coog Music, artists and creators within the University of

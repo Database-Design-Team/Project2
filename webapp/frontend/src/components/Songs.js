@@ -78,7 +78,7 @@ const Songs = (props) => {
     })
       .then(function(response) {
         if (response.data) {
-          alert("Your response has been recorded. (Remind me to change this)");
+          alert("Your response has been recorded.");
         } else {
           alert("You've already rated the song.");
         }

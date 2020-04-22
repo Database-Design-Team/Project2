@@ -60,6 +60,8 @@ const TopSongs = (props) => {
             })}
             placeholder="Total Days"
           />
+        </div>
+        <div className="input-container">
           <input
             name="songs"
             ref={register({
@@ -68,6 +70,8 @@ const TopSongs = (props) => {
             })}
             placeholder="Total Songs"
           />
+        </div>
+        <div>
           <div className="dropdown">
             <select
               id="genre"

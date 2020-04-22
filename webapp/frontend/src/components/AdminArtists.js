@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Artists.scss";
+import "./AdminArtists.scss";
 import { useStateValue } from "../state";
 import Modali, { useModali } from "modali";
 import CreateArtist from "./CreateArtist";
+import AddUser from "./AddUser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle } from "@fortawesome/fontawesome-free-solid";
 
 const Artists = (props) => {
   const [{ credentials }] = useStateValue();
   const [createArtistModal, toggleCreateArtistModal] = useModali({
+    animated: true,
+  });
+  const [addUserModal, toggleAddUserModal] = useModali({
     animated: true,
   });
   const [artistList, setArtistList] = useState({});
@@ -70,11 +74,18 @@ const Artists = (props) => {
         <button className="btn btn--1 btnCA" onClick={toggleCreateArtistModal}>
           Create Artist
         </button>
+        <button className="btn btn--1 btnCA" onClick={toggleAddUserModal}>
+          Add User
+        </button>
         <Modali.Modal {...createArtistModal}>
           <CreateArtist />
         </Modali.Modal>
+        <Modali.Modal {...addUserModal}>
+          <AddUser />
+        </Modali.Modal>
       </div>
-      <div className="artists-list-header-container">
+      <div className="adminartists-list-header-container">
+        <p>Artist ID</p>
         <p>Artist</p>
         <p>Date Formed</p>
         <p>Remove Artist</p>
@@ -84,7 +95,8 @@ const Artists = (props) => {
           {Object.keys(artistList)
             .reverse()
             .map((item, i) => (
-              <li className="current-artists-element-container" key={i}>
+              <li className="current-adminartists-element-container" key={i}>
+                <p>{item}</p>
                 <p>{Object.keys(artistList[item])}</p>
                 <p>{Object.values(artistList[item])}</p>
                 <FontAwesomeIcon

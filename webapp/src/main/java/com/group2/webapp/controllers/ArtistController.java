@@ -118,12 +118,12 @@ public class ArtistController {
     @DeleteMapping("/remove-artist")
      @ResponseBody
      public ResponseEntity<Boolean> removeArtistById(@RequestParam("artist_id") Integer artist_id) {
-         try {
+        try {
              dao.removeArtistById(artist_id);
              return new ResponseEntity<Boolean>(true, HttpStatus.OK);
          } catch(SQLException e) {
              e.getMessage();
-             return new ResponseEntity<Boolean>(false, HttpStatus.CONFLICT);
+             return new ResponseEntity<Boolean>(false, HttpStatus.OK);
          }
 
      }
