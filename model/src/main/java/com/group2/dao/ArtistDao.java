@@ -95,4 +95,12 @@ public class ArtistDao extends AbstractBaseDao {
         ps.executeUpdate();
         ps.close();
     }
+
+    public void removeArtistById(Integer artist_id) throws SQLException {
+        String SQLStatement = "DELETE FROM artist WHERE artist_id = ?";
+        PreparedStatement ps = conn.prepareStatement(SQLStatement);
+        ps.setInt(1, artist_id);
+        ps.executeUpdate();
+        ps.close();
+    }
 }

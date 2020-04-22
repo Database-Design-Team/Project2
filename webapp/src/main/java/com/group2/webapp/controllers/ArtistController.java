@@ -103,7 +103,8 @@ public class ArtistController {
 
     @DeleteMapping("/remove-artist-member")
     @ResponseBody
-    public ResponseEntity<Boolean> removeArtistMember(@RequestParam("artist_id") Integer artist_id, @RequestParam("username") String username) {
+    public ResponseEntity<Boolean> removeArtistMember(@RequestParam("artist_id") Integer artist_id,
+            @RequestParam("username") String username) {
         try {
             dao.removeUserFromArtist(artist_id, username);
             // return true;
@@ -113,4 +114,17 @@ public class ArtistController {
             return new ResponseEntity<>(false, HttpStatus.CONFLICT);
         }
     }
+    
+    @DeleteMapping("/remove-artist")
+     @ResponseBody
+     public ResponseEntity<Boolean> removeArtistById(@RequestParam("artist_id") Integer artist_id) {
+         try {
+             dao.removeArtistById(artist_id);
+             return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+         } catch(SQLException e) {
+             e.getMessage();
+             return new ResponseEntity<Boolean>(false, HttpStatus.CONFLICT);
+         }
+
+     }
 }
