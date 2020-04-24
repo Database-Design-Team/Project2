@@ -42,7 +42,11 @@ const ArtistsJoined = (props) => {
         <div className="title-container">
           <h1>Get Artists Joined</h1>
         </div>
-
+        <p>
+          Returns a list of the artists who joined within a given number of
+          days, sorted by age, and the number of songs.
+        </p>
+        <p></p>
         <div className="input-container">
           <input
             name="days"

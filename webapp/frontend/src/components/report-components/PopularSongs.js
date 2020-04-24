@@ -42,7 +42,11 @@ const PopularSongs = (props) => {
         <div className="title-container">
           <h1>Get Most Popular Songs</h1>
         </div>
-
+        <p>
+          Returns the top x most highly rated songs, the artist who released the
+          song, and the rating.
+        </p>
+        <p></p>
         <div className="input-container">
           <input
             name="totalSongs"

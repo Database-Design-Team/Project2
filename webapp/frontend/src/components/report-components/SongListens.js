@@ -42,6 +42,11 @@ const SongListens = (props) => {
         <div className="title-container">
           <h1>Get Song Listens</h1>
         </div>
+        <p>
+          Returns the number of listens over the past given number of days,
+          broken down by the day.
+        </p>
+        <p></p>
 
         <div className="input-container">
           <input

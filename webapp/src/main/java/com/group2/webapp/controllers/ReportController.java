@@ -37,7 +37,8 @@ public class ReportController {
             JSONObject temp = new JSONObject();
             temp.put("ArtistName", rs.getString(1));
             temp.put("SongName", rs.getString(2));
-            temp.put("Rating", rs.getInt(3));
+            String formattedFloat = String.format("%.02f", rs.getFloat(3));
+            temp.put("Rating", String.valueOf((50 + Float.parseFloat(formattedFloat) * 50))+"%");
             array.put(temp);
         }
         rs.close();
