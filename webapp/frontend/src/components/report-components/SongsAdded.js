@@ -42,7 +42,11 @@ const SongsAdded = (props) => {
         <div className="title-container">
           <h1>Get Added Songs</h1>
         </div>
-
+        <p>
+          Gets the number of songs added in the past given number of days,
+          broken down by the day.
+        </p>
+        <p></p>
         <div className="input-container">
           <input
             name="days"

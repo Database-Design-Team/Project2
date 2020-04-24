@@ -50,7 +50,15 @@ const TopSongs = (props) => {
         <div className="title-container">
           <h1>Get Top Songs</h1>
         </div>
-
+        <p>
+          This will return a given number of the top songs of a given genre,
+          which were added within a given number of days.
+        </p>
+        <p>
+          If no data can can be generated for a given genre, no result will be
+          displayed.
+        </p>
+        <p></p>
         <div className="input-container">
           <input
             name="days"

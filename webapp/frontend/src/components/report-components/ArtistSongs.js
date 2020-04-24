@@ -40,9 +40,13 @@ const ArtistSongs = (props) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="login-container">
         <div className="title-container">
-          <h1>Get Top Artists</h1>
+          <h1>Get Most Active Artists</h1>
         </div>
-
+        <p>
+          Returns a table of the artists and the amount of songs they uploaded
+          in the past number of days, from most active to least active.
+        </p>
+        <p></p>
         <div className="input-container">
           <input
             name="days"

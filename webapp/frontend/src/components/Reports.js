@@ -32,6 +32,126 @@ const Reports = (props) => {
     animated: true,
   });
 
+  function PopularSongsComponent(props) {
+    return (
+      <div>
+        <div className="one-element-headers-container">
+          <p>Artist</p>
+          <p>Title</p>
+          <p>Rating</p>
+        </div>
+        <ul className="report-json-container">
+          {reports.popularSongs.map((item, i) => (
+            <li className="one-element-container" key={i}>
+              <div>{item.ArtistName}</div>
+              <div>{item.SongName}</div>
+              <div>{item.Rating}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  function ArtistsJoinedComponent(props) {
+    return (
+      <div>
+        <div className="one-element-headers-container">
+          <p>Artist</p>
+          <p>Date Joined</p>
+          <p>Total Songs</p>
+        </div>
+        <ul className="report-json-container">
+          {reports.artistsJoined.map((item, i) => (
+            <li className="one-element-container" key={i}>
+              <div>{item.ArtistName}</div>
+              <div>{item.DateFormed}</div>
+              <div>{item.Songs}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  function ArtistsSongsComponent(props) {
+    return (
+      <div>
+        <div className="two-element-headers-container">
+          <p>Artist</p>
+          <p>Total Songs</p>
+        </div>
+        <ul className="report-json-container">
+          {reports.artistSongs.map((item, i) => (
+            <li className="two-element-container" key={i}>
+              <div>{`Artist Name: ${item.ArtistName}`}</div>
+              <div>{`Songs: ${item.Songs}`}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  function SongListensComponent(props) {
+    return (
+      <div>
+        <div className="two-element-headers-container">
+          <p>Days Ago</p>
+          <p>Total Listens</p>
+        </div>
+        <ul className="report-json-container">
+          {reports.songListens.map((item, i) => (
+            <li className="two-element-container" key={i}>
+              <div>{item.DaysAgo}</div>
+              <div>{item.Listens}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  function SongsAddedComponent(props) {
+    return (
+      <div>
+        <div className="two-element-headers-container">
+          <p>Date Added</p>
+          <p>Count</p>
+        </div>
+        <ul className="report-json-container">
+          {reports.songsAdded.map((item, i) => (
+            <li className="two-element-container" key={i}>
+              <div>{item.DateUploaded}</div>
+              <div>{item.Count}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  function TopSongsComponent(props) {
+    return (
+      <div>
+        <div className="one-element-headers-container">
+          <p>Artist</p>
+          <p>Title</p>
+          <p>Rating</p>
+        </div>
+        <ul className="report-json-container">
+          {reports.topSongs.map((item, i) => (
+            <li className="one-element-container" key={i}>
+              <div>{item.ArtistName}</div>
+              <div>{item.SongName}</div>
+              <div>{item.Rating}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="reports-header-container">
@@ -42,7 +162,7 @@ const Reports = (props) => {
           Artists Joined
         </button>
         <button className="btn btn--1 btnCA" onClick={toggleArtistsSongs}>
-          Artists Songs
+          Active Artists
         </button>
         <button className="btn btn--1 btnCA" onClick={toggleSongListens}>
           Song Listens
@@ -72,58 +192,13 @@ const Reports = (props) => {
           <TopSongs />
         </Modali.Modal>
       </div>
-      <div className="report-json-container">
-        <ul>
-          {reports.popularSongs.map((item) => (
-            <li>
-              <div>{`Artist Name: ${item.ArtistName}`}</div>
-              <div>{`Song Name: ${item.SongName}`}</div>
-              <div>{`Rating: ${item.Rating}`}</div>
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {reports.artistsJoined.map((item) => (
-            <li>
-              <div>{`Artist Name: ${item.ArtistName}`}</div>
-              <div>{`Date Formed: ${item.DateFormed}`}</div>
-              <div>{`Songs: ${item.Songs}`}</div>
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {reports.artistSongs.map((item) => (
-            <li>
-              <div>{`Artist Name: ${item.ArtistName}`}</div>
-              <div>{`Songs: ${item.Songs}`}</div>
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {reports.songListens.map((item) => (
-            <li>
-              <div>{`Days Ago: ${item.DaysAgo}`}</div>
-              <div>{`Listens: ${item.Listens}`}</div>
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {reports.songsAdded.map((item) => (
-            <li>
-              <div>{`Date Uploaded: ${item.DateUploaded}`}</div>
-              <div>{`Count: ${item.Count}`}</div>
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {reports.topSongs.map((item) => (
-            <li>
-              <div>{`Artist Name ${item.ArtistName}`}</div>
-              <div>{`Song Name: ${item.SongName}`}</div>
-              <div>{`Rating: ${item.Rating}`}</div>
-            </li>
-          ))}
-        </ul>
+      <div className="report-container">
+        {reports.popularSongs.length > 0 && <PopularSongsComponent />}
+        {reports.artistsJoined.length > 0 && <ArtistsJoinedComponent />}
+        {reports.artistSongs.length > 0 && <ArtistsSongsComponent />}
+        {reports.songListens.length > 0 && <SongListensComponent />}
+        {reports.songsAdded.length > 0 && <SongsAddedComponent />}
+        {reports.topSongs.length > 0 && <TopSongsComponent />}
       </div>
     </div>
   );
