@@ -1,0 +1,12 @@
+INSERT INTO public.library (song, owner, date_added) VALUES (25, 'eskettit', '2020-04-24 00:00:00.000000');
+INSERT INTO public.library (song, owner, date_added) VALUES (24, 'eskettit', '2020-04-24 00:00:00.000000');
+INSERT INTO public.library (song, owner, date_added) VALUES (40, 'eskettit', '2020-04-24 00:00:00.000000');
+INSERT INTO public.library (song, owner, date_added) VALUES (1, 'ryan', '2020-04-21 05:00:00.000000');
+INSERT INTO public.library (song, owner, date_added) VALUES (2, 'ryan', '2020-04-21 05:00:00.000000');
+INSERT INTO public.library (song, owner, date_added) VALUES (3, 'ryan', '2020-04-21 05:00:00.000000');
+INSERT INTO public.library (song, owner, date_added) VALUES (4, 'ryan', '2020-04-21 05:00:00.000000');
+INSERT INTO public.library (song, owner, date_added) VALUES (5, 'ryan', '2020-04-22 05:00:00.000000');
+INSERT INTO public.library (song, owner, date_added) VALUES (7, 'ryan', '2020-04-21 05:00:00.000000');
+INSERT INTO public.library (song, owner, date_added) VALUES (8, 'ryan', '2020-04-21 05:00:00.000000');
+INSERT INTO public.library (song, owner, date_added) VALUES (19, 'Illien', '2020-04-21 05:00:00.000000');
+INSERT INTO public.library (song, owner, date_added) VALUES (25, 'ivanrodriguezzz', '2020-04-22 05:00:00.000000');
